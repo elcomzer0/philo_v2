@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:56 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/17 14:49:51 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/17 20:42:05 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,26 @@ void *philosopher_routine(void *arg)
         // Thinking
         print_status(philo, "is thinking");
 
+        ft_usleep(data->time_to_sleep * 1000);
         // Pick up forks
         pthread_mutex_lock(&philo->left_fork);
         print_status(philo, "has taken a fork");
-        pthread_mutex_lock(philo->right_fork);
-        print_status(philo, "has taken a fork");
-
+        //lock the right fork
+        if (philo->right_fork != NULL)
+        {
+            pthread_mutex_lock(philo->right_fork);
+            print_status(philo, "has taken a fork");
+        }
         // Eating
         print_status(philo, "is eating");
+        ft_usleep(data->time_to_eat * 1000);
         philo->last_meal_time = get_current_time();
         philo->meals_eaten++;
-        ft_usleep(data->time_to_eat * 1000);
 
-        // Put down forks
-        pthread_mutex_unlock(philo->right_fork);
+        // Put down forks or unlock forks
         pthread_mutex_unlock(&philo->left_fork);
+        if(philo->right_fork != NULL)
+            pthread_mutex_unlock(philo->right_fork);
 
         // Sleeping
         print_status(philo, "is sleeping");

@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:36 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/17 15:54:09 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/17 19:45:27 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
+#include <stddef.h>
+#include <stdbool.h>
+
+#define SIZE_MAX ((size_t)-1)
+
 
 
 //perhaps enumeration for a state maching in case of monitoring
@@ -63,8 +69,14 @@ typedef struct s_data
 void initialize_philosophers(t_data *data);
 void start_simulation(t_data *data);
 void *philosopher_routine(void *arg);
+void ft_usleep(unsigned long long int usec);
+
+/* utils */
+void *ft_calloc(size_t num_elements, size_t element_size);
 long get_current_time();
 void print_status(t_philosopher *philo, const char *status);
-void ft_usleep(unsigned long long int usec);
+void clean_exit(t_data *data);
+
+
 
 #endif
