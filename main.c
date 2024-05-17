@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/17 22:25:58 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/17 23:13:22 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void initialize_philosophers(t_data *data)
     //initialize the print_lock mutex
     if (pthread_mutex_init(&data->print_lock, NULL)!= 0)
     {
-        write(STDERR_FILENO, "Error initializing print_lock mutex\n", 34);
+        write(STDERR_FILENO, "Error initializing print_lock mutex\n", 35);
+        free(philosophers);
         exit(EXIT_FAILURE);
     }
 
@@ -64,7 +65,14 @@ void initialize_philosophers(t_data *data)
         philosophers[0].id = 1;
         philosophers[0].last_meal_time = get_current_time();
         philosophers[0].meals_eaten = 0;
-        pthread_mutex_init(&philosophers[0].left_fork, NULL);
+        if (pthread_mutex_init(&philosophers[0].left_fork, NULL) != 0)
+        {
+            //perror("Error initializing fork mutex");
+            write(STDERR_FILENO, "Error initializing fork mutex\n", 36);
+            free(philosophers);
+            pthread_mutex_destroy(&data->print_lock);
+            exit(EXIT_FAILURE);
+        }
         philosophers[0].right_fork = NULL;
         philosophers[0].data = data;
         philosophers[0].next = NULL;
@@ -72,7 +80,7 @@ void initialize_philosophers(t_data *data)
         data->philosophers = philosophers;
         if (pthread_create(&philosophers[0].thread, NULL, sokrates_case, &philosophers[0]) != 0)
         {
-            write(STDERR_FILENO, "Error creating philosopher thread\n", 33);
+            write(STDERR_FILENO, "Error creating philosopher thread\n", 34);
             pthread_mutex_destroy(&philosophers[0].left_fork);
             free(philosophers);
             exit(EXIT_FAILURE);
@@ -112,7 +120,8 @@ int init_data(t_data *data, int argc, char **argv)
         data->times_must_eat = atoi(argv[5]);
         if (data->times_must_eat < 0)
         {
-            printf("Error: times_must_eat must be a positive integer\n");
+            //printf("Error: times_must_eat must be a positive integer\n");
+            write(STDERR_FILENO, "Error: times_must_eat must be a positive integer\n", 49);
             return (1);
         }
     }
@@ -126,12 +135,14 @@ int main(int argc, char **argv)
     t_data data;
     if (argc != 5 && argc != 6)
     {
-        printf("Usage: %s number_of_philosophers time_to_die time_to_eat time_to_sleep [times_must_eat]\n", argv[0]);
+        //printf("Usage: %s number_of_philosophers time_to_die time_to_eat time_to_sleep [times_must_eat]\n", argv[0]);
+        write(STDERR_FILENO, "Usage:./philosophers number_of_philosophers time_to_die time_to_eat time_to_sleep [times_must_eat]\n", 75);
         return 1;
     }
     if (init_data(&data, argc, argv) != 0)
     {
-        printf("Error: invalid arguments\n");
+        write(STDERR_FILENO, "Error: invalid arguments\n", 25);
+        //printf("Error: invalid arguments\n");
         return 1;
     }  
     initialize_philosophers(&data);
@@ -139,6 +150,8 @@ int main(int argc, char **argv)
     if (data.number_of_philosophers > 1)
         start_simulation(&data);
     //free(data.philosophers);
+    //printf("All done!\n");
+    write(STDOUT_FILENO, "All done!\n", 11);
     clean_exit(&data);
     return 0;
 }

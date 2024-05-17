@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:05 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/17 22:23:40 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/17 23:11:06 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,28 @@ void free_data(t_data *data)
     if (!data)
         return;
 
-    i = 0;
+    i = 1;
     while(i < data->number_of_philosophers)
     {
-        pthread_mutex_destroy(&data->philosophers[i].left_fork);
+        if(pthread_mutex_destroy(&data->philosophers[i].left_fork) != 0)
+        {
+            write(2, "Error: mutex_destroy\n", 21);
+            free(data->philosophers);
+            pthread_mutex_destroy(&data->print_lock);
+            free(data);
+            data = NULL;
+            return;
+        }
         /* if ( data->philosophers[i].right_fork != NULL)
-            pthread_mutex_destroy(data->philosophers[i].right_fork); */
+            pthread_mutex_destroy(data->philosophers[i].right_fork);
+            Only the left_fork mutexes are destroyed, as each right_fork
+            is just a pointer to another philosopher's left_fork. */
         i++;
     }    
+   // write(1, "Exiting...\n", 12);
     //free the philosophers array
     free(data->philosophers);
+    data->philosophers = NULL;
 
     //destroy the print mutex
     pthread_mutex_destroy(&data->print_lock);
@@ -114,11 +126,19 @@ void clean_exit(t_data *data)
     if (!data)
         return; 
 
+    
     i = 0;
-    while (i < data->number_of_philosophers)
+    if (data->number_of_philosophers > 1)
     {
-        pthread_join(data->philosophers[i].thread, NULL);
-    }        
+        while (i < data->number_of_philosophers)
+        {
+            if(pthread_join(data->philosophers[i].thread, NULL) != 0)
+                write(2, "Error: pthread_join\n", 20);
+                
+                //printf("Error joining thread %d\n", i + 1);
+            //write(1, "Exiting...\n", 12);
+        }
+    }     
     
     free_data(data);
     exit(EXIT_SUCCESS);
