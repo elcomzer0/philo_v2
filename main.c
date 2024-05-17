@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/17 20:48:24 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/17 22:25:58 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,13 @@ void initialize_philosophers(t_data *data)
         philosophers[0].next = NULL;
         philosophers[0].prev = NULL;
         data->philosophers = philosophers;
-        pthread_create(&philosophers[0].thread, NULL, sokrates_case, &philosophers[0]);
+        if (pthread_create(&philosophers[0].thread, NULL, sokrates_case, &philosophers[0]) != 0)
+        {
+            write(STDERR_FILENO, "Error creating philosopher thread\n", 33);
+            pthread_mutex_destroy(&philosophers[0].left_fork);
+            free(philosophers);
+            exit(EXIT_FAILURE);
+        }
         return;
     }
 

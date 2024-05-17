@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:05 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/17 20:29:07 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/17 22:23:40 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,11 @@ void free_data(t_data *data)
         return;
 
     i = 0;
-    while(i > data->number_of_philosophers)
+    while(i < data->number_of_philosophers)
     {
         pthread_mutex_destroy(&data->philosophers[i].left_fork);
-        if ( data->philosophers[i].right_fork != NULL)
-            pthread_mutex_destroy(data->philosophers[i].right_fork);
+        /* if ( data->philosophers[i].right_fork != NULL)
+            pthread_mutex_destroy(data->philosophers[i].right_fork); */
         i++;
     }    
     //free the philosophers array
@@ -104,6 +104,7 @@ void free_data(t_data *data)
     pthread_mutex_destroy(&data->print_lock);
     //free the data structure itself
     free(data);
+    data = NULL;
 }
 
 void clean_exit(t_data *data)
@@ -116,7 +117,7 @@ void clean_exit(t_data *data)
     i = 0;
     while (i < data->number_of_philosophers)
     {
-        pthread_join(data->philosophers->thread, NULL);
+        pthread_join(data->philosophers[i].thread, NULL);
     }        
     
     free_data(data);
