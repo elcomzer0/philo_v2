@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:36 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/16 10:06:53 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:54:09 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,46 +15,56 @@
 
 #include <pthread.h>
 #include <sys/time.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 
-// Philosopher structure representing each node in the tree
-typedef struct s_philo
+
+//perhaps enumeration for a state maching in case of monitoring
+/* typedef enum state_monitor {
+    
+    
+    
+} state_monitor; */
+
+
+/**
+ * Represents a philosopher in the dining philosophers problem.
+ *
+ * Each philosopher has an ID, the time of their last meal, the number of meals they have eaten,
+ * a thread to represent their actions, a left and right fork, pointers to the next and previous
+ * philosophers, and a reference to the overall dining data.
+ */
+typedef struct s_philosopher
 {
     int id;
+    long last_meal_time;
     int meals_eaten;
-    long last_meal;
     pthread_t thread;
     pthread_mutex_t left_fork;
-    pthread_mutex_t right_fork;
-    struct s_philo *left;
-    struct s_philo *right;
+    pthread_mutex_t *right_fork;
+    struct s_philosopher *next;
+    struct s_philosopher *prev;
     struct s_data *data;
-} t_philo;
+} t_philosopher;
 
-// Global data structure for the simulation
 typedef struct s_data
 {
-    int num_philos;
-    int time_to_die;
-    int time_to_eat;
-    int time_to_sleep;
-    int num_meals;
-    long start_time;
-    pthread_mutex_t print_mutex;
-    t_philo *root;
+    int number_of_philosophers;
+    long time_to_die;
+    long time_to_eat;
+    long time_to_sleep;
+    int times_must_eat;
+    t_philosopher *philosophers; 
+    pthread_mutex_t print_lock;
 } t_data;
 
-int init_data(t_data *data, int argc, char **argv);
-t_philo *create_philosopher_tree(int id, int max_id, t_data *data);
-void init_philosophers(t_philo *root);
+// Function prototypes
+void initialize_philosophers(t_data *data);
+void start_simulation(t_data *data);
 void *philosopher_routine(void *arg);
-void *monitor_routine(void *arg);
-long get_timestamp();
-void print_status(t_philo *philo, const char *status);
-void start_philosopher_threads(t_philo *philo);
-void join_philosopher_threads(t_philo *philo);
-void destroy_philosopher_tree(t_philo *philo);
+long get_current_time();
+void print_status(t_philosopher *philo, const char *status);
+void ft_usleep(unsigned long long int usec);
 
 #endif
