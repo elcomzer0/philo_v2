@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/19 18:16:48 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/19 20:29:45 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void initialize_single_philosopher(t_philosopher *philosopher, int id, t_
 }
 
 
-static void create_philosopher_thread(void *(*routine)(void *), t_data *data, int i)
+/* static void create_philosopher_thread(void *(*routine)(void *), t_data *data, int i)
 {
     pthread_t thread;
     (void)routine;
@@ -80,28 +80,41 @@ static void create_philosopher_thread(void *(*routine)(void *), t_data *data, in
         exit(EXIT_FAILURE);
     }
     pthread_join(thread, NULL);
-}
+} */
 
 static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data *data)
 {
     //write(1, "here\n", 5);
     int i;
+    long start_time = get_current_time();
     
     i = 0;
     //for (int i = 0; i < data->number_of_philosophers; i++)
     while (i < data->number_of_philosophers)
     {
         initialize_single_philosopher(&philosophers[i], i + 1, data);
+        data->start_time = start_time;
         if (i == data->number_of_philosophers - 1)
             philosophers[i].right_fork = &philosophers[0].left_fork;
         else
             philosophers[i].right_fork = &philosophers[i + 1].left_fork;
-
+        philosophers[i].data = data;
         philosophers[i].next = &philosophers[(i + 1) % data->number_of_philosophers];
         philosophers[i].prev = &philosophers[(i - 1 + data->number_of_philosophers) % data->number_of_philosophers];
 
         printf("Initializing philosopher %d\n", i + 1);
-        create_philosopher_thread(philosopher_routine, data, i);
+        // create_philosopher_thread(philosopher_routine, data, i);
+         if (pthread_create(&philosophers[i].thread, NULL, philosopher_routine, &philosophers[i]) != 0)
+        {
+            perror("Error creating philosopher thread");
+            for (int j = 0; j <= i; j++)
+            {
+                pthread_mutex_destroy(&philosophers[j].left_fork);
+            }
+            free(philosophers);
+            pthread_mutex_destroy(&data->print_lock);
+            exit(EXIT_FAILURE);
+        }
         i++;
     }
 }

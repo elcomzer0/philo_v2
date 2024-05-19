@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:36 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/19 18:12:39 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/19 18:32:35 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_philosopher
 
 typedef struct s_data
 {
+    long start_time;
     int number_of_philosophers;
     long time_to_die;
     long time_to_eat;

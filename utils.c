@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:05 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/19 16:55:10 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/19 19:07:14 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ long get_current_time()
 {
     struct timeval tv;
     unsigned long long time;
-    gettimeofday(&tv, NULL);
-    time = (tv.tv_sec * 1000LL) + (tv.tv_usec / 1000);
+    if (gettimeofday(&tv, NULL) != 0)
+        return (-1);
+    time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
     return (time);
 }
 
@@ -59,7 +60,7 @@ void print_status(t_philosopher *philo, const char *status)
     if (philo == NULL || philo->data == NULL) 
         return;
     pthread_mutex_lock(&philo->data->print_lock);
-    printf("%ld %d %s\n", get_current_time(), philo->id, status);
+    printf("%ld %d %s\n", get_current_time() - philo->data->start_time, philo->id, status);
     pthread_mutex_unlock(&philo->data->print_lock);
 }
 
