@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/17 23:13:22 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/19 18:16:48 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 
 #include "philo.h"
+
+
+
+
+
 
 /**
  * Handles the case where a philosopher dies.
@@ -24,16 +29,114 @@
  *
  * @param philo The philosopher who is about to die.
  */
-static void *sokrates_case(void *arg)
+
+
+static t_philosopher *allocate_philosophers(int number_of_philosophers)
 {
-    t_philosopher *philo = (t_philosopher *)arg;
+    t_philosopher *philosophers = (t_philosopher *)ft_calloc(number_of_philosophers, sizeof(t_philosopher));
+    if (!philosophers)
+    {
+        perror("Error allocating philosophers");
+        exit(EXIT_FAILURE);
+    }
+    printf("Allocated %d philosophers\n", number_of_philosophers);
+    return philosophers;
+}
+
+static void initialize_print_lock(t_data *data)
+{
+    if (pthread_mutex_init(&data->print_lock, NULL) != 0)
+    {
+        perror("Error initializing print_lock mutex");
+        exit(EXIT_FAILURE);
+    }
+    printf("Initialized print_lock mutex\n");
+}
+
+static void initialize_single_philosopher(t_philosopher *philosopher, int id, t_data *data)
+{
+    philosopher->id = id;
+    philosopher->last_meal_time = get_current_time();
+    philosopher->meals_eaten = 0;
+    if (pthread_mutex_init(&philosopher->left_fork, NULL) != 0)
+    {
+        perror("Error initializing fork mutex");
+        exit(EXIT_FAILURE);
+    }
+    printf("Initialized philosopher %d\n", id);
+    philosopher->data = data;
+}
+
+
+static void create_philosopher_thread(void *(*routine)(void *), t_data *data, int i)
+{
+    pthread_t thread;
+    (void)routine;
     
-    pthread_mutex_lock(&philo->left_fork);
-    print_status(philo, "has taken a fork");
-    ft_usleep(philo->data->time_to_die * 1000);
-    print_status(philo, "died");
-    pthread_mutex_unlock(&philo->left_fork);
-    exit(EXIT_SUCCESS);
+    write(1, "DEBUG: create_philosopher_thread\n", 34);
+    if (pthread_create(&thread, NULL, philosopher_routine, &data->philosophers[i]) != 0)
+    {
+        perror("Error creating philosopher thread");
+        exit(EXIT_FAILURE);
+    }
+    pthread_join(thread, NULL);
+}
+
+static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data *data)
+{
+    //write(1, "here\n", 5);
+    int i;
+    
+    i = 0;
+    //for (int i = 0; i < data->number_of_philosophers; i++)
+    while (i < data->number_of_philosophers)
+    {
+        initialize_single_philosopher(&philosophers[i], i + 1, data);
+        if (i == data->number_of_philosophers - 1)
+            philosophers[i].right_fork = &philosophers[0].left_fork;
+        else
+            philosophers[i].right_fork = &philosophers[i + 1].left_fork;
+
+        philosophers[i].next = &philosophers[(i + 1) % data->number_of_philosophers];
+        philosophers[i].prev = &philosophers[(i - 1 + data->number_of_philosophers) % data->number_of_philosophers];
+
+        printf("Initializing philosopher %d\n", i + 1);
+        create_philosopher_thread(philosopher_routine, data, i);
+        i++;
+    }
+}
+
+void initialize_philosophers(t_data *data)
+{
+
+    if (data->number_of_philosophers == 1)
+    {
+        initialize_single_philosopher_case(data);
+        return;
+    }
+    t_philosopher *philosophers = allocate_philosophers(data->number_of_philosophers);
+    initialize_print_lock(data);
+    if (data->number_of_philosophers > 1)
+    {
+       printf("DEBUG: Initializing multiple philosophers\n");
+       initialize_multiple_philosophers(philosophers, data);
+    }
+    data->philosophers = philosophers;
+    write(1, "DEBUG: initialize_philosophers\n", 32);
+    if (data->philosophers != NULL)
+    {   
+        int i = 0;
+        while (i < data->number_of_philosophers)
+        {
+            printf("================================================================================================================\n");
+            printf("DEBUG: initialize_philosophers: data->philosphers %p:                                             ||\n", data->philosophers);
+            printf("DEBUG: initialize_philosophers: data->philosophers->id %d                                                      ||\n", data->philosophers[i].id);
+            printf("DEBUG: initialize_philosophers: data->philosophers->last_meal_time %ld                              ||\n", data->philosophers[i].last_meal_time);
+            printf("DEBUG: initialize_philosophers: data->philosophers->meals_eaten %d                                             ||\n", data->philosophers[i].meals_eaten);
+            printf("================================================================================================================\n");
+            i++;
+        }
+    }
 }
 
 
@@ -46,7 +149,93 @@ static void *sokrates_case(void *arg)
  *
  * @param data A pointer to the t_data struct containing the number of philosophers.
  */
-void initialize_philosophers(t_data *data)
+
+int init_data(t_data *data, int argc, char **argv)
+{
+    data->number_of_philosophers = atoi(argv[1]);
+    data->time_to_die = atol(argv[2]);
+    data->time_to_eat = atol(argv[3]);
+    data->time_to_sleep = atol(argv[4]);
+    if (argc == 6)
+    {
+        data->times_must_eat = atoi(argv[5]);
+        if (data->times_must_eat < 0)
+        {
+            //printf("Error: times_must_eat must be a positive integer\n");
+            write(STDERR_FILENO, "Error: times_must_eat must be a positive integer\n", 49);
+            return (1);
+        }
+    }
+    return (0);
+}
+
+
+
+int main(int argc, char **argv)
+{
+    t_data *data;
+    
+    data = ft_calloc(1, sizeof(t_data));
+    if (argc != 5 && argc != 6)
+    {
+        //printf("Usage: %s number_of_philosophers time_to_die time_to_eat time_to_sleep [times_must_eat]\n", argv[0]);
+        write(STDERR_FILENO, "Usage:./philosophers number_of_philosophers time_to_die time_to_eat time_to_sleep [times_must_eat]\n", 75);
+        return 1;
+    }
+    if (init_data(data, argc, argv) != 0)
+    {
+        write(STDERR_FILENO, "Error: invalid arguments\n", 25);
+        //printf("Error: invalid arguments\n");
+        return 1;
+    }  
+   // printf("Number of philosophers: %d\n", data->number_of_philosophers);
+    //exit(0);
+    initialize_philosophers(data);
+    //check if the simulation should be started if there is more than one philosopher
+    if (data->number_of_philosophers > 1)
+        start_simulation(data);
+    //write(STDOUT_FILENO, "All done!\n", 11);
+    clean_exit(data);
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* void initialize_philosophers(t_data *data)
 {
     t_philosopher *philosophers = ft_calloc(data->number_of_philosophers, sizeof(t_philosopher));
     if (!philosophers)
@@ -107,52 +296,90 @@ void initialize_philosophers(t_data *data)
         i++;
     }
     data->philosophers = philosophers;
-}
-
-int init_data(t_data *data, int argc, char **argv)
+} */
+/* void initialize_philosophers(t_data *data)
 {
-    data->number_of_philosophers = atoi(argv[1]);
-    data->time_to_die = atol(argv[2]);
-    data->time_to_eat = atol(argv[3]);
-    data->time_to_sleep = atol(argv[4]);
-    if (argc == 6)
+    t_philosopher *philosophers = (t_philosopher *)calloc(data->number_of_philosophers, sizeof(t_philosopher));
+    if (!philosophers)
     {
-        data->times_must_eat = atoi(argv[5]);
-        if (data->times_must_eat < 0)
+        perror("Error allocating philosophers");
+        exit(EXIT_FAILURE);
+    }
+
+    // Initialize the print_lock mutex
+    if (pthread_mutex_init(&data->print_lock, NULL) != 0)
+    {
+        perror("Error initializing print_lock mutex");
+        free(philosophers);
+        exit(EXIT_FAILURE);
+    }
+
+    if (data->number_of_philosophers == 1)
+    {
+        philosophers[0].id = 1;
+        philosophers[0].last_meal_time = get_current_time();
+        philosophers[0].meals_eaten = 0;
+        if (pthread_mutex_init(&philosophers[0].left_fork, NULL) != 0)
         {
-            //printf("Error: times_must_eat must be a positive integer\n");
-            write(STDERR_FILENO, "Error: times_must_eat must be a positive integer\n", 49);
-            return (1);
+            perror("Error initializing fork mutex");
+            free(philosophers);
+            pthread_mutex_destroy(&data->print_lock);
+            exit(EXIT_FAILURE);
+        }
+        philosophers[0].right_fork = NULL;
+        philosophers[0].data = data;
+        philosophers[0].next = NULL;
+        philosophers[0].prev = NULL;
+        data->philosophers = philosophers;
+        if (pthread_create(&philosophers[0].thread, NULL, sokrates_case, &philosophers[0]) != 0)
+        {
+            perror("Error creating philosopher thread");
+            pthread_mutex_destroy(&philosophers[0].left_fork);
+            pthread_mutex_destroy(&data->print_lock);
+            free(philosophers);
+            exit(EXIT_FAILURE);
+        }
+        return;
+    }
+
+    for (int i = 0; i < data->number_of_philosophers; i++)
+    {
+        philosophers[i].id = i + 1;
+        philosophers[i].last_meal_time = get_current_time();
+        philosophers[i].meals_eaten = 0;
+        if (pthread_mutex_init(&philosophers[i].left_fork, NULL) != 0)
+        {
+            perror("Error initializing fork mutex");
+            for (int j = 0; j <= i; j++)
+            {
+                pthread_mutex_destroy(&philosophers[j].left_fork);
+            }
+            free(philosophers);
+            pthread_mutex_destroy(&data->print_lock);
+            exit(EXIT_FAILURE);
+        }
+
+        if (i == data->number_of_philosophers - 1)
+            philosophers[i].right_fork = &philosophers[0].left_fork;
+        else
+            philosophers[i].right_fork = &philosophers[i + 1].left_fork;
+
+        philosophers[i].data = data;
+        philosophers[i].next = &philosophers[(i + 1) % data->number_of_philosophers];
+        philosophers[i].prev = &philosophers[(i - 1 + data->number_of_philosophers) % data->number_of_philosophers];
+
+        if (pthread_create(&philosophers[i].thread, NULL, philosopher_routine, &philosophers[i]) != 0)
+        {
+            perror("Error creating philosopher thread");
+            for (int j = 0; j <= i; j++)
+            {
+                pthread_mutex_destroy(&philosophers[j].left_fork);
+            }
+            free(philosophers);
+            pthread_mutex_destroy(&data->print_lock);
+            exit(EXIT_FAILURE);
         }
     }
-    return (0);
-}
 
-
-
-int main(int argc, char **argv)
-{
-    t_data data;
-    if (argc != 5 && argc != 6)
-    {
-        //printf("Usage: %s number_of_philosophers time_to_die time_to_eat time_to_sleep [times_must_eat]\n", argv[0]);
-        write(STDERR_FILENO, "Usage:./philosophers number_of_philosophers time_to_die time_to_eat time_to_sleep [times_must_eat]\n", 75);
-        return 1;
-    }
-    if (init_data(&data, argc, argv) != 0)
-    {
-        write(STDERR_FILENO, "Error: invalid arguments\n", 25);
-        //printf("Error: invalid arguments\n");
-        return 1;
-    }  
-    initialize_philosophers(&data);
-    //check if the simulation should be started if there is more than one philosopher
-    if (data.number_of_philosophers > 1)
-        start_simulation(&data);
-    //free(data.philosophers);
-    //printf("All done!\n");
-    write(STDOUT_FILENO, "All done!\n", 11);
-    clean_exit(&data);
-    return 0;
-}
-
+    data->philosophers = philosophers;
+} */

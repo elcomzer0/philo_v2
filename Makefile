@@ -1,11 +1,12 @@
 NAME = philo
 
+
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = -lpthread
 ASAN_FLAGS = -g -fsanitize=address
 
-SRC = main.c philosopher.c utils.c monitor.c
+SRC = main.c philosopher.c utils.c monitor.c single_philo.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

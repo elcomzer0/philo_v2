@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:36 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/17 19:45:27 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/19 18:12:39 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ void initialize_philosophers(t_data *data);
 void start_simulation(t_data *data);
 void *philosopher_routine(void *arg);
 void ft_usleep(unsigned long long int usec);
+
+//single_philosopher
+void *sokrates_case(void *arg);
+void initialize_single_philosopher_case(t_data *data);
+void create_single_philosopher_thread(t_data *data);
 
 /* utils */
 void *ft_calloc(size_t num_elements, size_t element_size);
