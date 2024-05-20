@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/20 10:58:54 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:19:33 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
 
         exit(EXIT_FAILURE);
     }
-    if (pthread_mutex_init(&data->print_lock, NULL) != 0)
+    if (pthread_mutex_init(&data->dined, NULL) != 0)
     {
         perror("Error initializing print_lock mutex");
         for (int j = 0; j < data->number_of_philosophers; j++)
@@ -106,22 +106,22 @@ static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data
     {
         data->start_time = start_time;
 
-    if (i == 0) {
-        philosophers[i].right_fork = &data->fork[data->number_of_philosophers - 1];
-        philosophers[i].left_fork = &data->fork[i];
-    } else if (i % 2 == 0) {
-        philosophers[i].left_fork = &data->fork[i];
-        philosophers[i].right_fork = &data->fork[i - 1];
-    } else {
-        philosophers[i].right_fork = &data->fork[i];
-        philosophers[i].left_fork = &data->fork[i - 1];
-    }
         philosophers[i].id = i + 1;
-        philosophers->last_meal_time = get_current_time();
-        philosophers->meals_eaten = 0;
-        philosophers->time_to_die = data->time_to_die;
-        philosophers->data->death_note = 0;
-
+        philosophers[i].last_meal_time = get_current_time();
+        philosophers[i].meals_eaten = 0;
+        philosophers[i].time_to_die = data->time_to_die;
+        philosophers[i].data = data;
+        philosophers[i].data->death_note = 0;
+        if (i == 0) { //check for later 
+            philosophers[i].right_fork = &data->fork[data->number_of_philosophers - 1];
+            philosophers[i].left_fork = &data->fork[i];
+        } else if (i % 2 == 0) {
+            philosophers[i].right_fork = &data->fork[philosophers[i].id - 1];
+            philosophers[i].left_fork = &data->fork[philosophers[i].id % data->number_of_philosophers];
+        } else {
+            philosophers[i].right_fork = &data->fork[philosophers[i].id % data->number_of_philosophers];
+            philosophers[i].left_fork = &data->fork[philosophers[i].id - 1];
+        }
         printf("Initializing philosopher %d\n", i + 1);
          //create_philosopher_thread(philosopher_routine, data, i);
          if (pthread_create(&philosophers[i].thread, NULL, &philosopher_routine, &philosophers[i]) != 0)
@@ -135,9 +135,14 @@ static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data
             pthread_mutex_destroy(&data->print_lock);
             exit(EXIT_FAILURE);
         }
-        philosophers[i].data = data;
+        //philosophers[i].data = data;
         i++;
     }
+}
+
+void create_monitor(t_data *data)
+{
+    pthread_create(&data->monitor, NULL, monitor_routine, data);
 }
 
 void initialize_philosophers(t_data *data)
@@ -155,6 +160,8 @@ void initialize_philosophers(t_data *data)
     if (data->number_of_philosophers > 1)
     {
        printf("DEBUG: Initializing multiple philosophers\n");
+       //initialize_monitor(data);
+       pthread_create(&data->monitor, NULL, &monitor_routine, data);
        initialize_mutexes(philosophers, data);
        initialize_multiple_philosophers(philosophers, data);
     }

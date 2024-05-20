@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:36 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/20 10:41:07 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:39:45 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ typedef struct s_data
     long time_to_sleep;
     int times_must_eat;
     int death_note;
+    int dined_enough;
+    pthread_t monitor;
     pthread_mutex_t *fork;
     pthread_mutex_t print_lock;
     pthread_mutex_t death;
@@ -75,7 +77,7 @@ typedef struct s_data
 void initialize_philosophers(t_data *data);
 void start_simulation(t_data *data);
 void *philosopher_routine(void *arg);
-void ft_usleep(unsigned long long int usec);
+void ft_usleep(unsigned long long int time_value, t_philosopher *philo);
 
 //single_philosopher
 void *sokrates_case(void *arg);
@@ -87,7 +89,11 @@ void *ft_calloc(size_t num_elements, size_t element_size);
 long get_current_time();
 void print_status(t_philosopher *philo, const char *status);
 void clean_exit(t_data *data);
+bool is_death_note(t_philosopher *philo);
 
+/*monitor*/
+void *monitor_routine(void *arg);
+int death_note_check(t_philosopher *philo);
 
 
 #endif

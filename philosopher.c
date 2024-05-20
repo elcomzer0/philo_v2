@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:56 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/20 10:46:20 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:59:50 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,60 +93,23 @@ void routine_think(t_philosopher *philo)
     routine_think((t_philosopher *)arg);
 } */
 
-bool is_death_note(t_philosopher *philo)
-{
-    if (philo->data->times_must_eat != -1 && philo->meals_eaten >= philo->data->times_must_eat)
-        return (true);
-    return (false);
-}
 
 
 
-/* void routine_loop(t_philosopher *philo)
+
+void routine_loop(t_philosopher *philo)
 {
     while (1 && )
     {
     routine_new(philo);
     }
-} */
+}
 void *philosopher_routine(void *arg)
 {
     t_philosopher *philo = (t_philosopher *)arg;
     t_data *data = philo->data;
 
-    while (1)
-    {
-        // Thinking
-        print_status(philo, "is thinking");
-
-        ft_usleep(data->time_to_sleep * 1000);
-        // Pick up forks
-        pthread_mutex_lock(philo->left_fork);
-        print_status(philo, "has taken a fork");
-        //lock the right fork
-        if (philo->right_fork != NULL)
-        {
-            pthread_mutex_lock(philo->right_fork);
-            print_status(philo, "has taken a fork");
-        }
-        // Eating
-        print_status(philo, "is eating");
-        ft_usleep(data->time_to_eat * 1000);
-        philo->last_meal_time = get_current_time();
-        philo->meals_eaten++;
-
-        // Put down forks or unlock forks
-        pthread_mutex_unlock(philo->left_fork);
-        if(philo->right_fork != NULL)
-            pthread_mutex_unlock(philo->right_fork);
-
-        // Sleeping
-        print_status(philo, "is sleeping");
-        ft_usleep(data->time_to_sleep * 1000);
-
-        if (data->times_must_eat != -1 && philo->meals_eaten >= data->times_must_eat)
-            break;
-    }
+   while()
 
     return NULL;
 }

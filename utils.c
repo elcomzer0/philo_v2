@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:05 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/20 01:47:34 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:40:23 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 
 #include "philo.h"
+
+
+bool is_death_note(t_philosopher *philo)
+{
+    if (philo->data->times_must_eat != -1 && philo->meals_eaten >= philo->data->times_must_eat)
+        return (true);
+    return (false);
+}
 
 void *ft_memset(void *b, int c, size_t len)
 {
@@ -64,22 +72,31 @@ void print_status(t_philosopher *philo, const char *status)
     pthread_mutex_unlock(&philo->data->print_lock);
 }
 
-void ft_usleep(unsigned long long int usec)
+void ft_usleep(unsigned long long int time_value, t_philosopher *philo)
 {
     struct timeval start, current;
-    unsigned long long elapsed = 0;
+    unsigned long long elapsed;
 
     // Get the start time
     gettimeofday(&start, NULL);
 
     // Loop until the elapsed time is greater than or equal to the specified time
-    while (elapsed < usec)
+    while (1)
     {
         // Get the current time
         gettimeofday(&current, NULL);
 
         // Calculate the elapsed time in microseconds
-        elapsed = (current.tv_sec - start.tv_sec) * 1000000ULL + (current.tv_usec - start.tv_usec);
+        //elapsed = (current.tv_sec - start.tv_sec) * 1000000ULL + (current.tv_usec - start.tv_usec);
+        elapsed = (current.tv_sec - start.tv_sec) * 1000 + (current.tv_usec - start.tv_usec) / 1000;
+        pthread_mutex_lock(&philo->data->death);
+        if(elapsed >= time_value || philo->data->death_note == 1)
+        {
+            pthread_mutex_unlock(&philo->data->death);
+            break ;
+        }
+        usleep(400);
+        pthread_mutex_unlock(&philo->data->death);
     }
 }
 
