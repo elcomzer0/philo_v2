@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:56 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/19 19:49:20 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/20 01:46:56 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void *philosopher_routine(void *arg)
 
         ft_usleep(data->time_to_sleep * 1000);
         // Pick up forks
-        pthread_mutex_lock(&philo->left_fork);
+        pthread_mutex_lock(philo->left_fork);
         print_status(philo, "has taken a fork");
         //lock the right fork
         if (philo->right_fork != NULL)
@@ -127,7 +127,7 @@ void *philosopher_routine(void *arg)
         philo->meals_eaten++;
 
         // Put down forks or unlock forks
-        pthread_mutex_unlock(&philo->left_fork);
+        pthread_mutex_unlock(philo->left_fork);
         if(philo->right_fork != NULL)
             pthread_mutex_unlock(philo->right_fork);
 
@@ -170,7 +170,7 @@ void start_simulation(t_data *data)
     i = 0;
     while(i < data->number_of_philosophers)
     {
-        pthread_mutex_destroy(&data->philosophers[i].left_fork);
+        pthread_mutex_destroy(data->philosophers[i].left_fork);
         i++;
     }
 }

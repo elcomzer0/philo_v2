@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:05 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/19 19:07:14 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/20 01:47:34 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void free_data(t_data *data)
     {
     for (i = 0; i < data->number_of_philosophers; i++)
     {
-        if (pthread_mutex_destroy(&data->philosophers[i].left_fork) != 0)
+        if (pthread_mutex_destroy(data->philosophers[i].left_fork) != 0)
         {
             write(2, "Error: mutex_destroy\n", 21);
         }
