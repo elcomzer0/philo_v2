@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:36 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/19 18:32:35 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/20 00:11:21 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ typedef struct s_philosopher
     int id;
     long last_meal_time;
     int meals_eaten;
+    long time_to_die;
     pthread_t thread;
-    pthread_mutex_t left_fork;
+    pthread_mutex_t *left_fork;
     pthread_mutex_t *right_fork;
     struct s_philosopher *next;
     struct s_philosopher *prev;
@@ -62,8 +63,10 @@ typedef struct s_data
     long time_to_eat;
     long time_to_sleep;
     int times_must_eat;
-    t_philosopher *philosophers; 
+    int death_note;
+    pthread_mutex_t *fork;
     pthread_mutex_t print_lock;
+    t_philosopher *philosophers; 
 } t_data;
 
 // Function prototypes

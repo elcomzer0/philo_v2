@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/19 20:29:45 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/20 00:43:55 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,34 +53,22 @@ static void initialize_print_lock(t_data *data)
     printf("Initialized print_lock mutex\n");
 }
 
-static void initialize_single_philosopher(t_philosopher *philosopher, int id, t_data *data)
+/* static void initialize_single_philosopher(t_philosopher *philosopher, int id, t_data *data)
 {
     philosopher->id = id;
     philosopher->last_meal_time = get_current_time();
     philosopher->meals_eaten = 0;
-    if (pthread_mutex_init(&philosopher->left_fork, NULL) != 0)
+    philosopher->time_to_die = data->time_to_die;
+    
+    if (pthread_mutex_init(&data->fork[id], NULL) != 0)
     {
         perror("Error initializing fork mutex");
         exit(EXIT_FAILURE);
     }
+    //philosopher->data = data;
     printf("Initialized philosopher %d\n", id);
-    philosopher->data = data;
-}
-
-
-/* static void create_philosopher_thread(void *(*routine)(void *), t_data *data, int i)
-{
-    pthread_t thread;
-    (void)routine;
-    
-    write(1, "DEBUG: create_philosopher_thread\n", 34);
-    if (pthread_create(&thread, NULL, philosopher_routine, &data->philosophers[i]) != 0)
-    {
-        perror("Error creating philosopher thread");
-        exit(EXIT_FAILURE);
-    }
-    pthread_join(thread, NULL);
 } */
+
 
 static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data *data)
 {
@@ -89,32 +77,30 @@ static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data
     long start_time = get_current_time();
     
     i = 0;
-    //for (int i = 0; i < data->number_of_philosophers; i++)
     while (i < data->number_of_philosophers)
     {
-        initialize_single_philosopher(&philosophers[i], i + 1, data);
         data->start_time = start_time;
-        if (i == data->number_of_philosophers - 1)
-            philosophers[i].right_fork = &philosophers[0].left_fork;
-        else
-            philosophers[i].right_fork = &philosophers[i + 1].left_fork;
+        philosophers[i].left_fork = &data->fork[i];
+        philosophers[i].right_fork = &data->fork[(i + 1) % data->number_of_philosophers];
+        philosophers[i].id = i + 1;
+        philosophers->last_meal_time = get_current_time();
+        philosophers->meals_eaten = 0;
+        philosophers->time_to_die = data->time_to_die;
         philosophers[i].data = data;
-        philosophers[i].next = &philosophers[(i + 1) % data->number_of_philosophers];
-        philosophers[i].prev = &philosophers[(i - 1 + data->number_of_philosophers) % data->number_of_philosophers];
 
         printf("Initializing philosopher %d\n", i + 1);
         // create_philosopher_thread(philosopher_routine, data, i);
-         if (pthread_create(&philosophers[i].thread, NULL, philosopher_routine, &philosophers[i]) != 0)
+         /* if (pthread_create(&philosophers[i].thread, NULL, philosopher_routine, &philosophers[i]) != 0)
         {
             perror("Error creating philosopher thread");
             for (int j = 0; j <= i; j++)
             {
-                pthread_mutex_destroy(&philosophers[j].left_fork);
+                pthread_mutex_destroy(&(data)->fork[j]);
             }
             free(philosophers);
             pthread_mutex_destroy(&data->print_lock);
             exit(EXIT_FAILURE);
-        }
+        } */
         i++;
     }
 }
@@ -128,6 +114,8 @@ void initialize_philosophers(t_data *data)
         return;
     }
     t_philosopher *philosophers = allocate_philosophers(data->number_of_philosophers);
+    
+    
     initialize_print_lock(data);
     if (data->number_of_philosophers > 1)
     {
@@ -142,7 +130,7 @@ void initialize_philosophers(t_data *data)
         while (i < data->number_of_philosophers)
         {
             printf("================================================================================================================\n");
-            printf("DEBUG: initialize_philosophers: data->philosphers %p:                                             ||\n", data->philosophers);
+            printf("DEBUG: initialize_philosophers: data->philosphers %p:                                             ||\n", &data[i]);
             printf("DEBUG: initialize_philosophers: data->philosophers->id %d                                                      ||\n", data->philosophers[i].id);
             printf("DEBUG: initialize_philosophers: data->philosophers->last_meal_time %ld                              ||\n", data->philosophers[i].last_meal_time);
             printf("DEBUG: initialize_philosophers: data->philosophers->meals_eaten %d                                             ||\n", data->philosophers[i].meals_eaten);
