@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/20 10:42:35 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/20 10:58:54 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
             {
                 pthread_mutex_destroy(&data->fork[j]);
             }
-            /* free(philosophers);
-            pthread_mutex_destroy(&data->print_lock); */
+            
             exit(EXIT_FAILURE);
         }
         i++;
@@ -81,8 +80,7 @@ static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
         {
             pthread_mutex_destroy(&data->fork[j]);
         }
-        /* free(philosophers);
-        pthread_mutex_destroy(&data->print_lock); */
+
         exit(EXIT_FAILURE);
     }
     if (pthread_mutex_init(&data->print_lock, NULL) != 0)
@@ -95,13 +93,11 @@ static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
         exit(EXIT_FAILURE);
     }
     
-   // if (pthread_mutex_init(&data->, NULL) != 0)
     printf("Initialized mutexes\n");
 }
 
 static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data *data)
 {
-    //write(1, "here\n", 5);
     int i;
     long start_time = get_current_time();
     
@@ -109,19 +105,7 @@ static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data
     while (i < data->number_of_philosophers)
     {
         data->start_time = start_time;
-        /* philosophers[i].left_fork = &data->fork[i];
-        philosophers[i].right_fork = &data->fork[(i + 1) % data->number_of_philosophers]; */
-    /* if (i == 0) {
-        philosophers[i].right_fork = &data->fork[data->number_of_philosophers - 1];
-    } else {
-        philosophers[i].right_fork = &data->fork[i];
-    }
 
-    if (i == 0 || i % 2 == 0) {
-        philosophers[i].left_fork = &data->fork[i];
-    } else {
-        philosophers[i].left_fork = &data->fork[i - 1];
-    } */
     if (i == 0) {
         philosophers[i].right_fork = &data->fork[data->number_of_philosophers - 1];
         philosophers[i].left_fork = &data->fork[i];
@@ -136,6 +120,7 @@ static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data
         philosophers->last_meal_time = get_current_time();
         philosophers->meals_eaten = 0;
         philosophers->time_to_die = data->time_to_die;
+        philosophers->data->death_note = 0;
 
         printf("Initializing philosopher %d\n", i + 1);
          //create_philosopher_thread(philosopher_routine, data, i);
@@ -213,7 +198,6 @@ int init_data(t_data *data, int argc, char **argv)
         data->times_must_eat = atoi(argv[5]);
         if (data->times_must_eat < 0)
         {
-            //printf("Error: times_must_eat must be a positive integer\n");
             write(STDERR_FILENO, "Error: times_must_eat must be a positive integer\n", 49);
             return (1);
         }
@@ -230,23 +214,18 @@ int main(int argc, char **argv)
     data = ft_calloc(1, sizeof(t_data));
     if (argc != 5 && argc != 6)
     {
-        //printf("Usage: %s number_of_philosophers time_to_die time_to_eat time_to_sleep [times_must_eat]\n", argv[0]);
         write(STDERR_FILENO, "Usage:./philosophers number_of_philosophers time_to_die time_to_eat time_to_sleep [times_must_eat]\n", 75);
         return 1;
     }
     if (init_data(data, argc, argv) != 0)
     {
         write(STDERR_FILENO, "Error: invalid arguments\n", 25);
-        //printf("Error: invalid arguments\n");
         return 1;
     }  
-   // printf("Number of philosophers: %d\n", data->number_of_philosophers);
-    //exit(0);
+   
     initialize_philosophers(data);
-    //check if the simulation should be started if there is more than one philosopher
     if (data->number_of_philosophers > 1)
         start_simulation(data);
-    //write(STDOUT_FILENO, "All done!\n", 11);
     clean_exit(data);
     return 0;
 }

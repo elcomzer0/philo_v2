@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:56 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/20 10:32:44 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/20 10:46:20 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ bool is_death_note(t_philosopher *philo)
         return (true);
     return (false);
 }
+
+
 
 /* void routine_loop(t_philosopher *philo)
 {
