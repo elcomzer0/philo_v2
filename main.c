@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/20 01:44:01 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/20 10:42:35 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,7 @@ static void initialize_print_lock(t_data *data)
     printf("Initialized print_lock mutex\n");
 }
 
-/* static void initialize_single_philosopher(t_philosopher *philosopher, int id, t_data *data)
-{
-    philosopher->id = id;
-    philosopher->last_meal_time = get_current_time();
-    philosopher->meals_eaten = 0;
-    philosopher->time_to_die = data->time_to_die; 
-    
-    if (pthread_mutex_init(&data->fork[id], NULL) != 0)
-    {
-        perror("Error initializing fork mutex");
-        exit(EXIT_FAILURE);
-    }
-    //philosopher->data = data;
-    printf("Initialized philosopher %d\n", id);
-} */
+
 static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
 {
     int i = 0;
@@ -88,6 +74,27 @@ static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
         }
         i++;
     }
+    if (pthread_mutex_init(&data->death, NULL) != 0)
+    {
+        perror("Error initializing death mutex");
+        for (int j = 0; j < data->number_of_philosophers; j++)
+        {
+            pthread_mutex_destroy(&data->fork[j]);
+        }
+        /* free(philosophers);
+        pthread_mutex_destroy(&data->print_lock); */
+        exit(EXIT_FAILURE);
+    }
+    if (pthread_mutex_init(&data->print_lock, NULL) != 0)
+    {
+        perror("Error initializing print_lock mutex");
+        for (int j = 0; j < data->number_of_philosophers; j++)
+        {
+            pthread_mutex_destroy(&data->fork[j]);
+        }
+        exit(EXIT_FAILURE);
+    }
+    
    // if (pthread_mutex_init(&data->, NULL) != 0)
     printf("Initialized mutexes\n");
 }
@@ -102,8 +109,29 @@ static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data
     while (i < data->number_of_philosophers)
     {
         data->start_time = start_time;
+        /* philosophers[i].left_fork = &data->fork[i];
+        philosophers[i].right_fork = &data->fork[(i + 1) % data->number_of_philosophers]; */
+    /* if (i == 0) {
+        philosophers[i].right_fork = &data->fork[data->number_of_philosophers - 1];
+    } else {
+        philosophers[i].right_fork = &data->fork[i];
+    }
+
+    if (i == 0 || i % 2 == 0) {
         philosophers[i].left_fork = &data->fork[i];
-        philosophers[i].right_fork = &data->fork[(i + 1) % data->number_of_philosophers];
+    } else {
+        philosophers[i].left_fork = &data->fork[i - 1];
+    } */
+    if (i == 0) {
+        philosophers[i].right_fork = &data->fork[data->number_of_philosophers - 1];
+        philosophers[i].left_fork = &data->fork[i];
+    } else if (i % 2 == 0) {
+        philosophers[i].left_fork = &data->fork[i];
+        philosophers[i].right_fork = &data->fork[i - 1];
+    } else {
+        philosophers[i].right_fork = &data->fork[i];
+        philosophers[i].left_fork = &data->fork[i - 1];
+    }
         philosophers[i].id = i + 1;
         philosophers->last_meal_time = get_current_time();
         philosophers->meals_eaten = 0;
@@ -153,10 +181,10 @@ void initialize_philosophers(t_data *data)
         while (i < data->number_of_philosophers)
         {
             printf("================================================================================================================\n");
-            printf("DEBUG: initialize_philosophers: data->philosphers %p:                                             ||\n", &data[i]);
-            printf("DEBUG: initialize_philosophers: data->philosophers->id %d                                                      ||\n", data->philosophers[i].id);
-            printf("DEBUG: initialize_philosophers: data->philosophers->last_meal_time %ld                              ||\n", data->philosophers[i].last_meal_time);
-            printf("DEBUG: initialize_philosophers: data->philosophers->meals_eaten %d                                             ||\n", data->philosophers[i].meals_eaten);
+            printf("DEBUG: initialize_philosophers: data->philosphers %p: \n", &data[i]);
+            printf("DEBUG: initialize_philosophers: data->philosophers->id %d  \n", data->philosophers[i].id);
+            printf("DEBUG: initialize_philosophers: data->philosophers->last_meal_time %ld \n", data->philosophers[i].last_meal_time);
+            printf("DEBUG: initialize_philosophers: data->philosophers->meals_eaten %d \n", data->philosophers[i].meals_eaten);
             printf("================================================================================================================\n");
             i++;
         }
