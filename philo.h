@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:36 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/20 15:39:45 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/20 20:42:07 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct s_philosopher
     long last_meal_time;
     int meals_eaten;
     long time_to_die;
+    int *l_fork;
+    int *r_fork;
     pthread_t thread;
     pthread_mutex_t *left_fork;
     pthread_mutex_t *right_fork;
@@ -65,6 +67,7 @@ typedef struct s_data
     int times_must_eat;
     int death_note;
     int dined_enough;
+    int *forks;
     pthread_t monitor;
     pthread_mutex_t *fork;
     pthread_mutex_t print_lock;
@@ -94,6 +97,13 @@ bool is_death_note(t_philosopher *philo);
 /*monitor*/
 void *monitor_routine(void *arg);
 int death_note_check(t_philosopher *philo);
+
+/*actions*/
+void action_eat(t_philosopher *philo);
+void action_sleep(t_philosopher *philo);
+void action_think(t_philosopher *philo);
+void print_philosopher(t_philosopher *philosopher);
+void print_data(const t_data *data);
 
 
 #endif

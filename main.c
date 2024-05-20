@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/20 15:19:33 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/20 21:31:39 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
             {
                 pthread_mutex_destroy(&data->fork[j]);
             }
-            
             exit(EXIT_FAILURE);
         }
         i++;
@@ -92,7 +91,6 @@ static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
         }
         exit(EXIT_FAILURE);
     }
-    
     printf("Initialized mutexes\n");
 }
 
@@ -100,6 +98,7 @@ static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data
 {
     int i;
     long start_time = get_current_time();
+    //print_data(data);
     
     i = 0;
     while (i < data->number_of_philosophers)
@@ -122,67 +121,78 @@ static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data
             philosophers[i].right_fork = &data->fork[philosophers[i].id % data->number_of_philosophers];
             philosophers[i].left_fork = &data->fork[philosophers[i].id - 1];
         }
-        printf("Initializing philosopher %d\n", i + 1);
-         //create_philosopher_thread(philosopher_routine, data, i);
-         if (pthread_create(&philosophers[i].thread, NULL, &philosopher_routine, &philosophers[i]) != 0)
-        {
-            perror("Error creating philosopher thread");
-            for (int j = 0; j <= i; j++)
-            {
-                pthread_mutex_destroy(&(data)->fork[j]);
-            }
-            free(philosophers);
-            pthread_mutex_destroy(&data->print_lock);
-            exit(EXIT_FAILURE);
+        //action for physical int of forks
+        if (i == 0) { //check for later 
+            philosophers[i].r_fork = &data->forks[data->number_of_philosophers - 1];
+            philosophers[i].l_fork = &data->forks[i];
+        } else if (i % 2 == 0) {
+            philosophers[i].r_fork = &data->forks[philosophers[i].id - 1];
+            philosophers[i].l_fork = &data->forks[philosophers[i].id % data->number_of_philosophers];
+        } else {
+            philosophers[i].r_fork = &data->forks[philosophers[i].id % data->number_of_philosophers];
+            philosophers[i].l_fork = &data->forks[philosophers[i].id - 1];
         }
-        //philosophers[i].data = data;
+        print_philosopher(&philosophers[i]);
         i++;
     }
 }
 
-void create_monitor(t_data *data)
+int *init_array_forks(t_data *data)
 {
-    pthread_create(&data->monitor, NULL, monitor_routine, data);
+    int number_of_philosophers = data->number_of_philosophers; 
+        int* forks = (int*) malloc(number_of_philosophers * sizeof(int));
+        if (!forks)
+        {
+            perror("Error allocating forks");
+            exit(EXIT_FAILURE);
+        }
+
+    for (int i = 0; i < number_of_philosophers; i++)
+    {
+        forks[i] = 0;
+    }
+
+    return forks;
 }
 
 void initialize_philosophers(t_data *data)
 {
-
+    //print_data(data);
     if (data->number_of_philosophers == 1)
     {
         initialize_single_philosopher_case(data);
         return;
     }
     t_philosopher *philosophers = allocate_philosophers(data->number_of_philosophers);
-    
-    
+    data->philosophers = philosophers;
     initialize_print_lock(data);
     if (data->number_of_philosophers > 1)
     {
-       printf("DEBUG: Initializing multiple philosophers\n");
-       //initialize_monitor(data);
-       pthread_create(&data->monitor, NULL, &monitor_routine, data);
        initialize_mutexes(philosophers, data);
        initialize_multiple_philosophers(philosophers, data);
-    }
-    data->philosophers = philosophers;
-    write(1, "DEBUG: initialize_philosophers\n", 32);
-    if (data->philosophers != NULL)
-    {   
-        int i = 0;
-        while (i < data->number_of_philosophers)
-        {
-            printf("================================================================================================================\n");
-            printf("DEBUG: initialize_philosophers: data->philosphers %p: \n", &data[i]);
-            printf("DEBUG: initialize_philosophers: data->philosophers->id %d  \n", data->philosophers[i].id);
-            printf("DEBUG: initialize_philosophers: data->philosophers->last_meal_time %ld \n", data->philosophers[i].last_meal_time);
-            printf("DEBUG: initialize_philosophers: data->philosophers->meals_eaten %d \n", data->philosophers[i].meals_eaten);
-            printf("================================================================================================================\n");
-            i++;
-        }
+       pthread_create(&data->monitor, NULL, &monitor_routine, data);
     }
 }
 
+void create_threads(t_data *data)
+{
+    int i = 0;
+    while (i < data->number_of_philosophers)
+    {
+        if (pthread_create(&(data->philosophers[i].thread), NULL, &philosopher_routine, &(data->philosophers[i])) != 0)
+        {
+            perror("Error creating philosopher thread");
+            for (int j = 0; j <= i; j++)
+            {
+                pthread_mutex_destroy(&(data)->fork[j]);
+            }
+            //free(philosophers); // TODO change to free array
+            pthread_mutex_destroy(&data->print_lock);
+            exit(EXIT_FAILURE);
+        }
+        i++;
+    }
+}
 
 /**
  * Initializes the philosophers in the dining philosophers problem.
@@ -200,6 +210,7 @@ int init_data(t_data *data, int argc, char **argv)
     data->time_to_die = atol(argv[2]);
     data->time_to_eat = atol(argv[3]);
     data->time_to_sleep = atol(argv[4]);
+    data->forks = init_array_forks(data);
     if (argc == 6)
     {
         data->times_must_eat = atoi(argv[5]);
@@ -211,7 +222,6 @@ int init_data(t_data *data, int argc, char **argv)
     }
     return (0);
 }
-
 
 
 int main(int argc, char **argv)
@@ -231,6 +241,7 @@ int main(int argc, char **argv)
     }  
    
     initialize_philosophers(data);
+    create_threads(data);
     if (data->number_of_philosophers > 1)
         start_simulation(data);
     clean_exit(data);
