@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:56 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/20 21:24:54 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:56:54 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ void start_simulation(t_data *data)
         i++;
     }
 
-    pthread_mutex_destroy(&data->print_lock);
+   // pthread_mutex_destroy(&data->print_lock);
     
-    i = 0;
+    /* i = 0;
     while(i < data->number_of_philosophers)
     {
         pthread_mutex_destroy(data->philosophers[i].left_fork);
         i++;
-    }
+    } */
 }
 
