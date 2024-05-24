@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:05 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/23 17:06:46 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/24 17:42:20 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void ft_usleep(unsigned long long int time_value, t_philosopher *philo)
     struct timeval start, current;
     unsigned long long elapsed;
 
+    if(philo == NULL || philo->data == NULL)
+        return ;
     // Get the start time
     gettimeofday(&start, NULL);
 
@@ -86,8 +88,6 @@ void ft_usleep(unsigned long long int time_value, t_philosopher *philo)
         // Get the current time
         gettimeofday(&current, NULL);
 
-        // Calculate the elapsed time in microseconds
-        //elapsed = (current.tv_sec - start.tv_sec) * 1000000ULL + (current.tv_usec - start.tv_usec);
         elapsed = (current.tv_sec - start.tv_sec) * 1000 + (current.tv_usec - start.tv_usec) / 1000;
         pthread_mutex_lock(&philo->data->death);
         if(elapsed >= time_value || philo->data->death_note == 1)
@@ -106,6 +106,12 @@ void free_data(t_data *data)
 
     if (!data)
         return;
+
+    //set flag exiting to 1
+    data->exiting = 1;
+    //wait for a reasonable time to allow threads to exit
+    //ft_usleep(100000, NULL);
+    usleep(1000000);
 
     write(1, "Exiting...\n", 12);
     if(data->philosophers)
@@ -141,9 +147,9 @@ void clean_exit(t_data *data)
     if (!data)
         return;
 
-    write(1, "Exiting...\n", 12);
+   // write(1, "Exiting...\n", 12);
    
-    if(data->philosophers)
+    /* if(data->philosophers)
     {
     for (int i = 0; i < data->number_of_philosophers; i++)
     {
@@ -160,7 +166,7 @@ void clean_exit(t_data *data)
         }
     }
     
-    }
+    } */
     if (pthread_mutex_destroy(&data->print_lock) != 0)
     {
         write(2, "Error: print mutex_destroy\n", 28);
@@ -173,6 +179,10 @@ void clean_exit(t_data *data)
     if (pthread_mutex_destroy(&data->dined) != 0)
     {
         write(2, "Error: dined mutex_destroy\n", 27);
+    }
+    if (pthread_mutex_destroy(&data->completed_threads_mutex) != 0)
+    {
+        write(2, "Error: completed_threads_count mutex_destroy\n", 44);
     }
    if (data->philosophers)
     {

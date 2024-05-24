@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/23 15:20:41 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/24 17:53:39 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static t_philosopher *allocate_philosophers(int number_of_philosophers)
         perror("Error allocating philosophers");
         exit(EXIT_FAILURE);
     }
-    printf("Allocated %d philosophers\n", number_of_philosophers);
+   // printf("Allocated %d philosophers\n", number_of_philosophers);
     return philosophers;
 }
 
@@ -48,9 +48,10 @@ static void initialize_print_lock(t_data *data)
     if (pthread_mutex_init(&data->print_lock, NULL) != 0)
     {
         perror("Error initializing print_lock mutex");
+       // pthread_mutex_destroy(&data->print_lock);
         exit(EXIT_FAILURE);
     }
-    printf("Initialized print_lock mutex\n");
+   // printf("Initialized print_lock mutex\n");
 }
 
 
@@ -68,6 +69,7 @@ static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
             {
                 pthread_mutex_destroy(&data->fork[j]);
             }
+            free(data->fork);
             exit(EXIT_FAILURE);
         }
         i++;
@@ -79,7 +81,7 @@ static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
         {
             pthread_mutex_destroy(&data->fork[j]);
         }
-
+        free(data->fork);
         exit(EXIT_FAILURE);
     }
     if (pthread_mutex_init(&data->dined, NULL) != 0)
@@ -89,9 +91,37 @@ static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
         {
             pthread_mutex_destroy(&data->fork[j]);
         }
+        pthread_mutex_destroy(&data->death);
+        free(data->fork);
         exit(EXIT_FAILURE);
     }
-    printf("Initialized mutexes\n");
+    if(pthread_mutex_init(&data->meals_eaten_mutex, NULL) != 0)
+    {
+        perror("Error initializing meals_eaten_mutex");
+        for (int j = 0; j < data->number_of_philosophers; j++)
+        {
+            pthread_mutex_destroy(&data->fork[j]);
+        }
+        pthread_mutex_destroy(&data->death);
+        pthread_mutex_destroy(&data->dined);
+        free(data->fork);
+        exit(EXIT_FAILURE);
+    }
+    if (pthread_mutex_init(&data->completed_threads_mutex, NULL) != 0)
+    {
+        perror("Error initializing completed_threads_mutex");
+        for (int j = 0; j < data->number_of_philosophers; j++)
+        {
+            pthread_mutex_destroy(&data->fork[j]);
+        }
+        pthread_mutex_destroy(&data->death);
+        pthread_mutex_destroy(&data->dined);
+        pthread_mutex_destroy(&data->meals_eaten_mutex);
+        free(data->fork);
+        exit(EXIT_FAILURE);
+    }
+    data->completed_threads_count = 0;
+   // printf("Initialized mutexes\n");
 }
 
 static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data *data)
@@ -111,6 +141,9 @@ static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data
         philosophers[i].time_to_die = data->time_to_die;
         philosophers[i].data = data;
         philosophers[i].data->death_note = 0;
+        philosophers[i].data->dined_enough = 0;
+        philosophers[i].data->completed_threads_count = 0;
+        philosophers[i].data->exiting = 0;
         if (i == 0) { //check for later 
             philosophers[i].right_fork = &data->fork[data->number_of_philosophers - 1];
             philosophers[i].left_fork = &data->fork[i];
@@ -132,7 +165,8 @@ static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data
             philosophers[i].r_fork = &data->forks[philosophers[i].id % data->number_of_philosophers];
             philosophers[i].l_fork = &data->forks[philosophers[i].id - 1];
         }
-        print_philosopher(&philosophers[i]);
+    /*     print_philosopher(&philosophers[i]);
+        print_data(data); */
         i++;
     }
 }

@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:36 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/20 20:42:07 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/24 16:32:51 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ typedef struct s_philosopher
     pthread_t thread;
     pthread_mutex_t *left_fork;
     pthread_mutex_t *right_fork;
-    struct s_philosopher *next;
-    struct s_philosopher *prev;
+    /* struct s_philosopher *next;
+    struct s_philosopher *prev; */
     struct s_data *data;
 } t_philosopher;
 
@@ -68,11 +68,15 @@ typedef struct s_data
     int death_note;
     int dined_enough;
     int *forks;
+    int completed_threads_count;
+    int exiting;
     pthread_t monitor;
     pthread_mutex_t *fork;
     pthread_mutex_t print_lock;
     pthread_mutex_t death;
     pthread_mutex_t dined;
+    pthread_mutex_t meals_eaten_mutex;
+    pthread_mutex_t completed_threads_mutex;
     t_philosopher *philosophers; 
 } t_data;
 
