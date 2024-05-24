@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:05 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/24 17:42:20 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/24 20:39:25 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,26 +147,7 @@ void clean_exit(t_data *data)
     if (!data)
         return;
 
-   // write(1, "Exiting...\n", 12);
-   
-    /* if(data->philosophers)
-    {
-    for (int i = 0; i < data->number_of_philosophers; i++)
-    {
-        if (pthread_mutex_destroy(data->philosophers[i].left_fork) != 0)
-        {
-            write(2, "Error: mutex_destroy\n", 21);
-        }
-    }
-    for (int i = 0; i < data->number_of_philosophers; i++)
-    {
-        if (pthread_mutex_destroy(data->philosophers[i].right_fork) != 0)
-        {
-            write(2, "Error: mutex_destroy\n", 21);
-        }
-    }
-    
-    } */
+
     if (pthread_mutex_destroy(&data->print_lock) != 0)
     {
         write(2, "Error: print mutex_destroy\n", 28);
@@ -211,26 +192,3 @@ void clean_exit(t_data *data)
     exit(EXIT_SUCCESS);
 }
 
-/* void clean_exit(t_data *data)
-{
-    int i;
-
-    if (!data)
-        return;
-
-    write(1, "Exiting...\n", 12);
-   
-    if (data->number_of_philosophers > 1)
-    {
-        for (i = 0; i < data->number_of_philosophers; i++)
-        {
-            if (pthread_join(data->philosophers[i].thread, NULL) != 0)
-                write(2, "Error: pthread_join\n", 20);
-        }
-    }
-    else
-    {
-        free(data);
-    }
-    exit(EXIT_SUCCESS);
-} */

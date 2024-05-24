@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:43 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/24 15:10:37 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/24 20:37:51 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,7 @@
 
 #include "philo.h"
 
-/* int dining_checker(t_philosopher *philo)
-{
-    //TODO protect with mutexes
-    if (philo->data->times_must_eat != -1 && philo->meals_eaten >= philo->data->times_must_eat)
-        return (1);
-    return (0);
-} */
+
 
 int dining_checker(t_philosopher *philo)
 {
@@ -41,24 +35,7 @@ int dining_timespan(t_philosopher *philo)
     return (0); 
 }
 
-/* int starving_check(t_philosopher *philo)
-{
-    int i;
 
-    i = 0;
-    while(dining_timespan(philo) == 0)
-    {
-        i++;
-        if (i == philo->data->number_of_philosophers)
-        {
-            pthread_mutex_lock(&philo->data->death);
-            philo->data->death_note = 1;
-            pthread_mutex_unlock(&philo->data->death);
-            return (1);
-        }
-    }
-    return (0);
-} */
  void print_philosopher(t_philosopher *philosopher)
 {
     printf ("----------------- This is PHILO--------------\n");
@@ -130,19 +107,7 @@ int dined_enough(t_philosopher *philo)
     return (0);
 }
 
-/* int death_note_check(t_philosopher *philo)
-{
-    //print_philosopher(philo);
-    //print_data(philo->data);
-    pthread_mutex_lock(&philo->data->death);
-    if (philo->data->death_note == 1)
-    {
-        pthread_mutex_unlock(&philo->data->death);
-        return (1);
-    }
-    pthread_mutex_unlock(&philo->data->death);
-    return (0);
-} */
+
 
 int death_note_check(t_philosopher *philo)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_philo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/19 16:55:33 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/24 20:40:05 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,6 @@ void *sokrates_case(void *arg)
 
 void initialize_single_philosopher_case(t_data *data)
 {
-    //initialize_single_philosopher(philosopher, 1, data);
-    //philosopher->right_fork = NULL;
-    //philosopher->next = NULL;
-    //philosopher->prev = NULL;
-   // printf("Initializing single philosopher case\n");
     create_single_philosopher_thread(data);
 }
 
@@ -45,6 +40,5 @@ void create_single_philosopher_thread(t_data *data)
         exit(EXIT_FAILURE);
     }
     pthread_join(thread, NULL);
-    //write(1, "halloooo\n", 9);
 }
 
