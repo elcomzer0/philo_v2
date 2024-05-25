@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:21:10 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/25 01:48:45 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/25 13:07:43 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@
     pthread_mutex_unlock(first_fork);
 } */
 
-void action_eat(t_philosopher *philo)
+/* void action_eat(t_philosopher *philo)
 {
     pthread_mutex_t *first_fork, *second_fork;
 
@@ -121,6 +121,110 @@ void action_eat(t_philosopher *philo)
     if (philo->l_fork != NULL && philo->r_fork != NULL) {
         *(philo->l_fork) = 0;
         *(philo->r_fork) = 0;
+    }
+
+    pthread_mutex_unlock(second_fork);
+    pthread_mutex_unlock(first_fork);
+} */
+
+/* void action_eat(t_philosopher *philo)
+{
+    pthread_mutex_t *first_fork, *second_fork;
+
+    if (philo->id % 2 == 0)
+    {
+        // Even philosophers acquire left fork first, then right fork
+        first_fork = philo->left_fork;
+        second_fork = philo->right_fork;
+    }
+    else
+    {
+        // Odd philosophers acquire right fork first, then left fork
+        first_fork = philo->right_fork;
+        second_fork = philo->left_fork;
+    }
+
+    if (pthread_mutex_lock(first_fork) != 0)
+    {
+        return;
+    }
+    print_status(philo, "has taken a fork");
+
+    if (pthread_mutex_lock(second_fork) != 0)
+    {
+        pthread_mutex_unlock(first_fork);
+        return;
+    }
+    print_status(philo, "has taken a fork");
+
+    pthread_mutex_lock(&philo->data->last_meal_timestamps_mutex);
+    philo->last_meal_time = get_current_time();
+    philo->data->last_meal_timestamps[philo->id - 1] = philo->last_meal_time;
+    pthread_mutex_unlock(&philo->data->last_meal_timestamps_mutex);
+
+    print_status(philo, "is eating");
+    ft_usleep(philo->data->time_to_eat * 1000, philo);
+
+    pthread_mutex_unlock(second_fork);
+    pthread_mutex_unlock(first_fork);
+} */
+
+void action_eat(t_philosopher *philo)
+{
+    pthread_mutex_t *first_fork, *second_fork;
+    if (philo->id % 2 == 0)
+    {
+        // Even philosophers acquire left fork first, then right fork
+        first_fork = philo->left_fork;
+        second_fork = philo->right_fork;
+    }
+    else
+    {
+        // Odd philosophers acquire right fork first, then left fork
+        first_fork = philo->right_fork;
+        second_fork = philo->left_fork;
+    }
+
+        printf("in action_eat: Philosopher %d attempting to pick up forks at time %ld\n", philo->id, get_current_time());
+
+
+    if (pthread_mutex_lock(first_fork) != 0)
+    {
+        return;
+    }
+    print_status(philo, "has taken a fork");
+
+        printf("in action eat: Philosopher %d attempting to pick up second fork at time %ld\n", philo->id, get_current_time());
+
+
+    if (pthread_mutex_lock(second_fork) != 0)
+    {
+        pthread_mutex_unlock(first_fork);
+        return;
+    }
+    print_status(philo, "has taken a fork");
+
+    // Update the fork status
+    if (philo->l_fork != NULL && philo->r_fork != NULL)
+    {
+        *(philo->l_fork) = 1; // Mark left fork as in use
+        *(philo->r_fork) = 1; // Mark right fork as in use
+    }
+
+    // Update the last_meal timestamp
+    pthread_mutex_lock(&philo->data->last_meal_timestamps_mutex);
+    philo->last_meal_time = get_current_time();
+    philo->data->last_meal_timestamps[philo->id - 1] = philo->last_meal_time;
+    pthread_mutex_unlock(&philo->data->last_meal_timestamps_mutex);
+
+    print_status(philo, "is eating");
+    ft_usleep(philo->data->time_to_eat * 1000, philo);
+
+    // Update the fork status
+    if (philo->l_fork != NULL && philo->r_fork != NULL)
+    {
+        *(philo->l_fork) = 0; // Mark left fork as not in use
+        *(philo->r_fork) = 0; // Mark right fork as not in use
     }
 
     pthread_mutex_unlock(second_fork);

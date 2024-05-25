@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:36 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/25 03:05:54 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/25 13:01:46 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 #define SIZE_MAX ((size_t)-1)
 #define MAX_PHILOSOPHERS 201
-#define THRESHOLD 500
+#define THRESHOLD 100
 
 
 

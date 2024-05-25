@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/25 03:07:16 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/25 12:58:38 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,8 +233,8 @@ static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data
             philosophers[i].r_fork = &data->forks[philosophers[i].id % data->number_of_philosophers];
             philosophers[i].l_fork = &data->forks[philosophers[i].id - 1];
         }
-    //     print_philosopher(&philosophers[i]);
-    //    print_data(data);
+         print_philosopher(&philosophers[i]);
+        print_data(data);
         i++;
     }
 }
@@ -272,16 +272,16 @@ void initialize_philosophers(t_data *data)
     {
        initialize_mutexes(philosophers, data);
        initialize_multiple_philosophers(philosophers, data);
-       pthread_create(&data->monitor, NULL, &monitor_routine, data);
+       //pthread_create(&(data->monitor), NULL, monitor_routine, data);
     }
 }
 
-void create_threads(t_data *data)
+/* void create_threads(t_data *data)
 {
     int i = 0;
     while (i < data->number_of_philosophers)
     {
-        if (pthread_create(&(data->philosophers[i].thread), NULL, &philosopher_routine, &(data->philosophers[i])) != 0)
+        if (pthread_create(&(data->philosophers[i].thread), NULL, philosopher_routine, &(data->philosophers[i])) != 0)
         {
             perror("Error creating philosopher thread");
             for (int j = 0; j <= i; j++)
@@ -293,6 +293,33 @@ void create_threads(t_data *data)
             exit(EXIT_FAILURE);
         }
         i++;
+    }
+} */
+
+void create_threads(t_data *data)
+{
+    int i = 0;
+    while (i < data->number_of_philosophers)
+    {
+        if (pthread_create(&(data->philosophers[i].thread), NULL, philosopher_routine, &(data->philosophers[i])) != 0)
+        {
+            perror("Error creating philosopher thread");
+            for (int j = 0; j <= i; j++)
+            {
+                pthread_mutex_destroy(&(data)->fork[j]);
+            }
+            pthread_mutex_destroy(&data->print_lock);
+            exit(EXIT_FAILURE);
+        }
+        usleep(100);  // Slight delay to avoid timing issues
+        i++;
+    }
+    
+    // Create the monitor thread
+    if (pthread_create(&(data->monitor), NULL, monitor_routine, data) != 0)
+    {
+        perror("Error creating monitor thread");
+        exit(EXIT_FAILURE);
     }
 }
 

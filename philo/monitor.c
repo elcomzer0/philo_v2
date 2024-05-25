@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:43 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/25 02:57:18 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/25 13:14:40 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,7 +307,7 @@ void process_philo_life_cycle(t_data *data, int *total_dining)
 }
 
 
-void check_philo_death_and_eaten_status(t_data *data, int *total_dining)
+/* void check_philo_death_and_eaten_status(t_data *data, int *total_dining)
 {
     pthread_mutex_lock(&data->dined);
     if (*total_dining >= data->number_of_philosophers && data->times_must_eat > 0)
@@ -317,9 +317,35 @@ void check_philo_death_and_eaten_status(t_data *data, int *total_dining)
         pthread_mutex_unlock(&data->death);
     }
     pthread_mutex_unlock(&data->dined);
+} */
+
+void check_philo_death_and_eaten_status(t_data *data, int *total_dining)
+{
+    pthread_mutex_lock(&data->death);
+    if (data->death_note)
+    {
+        pthread_mutex_unlock(&data->death);
+        return;
+    }
+    pthread_mutex_unlock(&data->death);
+
+    // Update dined_enough if required
+    pthread_mutex_lock(&data->dined);
+    if (data->times_must_eat > 0 && *total_dining >= data->number_of_philosophers)
+    {
+        data->dined_enough = 1;
+        pthread_mutex_unlock(&data->dined);
+        pthread_mutex_lock(&data->death);
+        data->death_note = 1;
+        pthread_mutex_unlock(&data->death);
+    }
+    else
+    {
+        pthread_mutex_unlock(&data->dined);
+    }
 }
 
-void *monitor_routine(void *arg)
+/* void *monitor_routine(void *arg)
 {
     usleep(500);
     t_data *data = (t_data *)arg;
@@ -334,5 +360,25 @@ void *monitor_routine(void *arg)
         process_philo_life_cycle(data, &eaten);
         check_philo_death_and_eaten_status(data, &eaten);
     }
+    return NULL;
+} */
+
+void *monitor_routine(void *arg)
+{
+    printf("monitor_routine started\n");
+    // usleep(500);  // Initial delay to allow philosophers to start
+    t_data *data = (t_data *)arg;
+    t_philosopher *philo = &(data->philosophers[0]);
+    // while (!data->death_note)
+    usleep(100000);
+    while (!death_note_check(philo))
+    {
+        //printf("monitor loop iteration\n");
+        int eaten = 0;
+        process_philo_life_cycle(data, &eaten);
+        check_philo_death_and_eaten_status(data, &eaten);
+        usleep(1000); // Short delay to reduce CPU usage
+    }
+    printf("monitor_routine exiting\n");
     return NULL;
 }
