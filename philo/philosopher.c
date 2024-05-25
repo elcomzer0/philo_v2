@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:56 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/24 20:38:39 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/25 02:03:50 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void *philosopher_routine(void *arg)
 
 void start_simulation(t_data *data)
 {
-    int i;
+   // int i;
     
     pthread_mutex_lock(&data->completed_threads_mutex);
     while (data->completed_threads_count < data->number_of_philosophers)
@@ -54,12 +54,12 @@ void start_simulation(t_data *data)
         pthread_mutex_lock(&data->completed_threads_mutex);
     }
     pthread_mutex_unlock(&data->completed_threads_mutex);
-
+/* 
     i = 0;
     while(i < data->number_of_philosophers)
     {
         pthread_join(data->philosophers[i].thread, NULL);
         i++;
     }
+} */
 }
-

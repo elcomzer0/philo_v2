@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/24 17:53:39 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/25 03:07:16 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,26 @@ static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
         free(data->fork);
         exit(EXIT_FAILURE);
     }
+    //added last_meal_timestamps_mutex
+    if (pthread_mutex_init(&data->last_meal_timestamps_mutex, NULL) != 0)
+    {
+        perror("Error initializing last_meal_timestamps_mutex");
+        for (int j = 0; j < data->number_of_philosophers; j++)
+        {
+            pthread_mutex_destroy(&data->fork[j]);
+        }
+        pthread_mutex_destroy(&data->death);
+        pthread_mutex_destroy(&data->dined);
+        pthread_mutex_destroy(&data->meals_eaten_mutex);
+        pthread_mutex_destroy(&data->completed_threads_mutex);
+        free(data->fork);
+        exit(EXIT_FAILURE);
+    }
     data->completed_threads_count = 0;
    // printf("Initialized mutexes\n");
 }
 
-static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data *data)
+/* static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data *data)
 {
     int i;
     long start_time = get_current_time();
@@ -165,8 +180,61 @@ static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data
             philosophers[i].r_fork = &data->forks[philosophers[i].id % data->number_of_philosophers];
             philosophers[i].l_fork = &data->forks[philosophers[i].id - 1];
         }
-    /*     print_philosopher(&philosophers[i]);
-        print_data(data); */
+    //    print_philosopher(&philosophers[i]);
+    //    print_data(data);
+        i++;
+    }
+} */
+
+// version with last_meal_timestamps
+static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data *data)
+{
+    int i;
+    long start_time = get_current_time();
+    //print_data(data);
+    
+    i = 0;
+    while (i < data->number_of_philosophers)
+    {
+        data->start_time = start_time;
+
+        philosophers[i].id = i + 1;
+        philosophers[i].last_meal_time = get_current_time();
+        philosophers[i].meals_eaten = 0;
+        philosophers[i].time_to_die = data->time_to_die;
+        philosophers[i].data = data;
+        philosophers[i].data->death_note = 0;
+        philosophers[i].data->dined_enough = 0;
+        philosophers[i].data->completed_threads_count = 0;
+        philosophers[i].data->exiting = 0;
+
+        pthread_mutex_lock(&data->last_meal_timestamps_mutex);
+        data->last_meal_timestamps[i] = start_time;
+        pthread_mutex_unlock(&data->last_meal_timestamps_mutex);
+        
+        if (i == 0) { //check for later 
+            philosophers[i].right_fork = &data->fork[data->number_of_philosophers - 1];
+            philosophers[i].left_fork = &data->fork[i];
+        } else if (i % 2 == 0) {
+            philosophers[i].right_fork = &data->fork[philosophers[i].id - 1];
+            philosophers[i].left_fork = &data->fork[philosophers[i].id % data->number_of_philosophers];
+        } else {
+            philosophers[i].right_fork = &data->fork[philosophers[i].id % data->number_of_philosophers];
+            philosophers[i].left_fork = &data->fork[philosophers[i].id - 1];
+        }
+        //action for physical int of forks
+        if (i == 0) { //check for later 
+            philosophers[i].r_fork = &data->forks[data->number_of_philosophers - 1];
+            philosophers[i].l_fork = &data->forks[i];
+        } else if (i % 2 == 0) {
+            philosophers[i].r_fork = &data->forks[philosophers[i].id - 1];
+            philosophers[i].l_fork = &data->forks[philosophers[i].id % data->number_of_philosophers];
+        } else {
+            philosophers[i].r_fork = &data->forks[philosophers[i].id % data->number_of_philosophers];
+            philosophers[i].l_fork = &data->forks[philosophers[i].id - 1];
+        }
+    //     print_philosopher(&philosophers[i]);
+    //    print_data(data);
         i++;
     }
 }

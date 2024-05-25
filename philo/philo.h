@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:36 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/24 16:32:51 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/25 03:05:54 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 #include <stdbool.h>
 
 #define SIZE_MAX ((size_t)-1)
+#define MAX_PHILOSOPHERS 201
+#define THRESHOLD 500
 
 
 
@@ -70,6 +72,7 @@ typedef struct s_data
     int *forks;
     int completed_threads_count;
     int exiting;
+    long long last_meal_timestamps[201];
     pthread_t monitor;
     pthread_mutex_t *fork;
     pthread_mutex_t print_lock;
@@ -77,6 +80,7 @@ typedef struct s_data
     pthread_mutex_t dined;
     pthread_mutex_t meals_eaten_mutex;
     pthread_mutex_t completed_threads_mutex;
+    pthread_mutex_t last_meal_timestamps_mutex;
     t_philosopher *philosophers; 
 } t_data;
 

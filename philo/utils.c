@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:05 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/24 20:39:25 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/25 02:40:18 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,27 @@ long get_current_time()
     return (time);
 }
 
-void print_status(t_philosopher *philo, const char *status)
+/* void print_status(t_philosopher *philo, const char *status)
 {
     if (philo == NULL || philo->data == NULL) 
         return;
     pthread_mutex_lock(&philo->data->print_lock);
     printf("%ld %d %s\n", get_current_time() - philo->data->start_time, philo->id, status);
+    pthread_mutex_unlock(&philo->data->print_lock);
+} */
+
+void print_status(t_philosopher *philo, const char *status)
+{
+    if (philo == NULL || philo->data == NULL)
+        return;
+
+    pthread_mutex_lock(&philo->data->print_lock);
+    pthread_mutex_lock(&philo->data->death);
+    if (!philo->data->death_note || strcmp(status, "died") == 0)  // Only print if not dead, or if it's the death message
+    {
+        printf("%ld %d %s\n", get_current_time() - philo->data->start_time, philo->id, status);
+    }
+    pthread_mutex_unlock(&philo->data->death);
     pthread_mutex_unlock(&philo->data->print_lock);
 }
 
@@ -95,8 +110,8 @@ void ft_usleep(unsigned long long int time_value, t_philosopher *philo)
             pthread_mutex_unlock(&philo->data->death);
             break ;
         }
-        usleep(400);
         pthread_mutex_unlock(&philo->data->death);
+        usleep(400);
     }
 }
 
@@ -143,11 +158,45 @@ void free_data(t_data *data)
 
 void clean_exit(t_data *data)
 {
-
+    //int i;
     if (!data)
         return;
 
-
+    
+    /* i = 0;
+    while(i < data->number_of_philosophers)
+    {
+        pthread_join(data->philosophers[i].thread, NULL);
+        i++;
+    }
+    pthread_join(data->monitor, NULL); */
+    
+      for (int i = 0; i < data->number_of_philosophers; i++)
+    {
+        pthread_join(data->philosophers[i].thread, NULL);
+    }
+    
+    // Join the monitor thread
+    pthread_join(data->monitor, NULL);
+    
+    if (data->forks)
+    {
+        for (int i = 0; i < data->number_of_philosophers; i++)
+        {
+            pthread_mutex_destroy(&data->fork[i]);
+        }
+        free(data->forks);
+        data->forks = NULL;
+    }
+    if (data->fork)
+    {
+        free(data->fork);
+        data->fork = NULL;
+    }
+    if (pthread_mutex_destroy(&data->last_meal_timestamps_mutex) != 0)
+    {
+        write(2, "Error: last_meal_timestamps mutex_destroy\n", 43);
+    }
     if (pthread_mutex_destroy(&data->print_lock) != 0)
     {
         write(2, "Error: print mutex_destroy\n", 28);
@@ -169,20 +218,6 @@ void clean_exit(t_data *data)
     {
         free(data->philosophers);
         data->philosophers = NULL;
-    }
-    if (data->forks)
-    {
-        for (int i = 0; i < data->number_of_philosophers; i++)
-        {
-            pthread_mutex_destroy(&data->fork[i]);
-        }
-        free(data->forks);
-        data->forks = NULL;
-    }
-    if (data->fork)
-    {
-        free(data->fork);
-        data->fork = NULL;
     }
     if (data)
     {
