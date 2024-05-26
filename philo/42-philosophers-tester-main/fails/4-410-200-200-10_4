@@ -1,0 +1,111 @@
+----------------- This is PHILO--------------
+Philosopher ID: 1
+Last Meal Time: 1716646815705
+Meals Eaten: 0
+Time to Die: 410
+Left Fork Address: 0x5c6092710a40
+Right Fork Address: 0x5c6092710a4c
+Thread ID: 0
+Left Fork Mutex Address: 0x5c6092710bd0
+Right Fork Mutex Address: 0x5c6092710c48
+Data Pointer: 0x5c60927102a0
+----------------- This is DATA--------------
+Start Time: 1716646815705
+Number of Philosophers: 4
+Time to Die: 410
+Time to Eat: 200
+Time to Sleep: 200
+Times Must Eat: 10
+Death Note: 0
+Dined Enough: 0
+Forks: 0 0 0 0 
+Philosophers:
+  Philosopher 1
+  Philosopher 0
+  Philosopher 0
+  Philosopher 0
+----------------- This is PHILO--------------
+Philosopher ID: 2
+Last Meal Time: 1716646815705
+Meals Eaten: 0
+Time to Die: 410
+Left Fork Address: 0x5c6092710a44
+Right Fork Address: 0x5c6092710a48
+Thread ID: 0
+Left Fork Mutex Address: 0x5c6092710bf8
+Right Fork Mutex Address: 0x5c6092710c20
+Data Pointer: 0x5c60927102a0
+----------------- This is DATA--------------
+Start Time: 1716646815705
+Number of Philosophers: 4
+Time to Die: 410
+Time to Eat: 200
+Time to Sleep: 200
+Times Must Eat: 10
+Death Note: 0
+Dined Enough: 0
+Forks: 0 0 0 0 
+Philosophers:
+  Philosopher 1
+  Philosopher 2
+  Philosopher 0
+  Philosopher 0
+----------------- This is PHILO--------------
+Philosopher ID: 3
+Last Meal Time: 1716646815705
+Meals Eaten: 0
+Time to Die: 410
+Left Fork Address: 0x5c6092710a4c
+Right Fork Address: 0x5c6092710a48
+Thread ID: 0
+Left Fork Mutex Address: 0x5c6092710c48
+Right Fork Mutex Address: 0x5c6092710c20
+Data Pointer: 0x5c60927102a0
+----------------- This is DATA--------------
+Start Time: 1716646815705
+Number of Philosophers: 4
+Time to Die: 410
+Time to Eat: 200
+Time to Sleep: 200
+Times Must Eat: 10
+Death Note: 0
+Dined Enough: 0
+Forks: 0 0 0 0 
+Philosophers:
+  Philosopher 1
+  Philosopher 2
+  Philosopher 3
+  Philosopher 0
+----------------- This is PHILO--------------
+Philosopher ID: 4
+Last Meal Time: 1716646815705
+Meals Eaten: 0
+Time to Die: 410
+Left Fork Address: 0x5c6092710a4c
+Right Fork Address: 0x5c6092710a40
+Thread ID: 0
+Left Fork Mutex Address: 0x5c6092710c48
+Right Fork Mutex Address: 0x5c6092710bd0
+Data Pointer: 0x5c60927102a0
+----------------- This is DATA--------------
+Start Time: 1716646815705
+Number of Philosophers: 4
+Time to Die: 410
+Time to Eat: 200
+Time to Sleep: 200
+Times Must Eat: 10
+Death Note: 0
+Dined Enough: 0
+Forks: 0 0 0 0 
+Philosophers:
+  Philosopher 1
+  Philosopher 2
+  Philosopher 3
+  Philosopher 4
+0 1 has taken a fork
+0 1 has taken a fork
+0 1 is eating
+0 2 has taken a fork
+0 2 has taken a fork
+0 2 is eating
+410 1 died

@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:36 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/25 13:01:46 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/26 15:06:24 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 
 #define SIZE_MAX ((size_t)-1)
 #define MAX_PHILOSOPHERS 201
-#define THRESHOLD 100
-
+#define THRESHOLD 400
+#define STARVATION_THRESHOLD 3
 
 
 //perhaps enumeration for a state maching in case of monitoring
@@ -51,6 +51,8 @@ typedef struct s_philosopher
     long time_to_die;
     int *l_fork;
     int *r_fork;
+    int starvation_counter;
+    int prioritize_eating;
     pthread_t thread;
     pthread_mutex_t *left_fork;
     pthread_mutex_t *right_fork;
@@ -81,6 +83,7 @@ typedef struct s_data
     pthread_mutex_t meals_eaten_mutex;
     pthread_mutex_t completed_threads_mutex;
     pthread_mutex_t last_meal_timestamps_mutex;
+    pthread_mutex_t prioritized_mutex;
     t_philosopher *philosophers; 
 } t_data;
 

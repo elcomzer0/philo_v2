@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:21:10 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/25 13:07:43 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/26 15:07:55 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@
     pthread_mutex_unlock(first_fork);
 } */
 
-void action_eat(t_philosopher *philo)
+/* void action_eat(t_philosopher *philo)
 {
     pthread_mutex_t *first_fork, *second_fork;
     if (philo->id % 2 == 0)
@@ -229,6 +229,137 @@ void action_eat(t_philosopher *philo)
 
     pthread_mutex_unlock(second_fork);
     pthread_mutex_unlock(first_fork);
+} */
+
+/* void acquire_forks(t_philosopher *philo, pthread_mutex_t *first_fork, pthread_mutex_t *second_fork) {
+    if (pthread_mutex_lock(first_fork) != 0) {
+        return;
+    }
+    print_status(philo, "has taken a fork");
+
+    if (pthread_mutex_lock(second_fork) != 0) {
+        pthread_mutex_unlock(first_fork);
+        philo->starvation_counter++;
+        return;
+    }
+    print_status(philo, "has taken a fork");
+} */
+
+/* void acquire_forks(t_philosopher *philo, pthread_mutex_t *first_fork, pthread_mutex_t *second_fork) {
+    if (philo->prioritize_eating) {
+        // Prioritized philosopher
+        pthread_mutex_lock(&philo->data->prioritized_mutex);
+    }
+
+    if (pthread_mutex_lock(first_fork) != 0) {
+        if (philo->prioritize_eating) {
+            pthread_mutex_unlock(&philo->data->prioritized_mutex);
+        }
+        return;
+    }
+    print_status(philo, "has taken a fork");
+
+    if (pthread_mutex_lock(second_fork) != 0) {
+        pthread_mutex_unlock(first_fork);
+        philo->starvation_counter++;
+            printf("starvation counter: %d\n", philo->starvation_counter);
+
+        if (philo->prioritize_eating) {
+            pthread_mutex_unlock(&philo->data->prioritized_mutex);
+        }
+        return;
+    }
+    print_status(philo, "has taken a fork");
+
+    if (philo->prioritize_eating) {
+        pthread_mutex_unlock(&philo->data->prioritized_mutex);
+    }
+} */
+
+void acquire_forks(t_philosopher *philo, pthread_mutex_t *first_fork, pthread_mutex_t *second_fork) {
+    if (philo->prioritize_eating) {
+        // Prioritized philosopher
+        pthread_mutex_lock(&philo->data->prioritized_mutex);
+    }
+
+    while (1) {
+        if (pthread_mutex_lock(first_fork) == 0) {
+            print_status(philo, "has taken a fork");
+            if (pthread_mutex_lock(second_fork) == 0) {
+                print_status(philo, "has taken a fork");
+                break;
+            } else {
+                pthread_mutex_unlock(first_fork);
+                philo->starvation_counter++;
+                printf("aquire_forks under first_fork: starvation counter: %d\n", philo->starvation_counter);
+            }
+        } else {
+            philo->starvation_counter++;
+            printf("aquire_forks under second_fork: starvation counter: %d\n", philo->starvation_counter);
+        }
+
+        if (philo->prioritize_eating) {
+            pthread_mutex_unlock(&philo->data->prioritized_mutex);
+            usleep(1000);  // Slight delay to avoid busy waiting
+            pthread_mutex_lock(&philo->data->prioritized_mutex);
+        } else {
+            usleep(1000);  // Slight delay to avoid busy waiting
+        }
+    }
+
+    if (philo->prioritize_eating) {
+        pthread_mutex_unlock(&philo->data->prioritized_mutex);
+    }
+}
+
+
+void release_forks(pthread_mutex_t *first_fork, pthread_mutex_t *second_fork) {
+    pthread_mutex_unlock(second_fork);
+    pthread_mutex_unlock(first_fork);
+}
+
+void update_fork_status(t_philosopher *philo, int status) {
+    if (philo->l_fork != NULL && philo->r_fork != NULL) {
+        *(philo->l_fork) = status;
+        *(philo->r_fork) = status;
+    }
+}
+
+void update_last_meal_time(t_philosopher *philo) {
+    pthread_mutex_lock(&philo->data->last_meal_timestamps_mutex);
+    philo->last_meal_time = get_current_time();
+    philo->data->last_meal_timestamps[philo->id - 1] = philo->last_meal_time;
+    pthread_mutex_unlock(&philo->data->last_meal_timestamps_mutex);
+}
+
+void action_eat(t_philosopher *philo) {
+    pthread_mutex_t *first_fork, *second_fork;
+    
+    // Use a simple even/odd strategy to reduce contention
+    if (philo->id % 2 == 0) {
+        first_fork = philo->left_fork;
+        second_fork = philo->right_fork;
+    } else {
+        first_fork = philo->right_fork;
+        second_fork = philo->left_fork;
+    }
+
+    printf("starvation counter: %d\n", philo->starvation_counter);
+    acquire_forks(philo, first_fork, second_fork);
+
+   /*  if (pthread_mutex_trylock(first_fork) != 0) {
+        usleep(1000);  // Slight delay to avoid timing issues
+    } */
+
+    update_fork_status(philo, 1);
+    update_last_meal_time(philo);
+    philo->starvation_counter = 0;
+   // printf("in action_eat: Philosopher %d attempting to pick up forks at time %ld\n", philo->id, get_current_time());
+    print_status(philo, "is eating");
+    ft_usleep(philo->data->time_to_eat * 1000, philo);
+
+    update_fork_status(philo, 0);
+    release_forks(first_fork, second_fork);
 }
 
 

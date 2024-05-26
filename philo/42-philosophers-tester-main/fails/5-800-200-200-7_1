@@ -1,0 +1,143 @@
+----------------- This is PHILO--------------
+Philosopher ID: 1
+Last Meal Time: 1716646806082
+Meals Eaten: 0
+Time to Die: 800
+Left Fork Address: 0x61a12d9b3a40
+Right Fork Address: 0x61a12d9b3a50
+Thread ID: 0
+Left Fork Mutex Address: 0x61a12d9b3c20
+Right Fork Mutex Address: 0x61a12d9b3cc0
+Data Pointer: 0x61a12d9b32a0
+----------------- This is DATA--------------
+Start Time: 1716646806082
+Number of Philosophers: 5
+Time to Die: 800
+Time to Eat: 200
+Time to Sleep: 200
+Times Must Eat: 7
+Death Note: 0
+Dined Enough: 0
+Forks: 0 0 0 0 0 
+Philosophers:
+  Philosopher 1
+  Philosopher 0
+  Philosopher 0
+  Philosopher 0
+  Philosopher 0
+----------------- This is PHILO--------------
+Philosopher ID: 2
+Last Meal Time: 1716646806082
+Meals Eaten: 0
+Time to Die: 800
+Left Fork Address: 0x61a12d9b3a44
+Right Fork Address: 0x61a12d9b3a48
+Thread ID: 0
+Left Fork Mutex Address: 0x61a12d9b3c48
+Right Fork Mutex Address: 0x61a12d9b3c70
+Data Pointer: 0x61a12d9b32a0
+----------------- This is DATA--------------
+Start Time: 1716646806082
+Number of Philosophers: 5
+Time to Die: 800
+Time to Eat: 200
+Time to Sleep: 200
+Times Must Eat: 7
+Death Note: 0
+Dined Enough: 0
+Forks: 0 0 0 0 0 
+Philosophers:
+  Philosopher 1
+  Philosopher 2
+  Philosopher 0
+  Philosopher 0
+  Philosopher 0
+----------------- This is PHILO--------------
+Philosopher ID: 3
+Last Meal Time: 1716646806082
+Meals Eaten: 0
+Time to Die: 800
+Left Fork Address: 0x61a12d9b3a4c
+Right Fork Address: 0x61a12d9b3a48
+Thread ID: 0
+Left Fork Mutex Address: 0x61a12d9b3c98
+Right Fork Mutex Address: 0x61a12d9b3c70
+Data Pointer: 0x61a12d9b32a0
+----------------- This is DATA--------------
+Start Time: 1716646806082
+Number of Philosophers: 5
+Time to Die: 800
+Time to Eat: 200
+Time to Sleep: 200
+Times Must Eat: 7
+Death Note: 0
+Dined Enough: 0
+Forks: 0 0 0 0 0 
+Philosophers:
+  Philosopher 1
+  Philosopher 2
+  Philosopher 3
+  Philosopher 0
+  Philosopher 0
+----------------- This is PHILO--------------
+Philosopher ID: 4
+Last Meal Time: 1716646806082
+Meals Eaten: 0
+Time to Die: 800
+Left Fork Address: 0x61a12d9b3a4c
+Right Fork Address: 0x61a12d9b3a50
+Thread ID: 0
+Left Fork Mutex Address: 0x61a12d9b3c98
+Right Fork Mutex Address: 0x61a12d9b3cc0
+Data Pointer: 0x61a12d9b32a0
+----------------- This is DATA--------------
+Start Time: 1716646806082
+Number of Philosophers: 5
+Time to Die: 800
+Time to Eat: 200
+Time to Sleep: 200
+Times Must Eat: 7
+Death Note: 0
+Dined Enough: 0
+Forks: 0 0 0 0 0 
+Philosophers:
+  Philosopher 1
+  Philosopher 2
+  Philosopher 3
+  Philosopher 4
+  Philosopher 0
+----------------- This is PHILO--------------
+Philosopher ID: 5
+Last Meal Time: 1716646806082
+Meals Eaten: 0
+Time to Die: 800
+Left Fork Address: 0x61a12d9b3a40
+Right Fork Address: 0x61a12d9b3a50
+Thread ID: 0
+Left Fork Mutex Address: 0x61a12d9b3c20
+Right Fork Mutex Address: 0x61a12d9b3cc0
+Data Pointer: 0x61a12d9b32a0
+----------------- This is DATA--------------
+Start Time: 1716646806082
+Number of Philosophers: 5
+Time to Die: 800
+Time to Eat: 200
+Time to Sleep: 200
+Times Must Eat: 7
+Death Note: 0
+Dined Enough: 0
+Forks: 0 0 0 0 0 
+Philosophers:
+  Philosopher 1
+  Philosopher 2
+  Philosopher 3
+  Philosopher 4
+  Philosopher 5
+0 1 has taken a fork
+0 1 has taken a fork
+0 1 is eating
+1 2 has taken a fork
+1 2 has taken a fork
+1 2 is eating
+1 4 has taken a fork
+800 1 died
