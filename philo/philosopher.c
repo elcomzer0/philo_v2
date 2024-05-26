@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:56 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/25 13:16:21 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/26 15:59:39 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void *philosopher_routine(void *arg)
     
     /* print_philosopher(philo);
     print_data(data); */
-    printf("in philosopher_routine: Philosopher %d starting at time %ld\n", philo->id, get_current_time());
+  //  printf("in philosopher_routine: Philosopher %d starting at time %ld\n", philo->id, get_current_time());
 
     while (!data->exiting && death_note_check(philo) == 0)
     {

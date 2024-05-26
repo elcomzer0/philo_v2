@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:36 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/25 13:01:46 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/26 20:20:43 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_philosopher
     long time_to_die;
     int *l_fork;
     int *r_fork;
+    int starvation_counter;
     pthread_t thread;
     pthread_mutex_t *left_fork;
     pthread_mutex_t *right_fork;
@@ -81,6 +82,7 @@ typedef struct s_data
     pthread_mutex_t meals_eaten_mutex;
     pthread_mutex_t completed_threads_mutex;
     pthread_mutex_t last_meal_timestamps_mutex;
+    pthread_mutex_t fork_status_mutex;
     t_philosopher *philosophers; 
 } t_data;
 

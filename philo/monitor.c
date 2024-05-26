@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:43 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/25 13:14:40 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/26 19:28:21 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -365,12 +365,12 @@ void check_philo_death_and_eaten_status(t_data *data, int *total_dining)
 
 void *monitor_routine(void *arg)
 {
-    printf("monitor_routine started\n");
+   // printf("monitor_routine started\n");
     // usleep(500);  // Initial delay to allow philosophers to start
     t_data *data = (t_data *)arg;
     t_philosopher *philo = &(data->philosophers[0]);
     // while (!data->death_note)
-    usleep(100000);
+   // usleep(1000);
     while (!death_note_check(philo))
     {
         //printf("monitor loop iteration\n");
@@ -379,6 +379,6 @@ void *monitor_routine(void *arg)
         check_philo_death_and_eaten_status(data, &eaten);
         usleep(1000); // Short delay to reduce CPU usage
     }
-    printf("monitor_routine exiting\n");
+    //printf("monitor_routine exiting\n");
     return NULL;
 }
