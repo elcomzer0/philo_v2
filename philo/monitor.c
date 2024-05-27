@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:43 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/26 13:22:02 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/27 17:19:47 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,22 +250,44 @@ void check_philo_death_and_eaten_status(t_data *data, int *total_dining)
  * @param arg A pointer to a t_data struct containing the data for the philosophers.
  * @return NULL, as this function is designed to run in a separate thread.
  */
+
+
 void *monitor_routine(void *arg)
 {
-    printf("monitor_routine started\n");
-    // usleep(500);  // Initial delay to allow philosophers to start
     t_data *data = (t_data *)arg;
     t_philosopher *philo = &(data->philosophers[0]);
-    // while (!data->death_note)
-    //usleep(100000);
+
     while (!death_note_check(philo))
     {
-        // printf("monitor loop iteration\n");
         int eaten = 0;
         process_philo_life_cycle(data, &eaten);
         check_philo_death_and_eaten_status(data, &eaten);
-        usleep(1000); // Short delay to reduce CPU usage
+
+        if (data->times_must_eat != -1)
+        {
+            int all_eaten_enough = 1;
+            for (int i = 0; i < data->number_of_philosophers; i++)
+            {
+                pthread_mutex_lock(&data->meals_eaten_mutex);
+                if (data->philosophers[i].meals_eaten < data->times_must_eat)
+                {
+                    all_eaten_enough = 0;
+                    pthread_mutex_unlock(&data->meals_eaten_mutex);
+                    break;
+                }
+                pthread_mutex_unlock(&data->meals_eaten_mutex);
+            }
+            if (all_eaten_enough)
+            {
+                pthread_mutex_lock(&data->dined);
+                data->dined_enough = 1;
+                pthread_mutex_unlock(&data->dined);
+                break;
+            }
+        }
+
+        usleep(100); // Short delay to reduce CPU usage
     }
-    printf("monitor_routine exiting\n");
     return NULL;
 }
+

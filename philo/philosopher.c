@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:56 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/26 13:53:05 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/27 17:06:45 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,53 +16,16 @@
 #include "philo.h"
 
 
-
-/* void *philosopher_routine(void *arg)
-{
-    t_philosopher *philo = (t_philosopher *)arg;
-    t_data *data = philo->data;
-    
-    //print_philosopher(philo);
-    // print_data(data);
-    printf("in philosopher_routine: Philosopher %d starting at time %ld\n", philo->id, get_current_time());
-
-    while (!data->exiting && death_note_check(philo) == 0)
-    {
-        if (!data->exiting)
-        {   
-            if(philo->prioritize_eating == 1)
-            {
-                action_eat(philo);
-                philo->prioritize_eating = 0;
-                    
-            }
-            else 
-            {
-                //usleep(100); // Sleep for a short period to avoid busy waiting
-                action_eat(philo);
-                action_sleep(philo);
-                action_think(philo);
-                
-            }
-        }
-    }
-    if (!data->exiting)
-    {    
-        pthread_mutex_lock(&data->completed_threads_mutex);
-        data->completed_threads_count++;
-        pthread_mutex_unlock(&data->completed_threads_mutex);
-    }
-    return NULL;
-} */
-
 void *philosopher_routine(void *arg)
 {
     t_philosopher *philo = (t_philosopher *)arg;
     t_data *data = philo->data;
     
-    printf("in philosopher_routine: Philosopher %d starting at time %ld\n", philo->id, get_current_time());
+  //  printf("in philosopher_routine: Philosopher %d starting at time %ld\n", philo->id, get_current_time());
 
-    while (!data->exiting && death_note_check(philo) == 0)
+    //printf("in philosopher_routine times must eat: %d\n", data->times_must_eat);
+    while (!data->exiting && death_note_check(philo) == 0 && (data->times_must_eat == -1 
+        || philo->meals_eaten < data->times_must_eat))
     {
         if (!data->exiting)
         {   
@@ -77,12 +40,15 @@ void *philosopher_routine(void *arg)
             {
                 // Prioritize eating if the flag is set
                 action_eat(philo);
+                philo->meals_eaten++;
                 philo->prioritize_eating = 0; // Reset the flag after eating
             }
             else 
             {
                 // Regular routine: think, eat, sleep
+                //usleep(1000); // Sleep for a short period to avoid busy waiting
                 action_eat(philo);
+                philo->meals_eaten++;
                 action_think(philo);
                 action_sleep(philo);
             }
@@ -112,12 +78,5 @@ void start_simulation(t_data *data)
         pthread_mutex_lock(&data->completed_threads_mutex);
     }
     pthread_mutex_unlock(&data->completed_threads_mutex);
-/* 
-    i = 0;
-    while(i < data->number_of_philosophers)
-    {
-        pthread_join(data->philosophers[i].thread, NULL);
-        i++;
-    }
-} */
+
 }

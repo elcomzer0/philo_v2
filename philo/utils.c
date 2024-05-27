@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:05 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/25 13:05:04 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/27 17:18:37 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,20 @@ void print_status(t_philosopher *philo, const char *status)
     pthread_mutex_unlock(&philo->data->print_lock);
 }
 
+/**
+ * Suspends the execution of the current thread for the specified time,
+ *  unless the philosopher's death note is set.
+ *
+ * @param time_value The time in milliseconds to suspend the thread.
+ * @param philo The philosopher whose thread is being suspended.
+ */
 void ft_usleep(unsigned long long int time_value, t_philosopher *philo)
 {
     struct timeval start, current;
     unsigned long long elapsed;
 
-    if(philo == NULL || philo->data == NULL)
-        return ;
+    if (philo == NULL || philo->data == NULL)
+        return;
     // Get the start time
     gettimeofday(&start, NULL);
 
@@ -105,10 +112,10 @@ void ft_usleep(unsigned long long int time_value, t_philosopher *philo)
 
         elapsed = (current.tv_sec - start.tv_sec) * 1000 + (current.tv_usec - start.tv_usec) / 1000;
         pthread_mutex_lock(&philo->data->death);
-        if(elapsed >= time_value || philo->data->death_note == 1)
+        if (elapsed >= time_value || philo->data->death_note == 1)
         {
             pthread_mutex_unlock(&philo->data->death);
-            break ;
+            break;
         }
         pthread_mutex_unlock(&philo->data->death);
         usleep(400);

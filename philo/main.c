@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/26 14:28:55 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/27 17:16:38 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,21 @@ static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
         exit(EXIT_FAILURE);
     }
     data->completed_threads_count = 0;
+    if (pthread_mutex_init(&data->fork_status_mutex, NULL) != 0)
+    {
+        perror("Error initializing fork_status_mutex");
+        for (int j = 0; j < data->number_of_philosophers; j++)
+        {
+            pthread_mutex_destroy(&data->fork[j]);
+        }
+        pthread_mutex_destroy(&data->death);
+        pthread_mutex_destroy(&data->dined);
+        pthread_mutex_destroy(&data->meals_eaten_mutex);
+        pthread_mutex_destroy(&data->completed_threads_mutex);
+        pthread_mutex_destroy(&data->last_meal_timestamps_mutex);
+        free(data->fork);
+        exit(EXIT_FAILURE);
+    }
     if (pthread_mutex_init(&data->prioritized_mutex, NULL) != 0)
     {
         perror("Error initializing prioritized_mutex");
@@ -148,6 +163,7 @@ static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
         pthread_mutex_destroy(&data->meals_eaten_mutex);
         pthread_mutex_destroy(&data->completed_threads_mutex);
         pthread_mutex_destroy(&data->last_meal_timestamps_mutex);
+        pthread_mutex_destroy(&data->fork_status_mutex);
         free(data->fork);
         exit(EXIT_FAILURE);
     }
@@ -182,11 +198,8 @@ static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data
         pthread_mutex_lock(&data->last_meal_timestamps_mutex);
         data->last_meal_timestamps[i] = start_time;
         pthread_mutex_unlock(&data->last_meal_timestamps_mutex);
-        
-        if (i == 0) { //check for later 
-            philosophers[i].right_fork = &data->fork[data->number_of_philosophers - 1];
-            philosophers[i].left_fork = &data->fork[i];
-        } else if (i % 2 == 0) {
+          
+        if (i % 2 == 0) {
             philosophers[i].right_fork = &data->fork[philosophers[i].id - 1];
             philosophers[i].left_fork = &data->fork[philosophers[i].id % data->number_of_philosophers];
         } else {
@@ -194,18 +207,16 @@ static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data
             philosophers[i].left_fork = &data->fork[philosophers[i].id - 1];
         }
         //action for physical int of forks
-        if (i == 0) { //check for later 
-            philosophers[i].r_fork = &data->forks[data->number_of_philosophers - 1];
-            philosophers[i].l_fork = &data->forks[i];
-        } else if (i % 2 == 0) {
+        
+        if (i % 2 == 0) {
             philosophers[i].r_fork = &data->forks[philosophers[i].id - 1];
             philosophers[i].l_fork = &data->forks[philosophers[i].id % data->number_of_philosophers];
         } else {
             philosophers[i].r_fork = &data->forks[philosophers[i].id % data->number_of_philosophers];
             philosophers[i].l_fork = &data->forks[philosophers[i].id - 1];
         }
-         print_philosopher(&philosophers[i]);
-        print_data(data);
+        /*  print_philosopher(&philosophers[i]);
+        print_data(data); */
         i++;
     }
 }
@@ -296,12 +307,14 @@ int init_data(t_data *data, int argc, char **argv)
     if (argc == 6)
     {
         data->times_must_eat = atoi(argv[5]);
-        if (data->times_must_eat < 0)
+        if (data->times_must_eat <= 0)
         {
             write(STDERR_FILENO, "Error: times_must_eat must be a positive integer\n", 49);
             return (1);
         }
     }
+    else
+        data->times_must_eat = -1;
     return (0);
 }
 
