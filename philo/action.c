@@ -6,11 +6,46 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:21:10 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/27 17:53:12 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/27 20:23:58 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+//#include <pthread.h>
+#include <stdint.h>
+
+static uint32_t seed = 1;
+pthread_mutex_t rand_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+void srand_custom(uint32_t new_seed) {
+    pthread_mutex_lock(&rand_mutex);
+    seed = new_seed;
+    pthread_mutex_unlock(&rand_mutex);
+}
+
+uint32_t rand_custom() {
+    pthread_mutex_lock(&rand_mutex);
+    seed = (1103515245 * seed + 12345) % (1 << 31);
+    uint32_t result = seed;
+    pthread_mutex_unlock(&rand_mutex);
+    return result;
+}
+
+int rand_range(int min, int max) {
+    return min + rand_custom() % (max - min + 1);
+}
+
+void random_delay(int min_ms, int max_ms) {
+    int delay = rand_range(min_ms, max_ms);
+    usleep(delay * 1000);
+}
+
+int    ft_abs(int v)
+{
+    if (v < 0)
+        return (-v);
+    return (v);
+}
 
 void acquire_forks(t_philosopher *philo, pthread_mutex_t *first_fork, pthread_mutex_t *second_fork)
 {
@@ -42,9 +77,9 @@ void release_forks(t_philosopher *philo, pthread_mutex_t *first_fork, pthread_mu
     pthread_mutex_lock(&philo->data->fork_status_mutex);
     *(philo->l_fork) = 0;
     *(philo->r_fork) = 0;
+    pthread_mutex_unlock(&philo->data->fork_status_mutex);
     pthread_mutex_unlock(second_fork);
     pthread_mutex_unlock(first_fork);
-    pthread_mutex_unlock(&philo->data->fork_status_mutex);
 }
 
 
@@ -86,12 +121,27 @@ void action_sleep(t_philosopher *philo)
 {
     print_status(philo, "is sleeping");
     ft_usleep(philo->data->time_to_sleep , philo);
-
+    //printf("amount of time a philosophers sleep is: %ld\n", get_current_time() - philo->last_meal_time);
 }
 
-
-void action_think(t_philosopher *philo)
+/* void action_think(t_philosopher *philo)
 {
     print_status(philo, "is thinking");
+    if ((philo->id % 2)
+        && (philo->data->time_to_sleep != philo->data->time_to_eat))
+        ft_usleep(ft_abs((philo->data->time_to_sleep
+                - philo->data->time_to_eat) * 1000 + 150), philo);
+   // printf("amount of time a philosophers think is: %ld\n", get_current_time() - philo->last_meal_time);
+} */
 
+void action_think(t_philosopher *philo) {
+    print_status(philo, "is thinking");
+    random_delay(100, 300);  // Add a random delay to prevent immediate fork contention
 }
+
+/* void action_think(t_philosopher *philo)
+{
+    
+    print_status(philo, "is thinking");
+    //usleep(100); // Sleep for a short time to avoid busy waiting
+} */

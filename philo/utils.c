@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:05 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/27 17:18:37 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/27 18:16:04 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,6 +220,14 @@ void clean_exit(t_data *data)
     if (pthread_mutex_destroy(&data->completed_threads_mutex) != 0)
     {
         write(2, "Error: completed_threads_count mutex_destroy\n", 44);
+    }
+    if (pthread_mutex_destroy(&data->fork_status_mutex) != 0)
+    {
+        write(2, "Error: fork_status_mutex mutex_destroy\n", 37);
+    }
+    if (pthread_mutex_destroy(&data->prioritized_mutex) != 0)
+    {
+        write(2, "Error: prioritized mutex_destroy\n", 34);
     }
    if (data->philosophers)
     {

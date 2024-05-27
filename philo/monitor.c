@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:43 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/27 17:19:47 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/27 19:32:25 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,55 @@ int death_note_check(t_philosopher *philo)
  * @param data The shared data structure containing information about the philosophers.
  * @param total_dining A pointer to the total number of philosophers who have dined enough.
  */
+/* void process_philo_life_cycle(t_data *data, int *total_dining)
+{
+    long long current_time = get_current_time();
+    int unlocked_inside_loop = 0; // Flag to track if the mutex was unlocked inside the loop
+
+    pthread_mutex_lock(&data->last_meal_timestamps_mutex);
+    for (int i = 0; i < data->number_of_philosophers; i++)
+    {
+        t_philosopher *philo = &data->philosophers[i];
+        long long time_since_last_meal = current_time - data->last_meal_timestamps[i];
+
+        if (time_since_last_meal >= data->time_to_die)
+        {
+            if (dining_timespan(philo)) // Use dining_timespan to check if the philosopher should die
+            {
+                if (philo->starvation_counter >= STARVATION_THRESHOLD)
+                {
+                    philo->prioritize_eating = 1;
+                }
+                else
+                {
+                    pthread_mutex_lock(&data->death);
+                    if (!data->death_note) // Ensure death is reported only once
+                    {
+                        data->death_note = 1;
+                        pthread_mutex_unlock(&data->death);
+                        print_status(philo, "died");
+                        pthread_mutex_unlock(&data->last_meal_timestamps_mutex);
+                        unlocked_inside_loop = 1;
+                        break;
+                    }
+                    pthread_mutex_unlock(&data->death);
+                }
+            }
+        }
+        else if (time_since_last_meal >= data->time_to_die - THRESHOLD))
+        {
+            if (dined_enough(philo))
+            {
+                (*total_dining)++;
+            }
+        }
+    }
+    if (!unlocked_inside_loop) // Only unlock if it wasn't already unlocked inside the loop
+    {
+        pthread_mutex_unlock(&data->last_meal_timestamps_mutex);
+    }
+} */
+
 void process_philo_life_cycle(t_data *data, int *total_dining)
 {
     long long current_time = get_current_time();
@@ -182,7 +231,7 @@ void process_philo_life_cycle(t_data *data, int *total_dining)
                 }
             }
         }
-        else if (time_since_last_meal >= (data->time_to_die - THRESHOLD))
+        else if (time_since_last_meal >= data->time_to_die) //- THRESHOLD))
         {
             if (dined_enough(philo))
             {

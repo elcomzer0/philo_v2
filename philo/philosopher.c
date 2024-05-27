@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:56 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/27 17:06:45 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/27 18:48:09 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ void *philosopher_routine(void *arg)
             {
                 // Prioritize eating if the flag is set
                 action_eat(philo);
+                pthread_mutex_lock(&data->meals_eaten_mutex);
                 philo->meals_eaten++;
+                pthread_mutex_unlock(&data->meals_eaten_mutex);
                 philo->prioritize_eating = 0; // Reset the flag after eating
             }
             else 
@@ -48,7 +50,9 @@ void *philosopher_routine(void *arg)
                 // Regular routine: think, eat, sleep
                 //usleep(1000); // Sleep for a short period to avoid busy waiting
                 action_eat(philo);
+                pthread_mutex_lock(&data->meals_eaten_mutex);
                 philo->meals_eaten++;
+                pthread_mutex_unlock(&data->meals_eaten_mutex);
                 action_think(philo);
                 action_sleep(philo);
             }
@@ -74,7 +78,7 @@ void start_simulation(t_data *data)
     while (data->completed_threads_count < data->number_of_philosophers)
     {
         pthread_mutex_unlock(&data->completed_threads_mutex);
-        usleep(100); // Sleep for a short period to avoid busy waiting
+        usleep(50); // Sleep for a short period to avoid busy waiting
         pthread_mutex_lock(&data->completed_threads_mutex);
     }
     pthread_mutex_unlock(&data->completed_threads_mutex);
