@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:56 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/27 22:53:57 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/28 01:36:07 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ void *philosopher_routine(void *arg)
             
         }
     }
+    //sleeping length of philosopher id number 1
+    //printf("philosopher %d sleeping lengthe: %ld\n", philo->id, get_current_time() - philo->last_meal_time);
+    //printf("first philosopher sleeping lengthe: %ld\n", get_current_time() - philo->last_meal_time);
     
     if (!data->exiting)
     {    

@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:21:10 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/27 22:29:58 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/28 01:50:29 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,14 @@ void action_eat(t_philosopher *philo)
   
     if (philo->id % 2 == 0) {
         // Even philosophers acquire left fork first, then right fork
+        usleep(100);
+        //random_delay(50, 100);
         first_fork = philo->right_fork;
         second_fork = philo->left_fork;
     } else {
         // Odd philosophers acquire right fork first, then left fork
+        usleep(100);
+        //random_delay(50, 100);
         first_fork = philo->right_fork;
         second_fork = philo->left_fork;
     }
