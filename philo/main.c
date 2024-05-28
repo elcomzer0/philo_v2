@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/27 18:57:28 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/28 00:08:06 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void initialize_print_lock(t_data *data)
 }
 
 
-static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
+/* static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
 {
     int i = 0;
     (void)philosophers;
@@ -168,7 +168,54 @@ static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
         exit(EXIT_FAILURE);
     }
    // printf("Initialized mutexes\n");
+} */
+
+static void initialize_mutex(pthread_mutex_t *mutex, t_data *data)
+{
+    if (pthread_mutex_init(mutex, NULL) != 0)
+    {
+        perror("Error initializing mutex");
+        
+        // Destroy previously initialized mutexes
+        for (int j = 0; j < data->number_of_philosophers; j++)
+        {
+            pthread_mutex_destroy(&data->fork[j]);
+        }
+        pthread_mutex_destroy(&data->death);
+        pthread_mutex_destroy(&data->dined);
+        pthread_mutex_destroy(&data->meals_eaten_mutex);
+        pthread_mutex_destroy(&data->completed_threads_mutex);
+        pthread_mutex_destroy(&data->last_meal_timestamps_mutex);
+        pthread_mutex_destroy(&data->fork_status_mutex);
+        
+        free(data->fork);
+        exit(EXIT_FAILURE);
+    }
 }
+
+static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
+{
+    int i = 0;
+    (void)philosophers;
+    data->fork = (pthread_mutex_t *)ft_calloc(data->number_of_philosophers, sizeof(pthread_mutex_t));
+    while (i < data->number_of_philosophers)
+    {
+        initialize_mutex(&data->fork[i], data);
+        i++;
+    }
+    
+    initialize_mutex(&data->death, data);
+    initialize_mutex(&data->dined, data);
+    initialize_mutex(&data->meals_eaten_mutex, data);
+    initialize_mutex(&data->completed_threads_mutex, data);
+    initialize_mutex(&data->last_meal_timestamps_mutex, data);
+    initialize_mutex(&data->fork_status_mutex, data);
+    initialize_mutex(&data->prioritized_mutex, data);
+    
+    data->completed_threads_count = 0;
+}
+
+
 
 
 // version with last_meal_timestamps
@@ -192,6 +239,7 @@ static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data
         philosophers[i].data->dined_enough = 0;
         philosophers[i].data->completed_threads_count = 0;
         philosophers[i].data->exiting = 0;
+        philosophers[i].data->turn = 0;
         philosophers[i].starvation_counter = 0;
         philosophers[i].prioritize_eating = 0;
 
@@ -275,7 +323,8 @@ void create_threads(t_data *data)
             pthread_mutex_destroy(&data->print_lock);
             exit(EXIT_FAILURE);
         }
-        usleep(100);  // Slight delay to avoid timing issues
+        random_delay(0, 150);
+        //usleep(100);  // Slight delay to avoid timing issues
         i++;
     }
     
@@ -336,9 +385,12 @@ int main(int argc, char **argv)
     }  
    
     initialize_philosophers(data);
-    create_threads(data);
     if (data->number_of_philosophers > 1)
+    {
+        create_threads(data);
         start_simulation(data);
+        
+    }
     clean_exit(data);
     return 0;
 }

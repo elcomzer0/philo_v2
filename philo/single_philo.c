@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/24 20:40:05 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/27 23:18:58 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,6 @@ void *sokrates_case(void *arg)
     printf("%ld 1 died\n", data->time_to_die);    
     return (NULL);
 }
-
-void initialize_single_philosopher_case(t_data *data)
-{
-    create_single_philosopher_thread(data);
-}
-
 void create_single_philosopher_thread(t_data *data)
 {   
     pthread_t thread;
@@ -41,4 +35,10 @@ void create_single_philosopher_thread(t_data *data)
     }
     pthread_join(thread, NULL);
 }
+
+void initialize_single_philosopher_case(t_data *data)
+{
+    create_single_philosopher_thread(data);
+}
+
 

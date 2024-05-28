@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:36 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/27 18:55:11 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/27 22:22:10 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_data
     int *forks;
     int completed_threads_count;
     int exiting;
+    int turn;
     long long last_meal_timestamps[201];
     pthread_t monitor;
     pthread_mutex_t *fork;
@@ -116,6 +117,6 @@ void action_sleep(t_philosopher *philo);
 void action_think(t_philosopher *philo);
 void print_philosopher(t_philosopher *philosopher);
 void print_data(const t_data *data);
-
+void random_delay(int min_ms, int max_ms);
 
 #endif

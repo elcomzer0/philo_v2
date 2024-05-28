@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:43 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/27 19:32:25 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/27 22:52:01 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,12 +211,12 @@ void process_philo_life_cycle(t_data *data, int *total_dining)
         {
             if (dining_timespan(philo)) // Use dining_timespan to check if the philosopher should die
             {
-                if (philo->starvation_counter >= STARVATION_THRESHOLD)
-                {
-                    philo->prioritize_eating = 1;
-                }
-                else
-                {
+                //if (philo->starvation_counter >= STARVATION_THRESHOLD)
+               // {
+                  //  philo->prioritize_eating = 1;
+               // }
+              //  else
+               // {
                     pthread_mutex_lock(&data->death);
                     if (!data->death_note) // Ensure death is reported only once
                     {
@@ -228,7 +228,7 @@ void process_philo_life_cycle(t_data *data, int *total_dining)
                         break;
                     }
                     pthread_mutex_unlock(&data->death);
-                }
+               // }
             }
         }
         else if (time_since_last_meal >= data->time_to_die) //- THRESHOLD))
@@ -334,8 +334,8 @@ void *monitor_routine(void *arg)
                 break;
             }
         }
-
-        usleep(100); // Short delay to reduce CPU usage
+        random_delay(50, 150); // Long delay to reduce CPU usage
+       //usleep(100); // Short delay to reduce CPU usage
     }
     return NULL;
 }

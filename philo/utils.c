@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:05 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/27 18:16:04 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/27 23:31:58 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,21 +170,50 @@ void clean_exit(t_data *data)
         return;
 
     
-    /* i = 0;
-    while(i < data->number_of_philosophers)
+   if (data->number_of_philosophers == 1)
+   {
+        //pthread_join(data->philosophers[0].thread, NULL);
+        if (data->forks)
+        {
+        /* for (int i = 0; i < data->number_of_philosophers; i++)
+        {
+            pthread_mutex_destroy(&data->fork[i]);
+        } */
+            free(data->forks);
+            data->forks = NULL;
+        }
+        if (data->fork)
+        {
+            free(data->fork);
+            data->fork = NULL;
+        }
+        if (data->philosophers)
+        {
+            free(data->philosophers);
+            data->philosophers = NULL;
+        }
+        if (data)
+        {
+            free(data);
+            data = NULL;
+        }
+        return;
+    }
+    if (data->number_of_philosophers > 1)
+    {
+        for (int i = 0; i < data->number_of_philosophers; i++)
+        {
+            pthread_join(data->philosophers[i].thread, NULL);
+        }
+    }
+    /* for (int i = 0; i < data->number_of_philosophers; i++)
     {
         pthread_join(data->philosophers[i].thread, NULL);
-        i++;
-    }
-    pthread_join(data->monitor, NULL); */
-    
-      for (int i = 0; i < data->number_of_philosophers; i++)
-    {
-        pthread_join(data->philosophers[i].thread, NULL);
-    }
+    } */
     
     // Join the monitor thread
-    pthread_join(data->monitor, NULL);
+    if (data->monitor)
+        pthread_join(data->monitor, NULL);
     
     if (data->forks)
     {

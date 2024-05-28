@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:21:10 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/27 20:23:58 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/27 22:29:58 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,17 @@ int rand_range(int min, int max) {
     return min + rand_custom() % (max - min + 1);
 }
 
-void random_delay(int min_ms, int max_ms) {
+void random_delay(int min_ms, int max_ms)
+{
     int delay = rand_range(min_ms, max_ms);
     usleep(delay * 1000);
+    //ft_usleep(delay * 1000);
+}
+
+void random_delay_v2(int min_ms, int max_ms, t_philosopher *philo) {
+    int delay = rand_range(min_ms, max_ms);
+   // usleep(delay * 1000);
+    ft_usleep(delay, philo);
 }
 
 int    ft_abs(int v)
@@ -66,6 +74,7 @@ void acquire_forks(t_philosopher *philo, pthread_mutex_t *first_fork, pthread_mu
             pthread_mutex_unlock(&philo->data->fork_status_mutex);
             philo->starvation_counter++; // Increment the starvation counter
            // ft_usleep(400, philo); // Sleep for a short time to avoid busy waiting
+            //random_delay(100, 150); // Sleep for a random time to avoid busy waiting
             usleep(100); // Sleep for a short time to avoid busy waiting
         }
     }
@@ -112,7 +121,7 @@ void action_eat(t_philosopher *philo)
 
     update_last_meal_time(philo);
     print_status(philo, "is eating");
-    ft_usleep(philo->data->time_to_eat, philo);
+    //ft_usleep(philo->data->time_to_eat, philo);
 
     release_forks(philo, first_fork, second_fork);
 }
@@ -120,7 +129,8 @@ void action_eat(t_philosopher *philo)
 void action_sleep(t_philosopher *philo)
 {
     print_status(philo, "is sleeping");
-    ft_usleep(philo->data->time_to_sleep , philo);
+   // ft_usleep(philo->data->time_to_sleep , philo);
+    random_delay(100, 200);  // Add a random delay to prevent immediate fork contention
     //printf("amount of time a philosophers sleep is: %ld\n", get_current_time() - philo->last_meal_time);
 }
 
@@ -136,7 +146,8 @@ void action_sleep(t_philosopher *philo)
 
 void action_think(t_philosopher *philo) {
     print_status(philo, "is thinking");
-    random_delay(100, 300);  // Add a random delay to prevent immediate fork contention
+    //random_delay(100, 300);  // Add a random delay to prevent immediate fork contention
+    random_delay_v2(100, 300, philo);  // Add a random delay to prevent immediate fork contention
 }
 
 /* void action_think(t_philosopher *philo)
