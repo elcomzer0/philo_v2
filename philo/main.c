@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/28 01:13:49 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:08:10 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static void initialize_mutex(pthread_mutex_t *mutex, t_data *data)
         pthread_mutex_destroy(&data->completed_threads_mutex);
         pthread_mutex_destroy(&data->last_meal_timestamps_mutex);
         pthread_mutex_destroy(&data->fork_status_mutex);
+        pthread_mutex_destroy(&data->dining_mutex);
         
         free(data->fork);
         exit(EXIT_FAILURE);
@@ -84,6 +85,7 @@ static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
     initialize_mutex(&data->last_meal_timestamps_mutex, data);
     initialize_mutex(&data->fork_status_mutex, data);
     initialize_mutex(&data->prioritized_mutex, data);
+    initialize_mutex(&data->dining_mutex, data);
     
     data->completed_threads_count = 0;
 }

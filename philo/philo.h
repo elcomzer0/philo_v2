@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:36 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/28 01:03:55 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:07:16 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_data
     pthread_mutex_t last_meal_timestamps_mutex;
     pthread_mutex_t fork_status_mutex;
     pthread_mutex_t prioritized_mutex;
+    pthread_mutex_t dining_mutex;
     t_philosopher *philosophers; 
 } t_data;
 
