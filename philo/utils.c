@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:05 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/27 23:31:58 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/05/28 16:55:26 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void print_status(t_philosopher *philo, const char *status)
 {
     if (philo == NULL || philo->data == NULL)
         return;
-
+   // random_delay(7, 49);
     pthread_mutex_lock(&philo->data->print_lock);
     pthread_mutex_lock(&philo->data->death);
     if (!philo->data->death_note || strcmp(status, "died") == 0)  // Only print if not dead, or if it's the death message

@@ -1,24 +1,39 @@
-0 1 has taken a fork
-1 1 has taken a fork
-1 1 is eating
-1 1 is thinking
-112 2 has taken a fork
-112 2 has taken a fork
-112 2 is eating
-112 2 is thinking
-183 3 has taken a fork
-183 3 has taken a fork
-183 3 is eating
-183 3 is thinking
-234 2 is sleeping
-257 1 is sleeping
-284 4 has taken a fork
-284 4 has taken a fork
-284 4 is eating
-284 4 is thinking
-352 3 is sleeping
-397 2 has taken a fork
-397 2 has taken a fork
-397 2 is eating
-397 2 is thinking
-412 1 died
+141 1 has taken a fork
+141 1 has taken a fork
+141 1 is eating
+141 1 is thinking
+191 2 has taken a fork
+191 2 has taken a fork
+191 2 is eating
+191 2 is thinking
+260 1 is sleeping
+291 2 is sleeping
+320 3 has taken a fork
+320 3 has taken a fork
+320 3 is eating
+320 3 is thinking
+331 4 has taken a fork
+331 4 has taken a fork
+331 4 is eating
+331 4 is thinking
+391 2 has taken a fork
+391 2 has taken a fork
+391 2 is eating
+391 2 is thinking
+466 3 is sleeping
+481 1 has taken a fork
+481 1 has taken a fork
+481 1 is eating
+481 1 is thinking
+561 4 is sleeping
+633 2 is sleeping
+642 3 has taken a fork
+642 3 has taken a fork
+642 3 is eating
+642 3 is thinking
+653 1 is sleeping
+729 4 has taken a fork
+729 4 has taken a fork
+729 4 is eating
+729 4 is thinking
+834 2 died
