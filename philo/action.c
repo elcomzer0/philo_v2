@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:21:10 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/08 14:02:23 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/09 19:11:52 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void update_last_meal_time(t_philosopher *philo)
     pthread_mutex_lock(&philo->data->last_meal_timestamps_mutex);
     philo->last_meal_time = get_current_time(); // Update the last meal time of the philosopher
     philo->data->last_meal_timestamps[philo->id - 1] = philo->last_meal_time; // Update the last meal time in the array of last meal times. 
+    //ft_usleep(philo->data->time_to_eat, philo);
     pthread_mutex_unlock(&philo->data->last_meal_timestamps_mutex);
 }
 
@@ -95,7 +96,12 @@ void acquire_forks(t_philosopher *philo)
 {
    // usleep(100);
    //random_delay(10, 150);
-    pthread_mutex_lock(&philo->data->dining_mutex); // Lock the dining mutex to prevent other philosophers from eating
+    pthread_mutex_lock(&philo->data->dining_mutex);
+   // usleep(philo->data->time_to_eat);
+    //ft_usleep(philo->data->time_to_eat, philo);
+   // printf("Philosopher %d is eating\n", philo->id);
+   // printf("time to eat %ld\n", philo->data->time_to_eat);
+ // Lock the dining mutex to prevent other philosophers from eating
     pthread_mutex_lock(&philo->data->death); // Lock the death mutex to prevent the philosopher from eating if they are about to die
     if (philo->data->death_note) // if the philosopher has a death note, then release the forks and return
     {
@@ -109,7 +115,7 @@ void acquire_forks(t_philosopher *philo)
     pthread_mutex_lock(philo->right_fork);
 
     pthread_mutex_lock(&philo->data->fork_status_mutex);
-    usleep(philo->data->time_to_eat);
+    //usleep(philo->data->time_to_eat);
     *(philo->l_fork) = 1;
     //usleep(100);
     *(philo->r_fork) = 1;
@@ -127,6 +133,9 @@ void action_eat(t_philosopher *philo)
     acquire_forks(philo);
     update_last_meal_time(philo);
     //usleep(100);
+    //usleep(philo->data->time_to_eat);
+    if (philo->id % 2 == 0)
+        ft_usleep(philo->data->time_to_eat, philo);
     print_status(philo, "is eating");
     release_forks(philo);
 }
@@ -135,7 +144,7 @@ void action_eat(t_philosopher *philo)
 void action_sleep(t_philosopher *philo)
 {
     print_status(philo, "is sleeping");
-    ft_usleep(philo->data->time_to_sleep , philo);
+    ft_usleep(philo->data->time_to_sleep, philo);
     //random_delay(50, 150);  // Add a random delay to prevent immediate fork contention
     //printf("amount of time a philosophers sleep is: %ld\n", get_current_time() - philo->last_meal_time);
 }
@@ -150,7 +159,7 @@ void action_sleep(t_philosopher *philo)
 } */
 
 
-void action_think(t_philosopher *philo)
+/* void action_think(t_philosopher *philo)
 {
     print_status(philo, "is thinking");
     if ((philo->id % 2) 
@@ -158,12 +167,12 @@ void action_think(t_philosopher *philo)
         ft_usleep(ft_abs((philo->data->time_to_sleep
                 - philo->data->time_to_eat) * 1000 + 150), philo);
    // printf("amount of time a philosophers think is: %ld\n", get_current_time() - philo->last_meal_time);
-}
+} */
 
 
-/* void action_think(t_philosopher *philo)
+void action_think(t_philosopher *philo)
 {
     
     print_status(philo, "is thinking");
     //usleep(100); // Sleep for a short time to avoid busy waiting
-} */
+}

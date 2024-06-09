@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:43 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/08 12:44:55 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/09 19:16:52 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,9 +144,12 @@ void process_philo_life_cycle(t_data *data, int *total_dining)
 {
     long long current_time = get_current_time();
     int unlocked_inside_loop = 0; // Flag to track if the mutex was unlocked inside the loop
+    int i;
 
     pthread_mutex_lock(&data->last_meal_timestamps_mutex);
-    for (int i = 0; i < data->number_of_philosophers; i++)
+    i = 0;
+    //for (int i = 0; i < data->number_of_philosophers; i++)
+    while (i < data->number_of_philosophers)
     {
         t_philosopher *philo = &data->philosophers[i];
         long long time_since_last_meal = current_time - data->last_meal_timestamps[i];
@@ -176,6 +179,7 @@ void process_philo_life_cycle(t_data *data, int *total_dining)
                 (*total_dining)++;
             }
         }
+        i++;
     }
     if (!unlocked_inside_loop) // Only unlock if it wasn't already unlocked inside the loop
     {

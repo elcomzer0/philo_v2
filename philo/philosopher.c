@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:56 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/08 13:43:25 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/09 15:51:19 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void *philosopher_routine(void *arg)
         If the flag is set to 0, then the philosopher routine should run forever.
         philo->meals_eaten is a counter that is incremented every time the philosopher eats.
     */
+   //usleep(100);
     while (!data->exiting && death_note_check(philo) == 0 && (data->times_must_eat == -1 
         || philo->meals_eaten < data->times_must_eat))
     {

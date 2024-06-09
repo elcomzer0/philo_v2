@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:05 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/08 12:47:56 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/09 18:56:06 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void print_status(t_philosopher *philo, const char *status)
  * @param time_value The time in milliseconds to suspend the thread.
  * @param philo The philosopher whose thread is being suspended.
  */
-void ft_usleep(unsigned long long int time_value, t_philosopher *philo)
+/* void ft_usleep(unsigned long long int time_value, t_philosopher *philo)
 {
     struct timeval start, current;
     unsigned long long elapsed;
@@ -120,6 +120,28 @@ void ft_usleep(unsigned long long int time_value, t_philosopher *philo)
         pthread_mutex_unlock(&philo->data->death);
         usleep(400);
     }
+} */
+//version2
+void    ft_usleep(unsigned long long int time_value, t_philosopher *philo)
+{
+    unsigned long long int start_time;
+    //(void)philo;
+    
+    start_time = get_current_time();
+
+    while(get_current_time() - start_time < time_value)
+    {
+        pthread_mutex_lock(&philo->data->death);
+        if (philo->data->death_note == 1)
+        {
+            pthread_mutex_unlock(&philo->data->death);
+            break;
+        }
+        pthread_mutex_unlock(&philo->data->death);
+        usleep(400);
+    }
+    
+    
 }
 
 void free_data(t_data *data)
