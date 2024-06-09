@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:36 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/28 13:07:16 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/08 12:46:48 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_data
     int dined_enough;
     int *forks;
     int completed_threads_count;
-    int exiting;
+    int exiting; // Flag to indicate that the simulation is exiting
     int turn;
     long long last_meal_timestamps[201];
     pthread_t monitor;

@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:05 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/28 16:55:26 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/08 12:47:56 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void free_data(t_data *data)
         return;
 
     //set flag exiting to 1
-    data->exiting = 1;
+    data->exiting = 1; // Set the exiting flag to 1 to stop the threads from eating and printing messages while exiting. 
     //wait for a reasonable time to allow threads to exit
     //ft_usleep(100000, NULL);
     usleep(1000000);

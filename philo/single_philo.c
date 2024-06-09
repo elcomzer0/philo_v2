@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/27 23:18:58 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/06 14:09:28 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "philo.h"
 
 
-
+//keep all functions here
 void *sokrates_case(void *arg)
 {
     t_data *data = (t_data *)arg;

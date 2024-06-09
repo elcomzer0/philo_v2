@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/28 13:08:10 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/09 13:43:35 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
  * @param philo The philosopher who is about to die.
  */
 
-
+//keep
 static t_philosopher *allocate_philosophers(int number_of_philosophers)
 {
     t_philosopher *philosophers = (t_philosopher *)ft_calloc(number_of_philosophers, sizeof(t_philosopher));
@@ -42,7 +42,7 @@ static t_philosopher *allocate_philosophers(int number_of_philosophers)
     return philosophers;
 }
 
-
+//check
 static void initialize_mutex(pthread_mutex_t *mutex, t_data *data)
 {
     if (pthread_mutex_init(mutex, NULL) != 0)
@@ -67,6 +67,7 @@ static void initialize_mutex(pthread_mutex_t *mutex, t_data *data)
     }
 }
 
+//check what i really need as a initialization
 static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
 {
     int i = 0;
@@ -90,7 +91,7 @@ static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
     data->completed_threads_count = 0;
 }
 
-
+//keep but needs checking
 void initialize_philosopher(t_philosopher *philosopher, int id, long start_time, t_data *data)
 {
     philosopher->id = id;
@@ -120,6 +121,7 @@ void initialize_philosopher(t_philosopher *philosopher, int id, long start_time,
  * @param philosopher The philosopher to assign the forks to.
  * @param data The data structure containing the forks.
  */
+//keep but needs checking. this could be done alse differently
 void assign_forks(t_philosopher *philosopher, t_data *data)
 {
     if (philosopher->id % 2 == 1)
@@ -138,7 +140,7 @@ void assign_forks(t_philosopher *philosopher, t_data *data)
     }
 }
 
-
+//keep
 static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data *data)
 {
     int i;
@@ -154,7 +156,7 @@ static void initialize_multiple_philosophers(t_philosopher *philosophers, t_data
     }
 }
 
-
+//do i need this? perhaps discard
 int *init_array_forks(t_data *data)
 {
     int number_of_philosophers = data->number_of_philosophers; 
@@ -173,6 +175,7 @@ int *init_array_forks(t_data *data)
     return forks;
 }
 
+//keep
 void initialize_philosophers(t_data *data)
 {
     if (data->number_of_philosophers == 1)
@@ -190,7 +193,7 @@ void initialize_philosophers(t_data *data)
 }
 
 
-
+//keep
 void create_threads(t_data *data)
 {
     int i = 0;
@@ -206,8 +209,7 @@ void create_threads(t_data *data)
             pthread_mutex_destroy(&data->print_lock);
             exit(EXIT_FAILURE);
         }
-        random_delay(0, 150);
-        //usleep(100);  // Slight delay to avoid timing issues
+        usleep(100);  // Slight delay to avoid timing issues
         i++;
     }
     

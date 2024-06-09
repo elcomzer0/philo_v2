@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:56 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/05/28 01:36:07 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/08 13:43:25 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,36 @@ void *philosopher_routine(void *arg)
   //  printf("in philosopher_routine: Philosopher %d starting at time %ld\n", philo->id, get_current_time());
 
     //printf("in philosopher_routine times must eat: %d\n", data->times_must_eat);
+    
+    /* explantion: data->exiting is a flag that is set to 1 when the program is shutting down.
+        if the flag is set to 1, then the philosopher routine should exit.
+        death_note_check() checks if the philosopher's death note has been set to 1.
+        If the death note has been set to 1, then the philosopher routine should exit.
+        data->times_must_eat is a flag that is set to -1 when the program is running.
+        If the flag is set to -1, then the philosopher routine should run forever.
+        If the flag is set to a positive number, then the philosopher routine should run for that many times.
+        If the flag is set to 0, then the philosopher routine should run forever.
+        philo->meals_eaten is a counter that is incremented every time the philosopher eats.
+    */
     while (!data->exiting && death_note_check(philo) == 0 && (data->times_must_eat == -1 
         || philo->meals_eaten < data->times_must_eat))
     {
         if (!data->exiting)
         {   
-            // Check if the philosopher's starvation counter exceeds the threshold
-            
-                // Regular routine: think, eat, sleep
-                //usleep(1000); // Sleep for a short period to avoid busy waiting
                 action_eat(philo);
+                //usleep(100);
                 pthread_mutex_lock(&data->meals_eaten_mutex);
                 philo->meals_eaten++;
                 pthread_mutex_unlock(&data->meals_eaten_mutex);
-                action_think(philo);
                 action_sleep(philo);
+                action_think(philo);
             
         }
     }
-    //sleeping length of philosopher id number 1
     //printf("philosopher %d sleeping lengthe: %ld\n", philo->id, get_current_time() - philo->last_meal_time);
     //printf("first philosopher sleeping lengthe: %ld\n", get_current_time() - philo->last_meal_time);
     
-    if (!data->exiting)
+    if (!data->exiting) // If the philosopher is still alive, increment the completed threads counter
     {    
         pthread_mutex_lock(&data->completed_threads_mutex);
         data->completed_threads_count++;
@@ -55,120 +62,8 @@ void *philosopher_routine(void *arg)
     return NULL;
 }
 
-/* void *philosopher_routine(void *arg)
-{
-    t_philosopher *philo = (t_philosopher *)arg;
-    t_data *data = philo->data;
-    
-  //  printf("in philosopher_routine: Philosopher %d starting at time %ld\n", philo->id, get_current_time());
 
-    //printf("in philosopher_routine times must eat: %d\n", data->times_must_eat);
-    while (!data->exiting && death_note_check(philo) == 0 && (data->times_must_eat == -1 
-        || philo->meals_eaten < data->times_must_eat))
-    {
-        if (!data->exiting)
-        {   
-            // Check if the philosopher's starvation counter exceeds the threshold
-            if (philo->starvation_counter >= STARVATION_THRESHOLD)
-            {
-                // Set the prioritize_eating flag to indicate that the philosopher should prioritize eating
-                philo->prioritize_eating = 1;
-            }
-
-            if (philo->prioritize_eating == 1)
-            {
-                // Prioritize eating if the flag is set
-                action_eat(philo);
-                pthread_mutex_lock(&data->meals_eaten_mutex);
-                philo->meals_eaten++;
-                pthread_mutex_unlock(&data->meals_eaten_mutex);
-                philo->prioritize_eating = 0; // Reset the flag after eating
-            }
-            else 
-            {
-                // Regular routine: think, eat, sleep
-                //usleep(1000); // Sleep for a short period to avoid busy waiting
-                action_eat(philo);
-                pthread_mutex_lock(&data->meals_eaten_mutex);
-                philo->meals_eaten++;
-                pthread_mutex_unlock(&data->meals_eaten_mutex);
-                action_think(philo);
-                action_sleep(philo);
-            }
-        }
-    }
-    
-    if (!data->exiting)
-    {    
-        pthread_mutex_lock(&data->completed_threads_mutex);
-        data->completed_threads_count++;
-        pthread_mutex_unlock(&data->completed_threads_mutex);
-    }
-    
-    return NULL;
-} */
-
-/* void *philosopher_routine(void *arg)
-{
-    t_philosopher *philo = (t_philosopher *)arg;
-    t_data *data = philo->data;
-
-    while (!data->exiting && death_note_check(philo) == 0 && (data->times_must_eat == -1
-        || philo->meals_eaten < data->times_must_eat))
-    {
-        if (!data->exiting)
-        {
-            // Wait for the philosopher's turn
-            while (data->turn != philo->id)
-            {
-                // Busy wait or use a condition variable to wait for the turn
-                usleep(10); // Sleep for a short period to avoid busy waiting
-            }
-
-            // Check if the philosopher's starvation counter exceeds the threshold
-            if (philo->starvation_counter >= STARVATION_THRESHOLD)
-            {
-                // Set the prioritize_eating flag to indicate that the philosopher should prioritize eating
-                philo->prioritize_eating = 1;
-            }
-
-            if (philo->prioritize_eating == 1)
-            {
-                // Prioritize eating if the flag is set
-                action_eat(philo);
-                pthread_mutex_lock(&data->meals_eaten_mutex);
-                philo->meals_eaten++;
-                pthread_mutex_unlock(&data->meals_eaten_mutex);
-                philo->prioritize_eating = 0; // Reset the flag after eating
-            }
-            else
-            {
-                // Regular routine: think, eat, sleep
-                action_eat(philo);
-                pthread_mutex_lock(&data->meals_eaten_mutex);
-                philo->meals_eaten++;
-                pthread_mutex_unlock(&data->meals_eaten_mutex);
-                action_think(philo);
-                action_sleep(philo);
-            }
-
-            // Pass the turn to the next philosopher
-            data->turn = (data->turn + 1) % data->number_of_philosophers;
-        }
-    }
-
-    if (!data->exiting)
-    {
-        pthread_mutex_lock(&data->completed_threads_mutex);
-        data->completed_threads_count++;
-        pthread_mutex_unlock(&data->completed_threads_mutex);
-    }
-
-    return NULL;
-} */
-
-
-
+// has to be renamed
 void start_simulation(t_data *data)
 {
    // int i;
