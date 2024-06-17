@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:56 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/17 22:45:36 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/17 23:09:40 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void *philosopher_routine(void *arg)
     */
    //usleep(100);
    if (philo->id % 2 == 0)
-        ft_usleep(philo->data->time_to_eat, philo);
+        ft_usleep(philo->data->time_to_eat - 10, philo);
     while (!data->exiting && death_note_check(philo) == 0 && (data->times_must_eat == -1 
         || philo->meals_eaten < data->times_must_eat))
     {
