@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/09 13:43:35 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:31:47 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,12 @@ void create_threads(t_data *data)
     }
     
     // Create the monitor thread
-    if (pthread_create(&(data->monitor), NULL, monitor_routine, data) != 0)
+    if (pthread_create(&(data->monitor_eat), NULL, monitor_eat, data) != 0)
+    {
+        perror("Error creating monitor thread");
+        exit(EXIT_FAILURE);
+    }
+    if (pthread_create(&(data->monitor_death), NULL, monitor_death, data) != 0)
     {
         perror("Error creating monitor thread");
         exit(EXIT_FAILURE);

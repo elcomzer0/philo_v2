@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:36 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/08 12:46:48 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:38:15 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ typedef struct s_data
     int exiting; // Flag to indicate that the simulation is exiting
     int turn;
     long long last_meal_timestamps[201];
-    pthread_t monitor;
+    pthread_t monitor_eat;
+    pthread_t monitor_death;
     pthread_mutex_t *fork;
     pthread_mutex_t print_lock;
     pthread_mutex_t death;
@@ -111,7 +112,8 @@ void clean_exit(t_data *data);
 bool is_death_note(t_philosopher *philo);
 
 /*monitor*/
-void *monitor_routine(void *arg);
+void *monitor_eat(void *arg);
+void *monitor_death(void *arg);
 int death_note_check(t_philosopher *philo);
 
 /*actions*/

@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:56 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/09 15:51:19 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/17 22:45:36 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void *philosopher_routine(void *arg)
         philo->meals_eaten is a counter that is incremented every time the philosopher eats.
     */
    //usleep(100);
+   if (philo->id % 2 == 0)
+        ft_usleep(philo->data->time_to_eat, philo);
     while (!data->exiting && death_note_check(philo) == 0 && (data->times_must_eat == -1 
         || philo->meals_eaten < data->times_must_eat))
     {

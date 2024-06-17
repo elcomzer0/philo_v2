@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:05 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/09 18:56:06 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:40:57 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void print_status(t_philosopher *philo, const char *status)
  * @param time_value The time in milliseconds to suspend the thread.
  * @param philo The philosopher whose thread is being suspended.
  */
-/* void ft_usleep(unsigned long long int time_value, t_philosopher *philo)
+void ft_usleep(unsigned long long int time_value, t_philosopher *philo)
 {
     struct timeval start, current;
     unsigned long long elapsed;
@@ -120,9 +120,9 @@ void print_status(t_philosopher *philo, const char *status)
         pthread_mutex_unlock(&philo->data->death);
         usleep(400);
     }
-} */
+}
 //version2
-void    ft_usleep(unsigned long long int time_value, t_philosopher *philo)
+/* void    ft_usleep(unsigned long long int time_value, t_philosopher *philo)
 {
     unsigned long long int start_time;
     //(void)philo;
@@ -138,11 +138,11 @@ void    ft_usleep(unsigned long long int time_value, t_philosopher *philo)
             break;
         }
         pthread_mutex_unlock(&philo->data->death);
-        usleep(400);
+        usleep(100);
     }
     
     
-}
+} */
 
 void free_data(t_data *data)
 {
@@ -234,8 +234,10 @@ void clean_exit(t_data *data)
     } */
     
     // Join the monitor thread
-    if (data->monitor)
-        pthread_join(data->monitor, NULL);
+    if (data->monitor_eat)
+        pthread_join(data->monitor_eat, NULL);
+    if (data->monitor_death)
+        pthread_join(data->monitor_death, NULL);
     
     if (data->forks)
     {
