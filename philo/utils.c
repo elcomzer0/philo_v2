@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:05 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/17 19:40:57 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/17 23:40:34 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,7 @@ long get_current_time()
     return (time);
 }
 
-/* void print_status(t_philosopher *philo, const char *status)
-{
-    if (philo == NULL || philo->data == NULL) 
-        return;
-    pthread_mutex_lock(&philo->data->print_lock);
-    printf("%ld %d %s\n", get_current_time() - philo->data->start_time, philo->id, status);
-    pthread_mutex_unlock(&philo->data->print_lock);
-} */
+
 
 void print_status(t_philosopher *philo, const char *status)
 {
@@ -121,28 +114,7 @@ void ft_usleep(unsigned long long int time_value, t_philosopher *philo)
         usleep(400);
     }
 }
-//version2
-/* void    ft_usleep(unsigned long long int time_value, t_philosopher *philo)
-{
-    unsigned long long int start_time;
-    //(void)philo;
-    
-    start_time = get_current_time();
 
-    while(get_current_time() - start_time < time_value)
-    {
-        pthread_mutex_lock(&philo->data->death);
-        if (philo->data->death_note == 1)
-        {
-            pthread_mutex_unlock(&philo->data->death);
-            break;
-        }
-        pthread_mutex_unlock(&philo->data->death);
-        usleep(100);
-    }
-    
-    
-} */
 
 void free_data(t_data *data)
 {
