@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:21:10 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/18 21:12:04 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 00:02:33 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,28 +43,4 @@ void	acquire_forks(t_philosopher *philo)
 	print_status(philo, "has taken a fork");
 	print_status(philo, "has taken a fork");
 	pthread_mutex_unlock(&philo->data->dining_mutex);
-}
-
-void	action_eat(t_philosopher *philo)
-{
-	acquire_forks(philo);
-	update_last_meal_time(philo);
-	print_status(philo, "is eating");
-	ft_usleep(philo->data->time_to_eat, philo);
-	release_forks(philo);
-}
-
-void	action_sleep(t_philosopher *philo)
-{
-	print_status(philo, "is sleeping");
-	ft_usleep(philo->data->time_to_sleep, philo);
-}
-
-void	action_think(t_philosopher *philo)
-{
-	if (philo->data->time_to_eat - philo->data->time_to_sleep >= 0
-		&& philo->data->number_of_philosophers % 2 == 1)
-		ft_usleep((philo->data->time_to_eat - philo->data->time_to_sleep) + 2,
-			philo);
-	print_status(philo, "is thinking");
 }

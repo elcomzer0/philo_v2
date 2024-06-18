@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:05 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/18 22:29:16 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/18 23:55:54 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,9 @@ void	print_status(t_philosopher *philo, const char *status)
 void	ft_usleep(unsigned long long int time_value, t_philosopher *philo)
 {
 	unsigned long long	elapsed;
+	struct timeval		start;
+	struct timeval		current;
 
-	struct timeval start, current;
 	if (philo == NULL || philo->data == NULL)
 		return ;
 	gettimeofday(&start, NULL);
@@ -92,4 +93,3 @@ void	ft_usleep(unsigned long long int time_value, t_philosopher *philo)
 		usleep(400);
 	}
 }
-

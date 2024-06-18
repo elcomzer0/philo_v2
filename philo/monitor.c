@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:43 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/18 21:24:42 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/18 23:56:26 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	process_philo_life_cycle(t_data *data)
 		philo = &data->philosophers[i];
 		time_since_last_meal = current_time - data->last_meal_timestamps[i];
 		if (time_since_last_meal >= data->time_to_die && data->death_note == 0)
-		// TODO: verifica el caso de mandar a dormir mucho tiempo
 		{
 			pthread_mutex_lock(&data->death);
 			data->death_note = 1;

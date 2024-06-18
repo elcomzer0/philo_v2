@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:36 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/18 23:37:37 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 00:09:24 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,7 @@ int					dining_checker(t_philosopher *philo);
 bool				stop_simulation(t_data *data);
 int					check_eaten_status(t_data *data);
 int					death_note_check(t_philosopher *philo);
-int dined_enough_check(t_data *data);
-
+int					dined_enough_check(t_data *data);
 
 /*actions*/
 void				action_eat(t_philosopher *philo);
@@ -131,5 +130,13 @@ size_t				ft_strlen(const char *str);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);
 long				ft_atol(const char *str);
+
+/* FUNCTIONS */
+void				acquire_forks(t_philosopher *philo);
+void				release_forks(t_philosopher *philo);
+void				update_last_meal_time(t_philosopher *philo);
+void				action_think(t_philosopher *philo);
+void				action_sleep(t_philosopher *philo);
+void				action_eat(t_philosopher *philo);
 
 #endif

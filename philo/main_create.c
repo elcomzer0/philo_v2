@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 21:32:35 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/18 21:49:47 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 00:05:27 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	create_monitor_threads(t_data *data)
 
 int	create_threads(t_data *data)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < data->number_of_philosophers)

@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:25:59 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/18 22:26:38 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 00:06:19 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ int	ft_atoi(const char *str)
 
 long	ft_atol(const char *str)
 {
-	int sign;
-	int i;
-	long n; // Changed from int to long
+	int		sign;
+	int		i;
+	long	n;
 
 	sign = 1;
 	n = 0;
