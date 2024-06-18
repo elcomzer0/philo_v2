@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 LDFLAGS = -lpthread
 ASAN_FLAGS = -g -fsanitize=address
 
-SRC = main.c philosopher.c utils.c monitor.c single_philo.c action.c
+SRC = main.c philosopher.c utils.c monitor.c single_philo.c action.c monitor_utils.c main_init.c main_valid.c main_create.c free.c utils_2.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
