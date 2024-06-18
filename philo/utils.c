@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:05 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/17 23:40:34 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/18 00:12:06 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ void free_data(t_data *data)
 }
 }
 
+//needs to be changed to an int function for returning -1  cant use exit()
 void clean_exit(t_data *data)
 {
     //int i;

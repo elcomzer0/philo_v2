@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/17 23:44:28 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/18 00:13:41 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,24 @@ static t_philosopher *allocate_philosophers(int number_of_philosophers)
     if (!philosophers)
     {
         perror("Error allocating philosophers");
-        exit(EXIT_FAILURE);
+        return NULL;
     }
     return philosophers;
 }
 
 //check
-static void initialize_mutex(pthread_mutex_t *mutex, t_data *data)
+/* static void initialize_mutex(pthread_mutex_t *mutex, t_data *data)
 {
+    int j;
     if (pthread_mutex_init(mutex, NULL) != 0)
     {
         perror("Error initializing mutex");
-        
-        for (int j = 0; j < data->number_of_philosophers; j++)
+
+        j = 0;
+        while (j < data->number_of_philosophers)
         {
             pthread_mutex_destroy(&data->fork[j]);
+            j++;
         }
         pthread_mutex_destroy(&data->print_lock);
         pthread_mutex_destroy(&data->death);
@@ -61,11 +64,40 @@ static void initialize_mutex(pthread_mutex_t *mutex, t_data *data)
         pthread_mutex_destroy(&data->last_meal_timestamps_mutex);
         pthread_mutex_destroy(&data->fork_status_mutex);
         pthread_mutex_destroy(&data->dining_mutex);
-        
+
         free(data->fork);
-        exit(EXIT_FAILURE);
+        // exit(EXIT_FAILURE); // Removed exit() call
     }
+} */
+static int initialize_mutex(pthread_mutex_t *mutex, t_data *data)
+{
+    int j;
+
+    if (pthread_mutex_init(mutex, NULL) != 0)
+    {
+        perror("Error initializing mutex");
+
+        j = 0;
+        while (j < data->number_of_philosophers)
+        {
+            pthread_mutex_destroy(&data->fork[j]);
+            j++;
+        }
+        pthread_mutex_destroy(&data->print_lock);
+        pthread_mutex_destroy(&data->death);
+        pthread_mutex_destroy(&data->dined);
+        pthread_mutex_destroy(&data->meals_eaten_mutex);
+        pthread_mutex_destroy(&data->completed_threads_mutex);
+        pthread_mutex_destroy(&data->last_meal_timestamps_mutex);
+        pthread_mutex_destroy(&data->fork_status_mutex);
+        pthread_mutex_destroy(&data->dining_mutex);
+
+        free(data->fork);
+        return -1;  // Return an error code instead of exiting
+    }
+    return 0;  // Return 0 on success
 }
+
 
 //check what i really need as a initialization
 static void initialize_mutexes(t_philosopher *philosophers, t_data *data)
@@ -193,23 +225,43 @@ void initialize_philosophers(t_data *data)
 }
 
 
-void create_monitor_threads(t_data *data)
+/* void create_monitor_threads(t_data *data)
 {
     // Create the monitor thread for eating
     if (pthread_create(&(data->monitor_eat), NULL, monitor_eat, data) != 0)
     {
         perror("Error creating monitor thread");
-        exit(EXIT_FAILURE);
+        // Handle error without using exit()
     }
     // Create the monitor thread for death
     if (pthread_create(&(data->monitor_death), NULL, monitor_death, data) != 0)
     {
         perror("Error creating monitor thread");
-        exit(EXIT_FAILURE);
+        // Handle error without using exit()
     }
+} */
+
+int create_monitor_threads(t_data *data)
+{
+    // Create the monitor thread for eating
+    if (pthread_create(&(data->monitor_eat), NULL, monitor_eat, data) != 0)
+    {
+        perror("Error creating monitor thread");
+        return -1;  // Return an error code
+    }
+
+    // Create the monitor thread for death
+    if (pthread_create(&(data->monitor_death), NULL, monitor_death, data) != 0)
+    {
+        perror("Error creating monitor thread");
+        return -1;  // Return an error code
+    }
+
+    return 0;  // Return 0 on success
 }
 
-void create_threads(t_data *data)
+
+/* void create_threads(t_data *data)
 {
     int i;
     int j;
@@ -227,13 +279,41 @@ void create_threads(t_data *data)
                 j++;
             }
             pthread_mutex_destroy(&data->print_lock);
-            exit(EXIT_FAILURE);
+            //exit(EXIT_FAILURE);
         }
         usleep(100);  // Slight delay to avoid timing issues
         i++;
     }
     create_monitor_threads(data);
+} */
+int create_threads(t_data *data)
+{
+    int i;
+    int j;
+
+    i = 0;
+    while (i < data->number_of_philosophers)
+    {
+        if (pthread_create(&(data->philosophers[i].thread), NULL, philosopher_routine, &(data->philosophers[i])) != 0)
+        {
+            perror("Error creating philosopher thread");
+            j = 0;
+            while (j <= i)
+            {
+                pthread_mutex_destroy(&(data)->fork[j]);
+                j++;
+            }
+            pthread_mutex_destroy(&data->print_lock);
+            return -1;  // Return an error code
+        }
+        usleep(100); // Slight delay to avoid timing issues
+        i++;
+    }
+    if (create_monitor_threads(data) != 0)
+        return -1;  // Return an error code if monitor threads creation fails
+    return 0;  // Return 0 on success
 }
+
 
 
 /**

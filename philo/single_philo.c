@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/06 14:09:28 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/18 00:01:45 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void create_single_philosopher_thread(t_data *data)
     if (pthread_create(&thread, NULL, &sokrates_case, data) != 0)
     {
         perror("Error creating philosopher thread");
-        exit(EXIT_FAILURE);
+       //exit(EXIT_FAILURE);
+       return;
     }
     pthread_join(thread, NULL);
 }
