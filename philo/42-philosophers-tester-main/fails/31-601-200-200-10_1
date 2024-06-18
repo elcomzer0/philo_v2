@@ -1,1241 +1,1527 @@
-140 1 has taken a fork
-140 1 has taken a fork
-140 1 is eating
-140 1 is thinking
-189 2 has taken a fork
-189 2 has taken a fork
-189 2 is eating
-189 2 is thinking
-258 1 is sleeping
-288 2 is sleeping
-318 3 has taken a fork
-318 3 has taken a fork
-318 3 is eating
-318 3 is thinking
-332 4 has taken a fork
-332 4 has taken a fork
-332 4 is eating
-332 4 is thinking
-364 6 has taken a fork
-364 6 has taken a fork
-364 6 is eating
-364 6 is thinking
-374 5 has taken a fork
-374 5 has taken a fork
-374 5 is eating
-374 5 is thinking
-433 4 is sleeping
-440 3 is sleeping
-484 7 has taken a fork
-484 7 has taken a fork
-484 7 is eating
-484 7 is thinking
-487 1 has taken a fork
-487 1 has taken a fork
-487 1 is eating
-487 1 is thinking
-490 2 has taken a fork
-490 2 has taken a fork
-490 2 is eating
-490 2 is thinking
-501 8 has taken a fork
-501 8 has taken a fork
-501 8 is eating
-501 8 is thinking
-585 5 is sleeping
-619 4 has taken a fork
-619 4 has taken a fork
-619 4 is eating
-619 4 is thinking
-644 6 is sleeping
-647 3 has taken a fork
-647 3 has taken a fork
-647 3 is eating
-647 3 is thinking
-647 8 is sleeping
-667 1 is sleeping
-685 7 is sleeping
-697 11 has taken a fork
-697 11 has taken a fork
-697 11 is eating
-697 11 is thinking
-700 9 has taken a fork
-700 9 has taken a fork
-700 9 is eating
-700 9 is thinking
-754 2 is sleeping
-779 5 has taken a fork
-779 5 has taken a fork
-779 5 is eating
-779 5 is thinking
-797 6 has taken a fork
-797 6 has taken a fork
-797 6 is eating
-797 6 is thinking
-807 10 has taken a fork
-807 10 has taken a fork
-807 10 is eating
-807 10 is thinking
-823 1 has taken a fork
-823 1 has taken a fork
-823 1 is eating
-823 1 is thinking
-838 12 has taken a fork
-838 12 has taken a fork
-838 12 is eating
-838 12 is thinking
-881 8 has taken a fork
-881 8 has taken a fork
-881 8 is eating
-881 8 is thinking
-898 4 is sleeping
-913 11 is sleeping
-921 10 is sleeping
-924 2 has taken a fork
-924 2 has taken a fork
-924 2 is eating
-924 2 is thinking
-928 3 is sleeping
-928 7 has taken a fork
-928 7 has taken a fork
-928 7 is eating
-928 7 is thinking
-951 13 has taken a fork
-951 13 has taken a fork
-951 13 is eating
-951 13 is thinking
-968 12 is sleeping
-980 9 is sleeping
-1013 6 is sleeping
-1036 4 has taken a fork
-1036 4 has taken a fork
-1036 4 is eating
-1036 4 is thinking
-1053 3 has taken a fork
-1053 3 has taken a fork
-1053 3 is eating
-1053 3 is thinking
-1059 8 is sleeping
-1061 10 has taken a fork
-1061 10 has taken a fork
-1061 10 is eating
-1061 10 is thinking
-1064 14 has taken a fork
-1064 14 has taken a fork
-1064 14 is eating
-1064 14 is thinking
-1075 1 is sleeping
-1078 5 is sleeping
-1103 11 has taken a fork
-1103 11 has taken a fork
-1103 11 is eating
-1103 11 is thinking
-1115 7 is sleeping
-1119 12 has taken a fork
-1119 12 has taken a fork
-1119 12 is eating
-1119 12 is thinking
-1130 2 is sleeping
-1149 4 is sleeping
-1161 15 has taken a fork
-1161 15 has taken a fork
-1161 15 is eating
-1161 15 is thinking
-1168 13 is sleeping
-1181 5 has taken a fork
-1181 5 has taken a fork
-1181 5 is eating
-1181 5 is thinking
-1195 9 has taken a fork
-1195 9 has taken a fork
-1195 9 is eating
-1195 9 is thinking
-1201 16 has taken a fork
-1201 16 has taken a fork
-1201 16 is eating
-1201 16 is thinking
+0 1 has taken a fork
+0 1 has taken a fork
+0 1 is eating
+0 3 has taken a fork
+0 3 has taken a fork
+0 3 is eating
+0 5 has taken a fork
+0 5 has taken a fork
+0 5 is eating
+1 7 has taken a fork
+1 7 has taken a fork
+1 7 is eating
+1 9 has taken a fork
+1 9 has taken a fork
+1 9 is eating
+1 11 has taken a fork
+1 11 has taken a fork
+1 11 is eating
+2 13 has taken a fork
+2 13 has taken a fork
+2 13 is eating
+2 15 has taken a fork
+2 15 has taken a fork
+2 15 is eating
+2 17 has taken a fork
+2 17 has taken a fork
+2 17 is eating
+3 19 has taken a fork
+3 19 has taken a fork
+3 19 is eating
+3 21 has taken a fork
+3 21 has taken a fork
+3 21 is eating
+3 23 has taken a fork
+3 23 has taken a fork
+3 23 is eating
+4 25 has taken a fork
+4 25 has taken a fork
+4 25 is eating
+4 27 has taken a fork
+4 27 has taken a fork
+4 27 is eating
+4 29 has taken a fork
+4 29 has taken a fork
+4 29 is eating
+200 1 is sleeping
+200 31 has taken a fork
+200 31 has taken a fork
+200 31 is eating
+200 3 is sleeping
+200 2 has taken a fork
+200 2 has taken a fork
+200 2 is eating
+201 5 is sleeping
+201 4 has taken a fork
+201 4 has taken a fork
+201 4 is eating
+201 7 is sleeping
+201 6 has taken a fork
+201 6 has taken a fork
+201 6 is eating
+201 9 is sleeping
+201 8 has taken a fork
+201 8 has taken a fork
+201 8 is eating
+202 11 is sleeping
+202 10 has taken a fork
+202 10 has taken a fork
+202 10 is eating
+202 13 is sleeping
+202 12 has taken a fork
+202 12 has taken a fork
+202 12 is eating
+202 15 is sleeping
+202 14 has taken a fork
+202 14 has taken a fork
+202 14 is eating
+203 17 is sleeping
+203 16 has taken a fork
+203 16 has taken a fork
+203 16 is eating
+203 19 is sleeping
+203 18 has taken a fork
+203 18 has taken a fork
+203 18 is eating
+203 21 is sleeping
+203 20 has taken a fork
+203 20 has taken a fork
+203 20 is eating
+203 23 is sleeping
+203 22 has taken a fork
+203 22 has taken a fork
+203 22 is eating
+204 25 is sleeping
+204 24 has taken a fork
+204 24 has taken a fork
+204 24 is eating
+204 27 is sleeping
+204 26 has taken a fork
+204 26 has taken a fork
+204 26 is eating
+205 29 is sleeping
+205 28 has taken a fork
+205 28 has taken a fork
+205 28 is eating
+399 1 is thinking
+399 3 is thinking
+400 31 is sleeping
+400 30 has taken a fork
+400 30 has taken a fork
+400 30 is eating
+400 2 is sleeping
+400 1 has taken a fork
+400 1 has taken a fork
+400 1 is eating
+400 4 is sleeping
+400 3 has taken a fork
+400 3 has taken a fork
+400 3 is eating
+400 5 is thinking
+400 6 is sleeping
+400 5 has taken a fork
+400 5 has taken a fork
+400 5 is eating
+400 7 is thinking
+401 8 is sleeping
+401 7 has taken a fork
+401 7 has taken a fork
+401 7 is eating
+401 9 is thinking
+401 11 is thinking
+401 10 is sleeping
+401 9 has taken a fork
+401 9 has taken a fork
+401 9 is eating
+401 12 is sleeping
+401 11 has taken a fork
+401 11 has taken a fork
+401 11 is eating
+401 14 is sleeping
+401 13 is thinking
+401 13 has taken a fork
+401 13 has taken a fork
+401 13 is eating
+402 15 is thinking
+402 17 is thinking
+402 16 is sleeping
+402 15 has taken a fork
+402 15 has taken a fork
+402 15 is eating
+402 19 is thinking
+402 21 is thinking
+402 18 is sleeping
+402 17 has taken a fork
+402 17 has taken a fork
+402 17 is eating
+402 20 is sleeping
+402 19 has taken a fork
+402 19 has taken a fork
+402 19 is eating
+402 22 is sleeping
+402 21 has taken a fork
+402 21 has taken a fork
+403 21 is eating
+403 23 is thinking
+403 25 is thinking
+403 24 is sleeping
+403 23 has taken a fork
+403 23 has taken a fork
+403 23 is eating
+403 26 is sleeping
+403 25 has taken a fork
+403 25 has taken a fork
+403 25 is eating
+403 27 is thinking
+404 28 is sleeping
+404 27 has taken a fork
+404 27 has taken a fork
+404 27 is eating
+404 29 is thinking
+600 31 is thinking
+600 4 is thinking
+600 3 is sleeping
+600 30 is sleeping
+600 29 has taken a fork
+600 29 has taken a fork
+600 29 is eating
+600 1 is sleeping
+600 2 is thinking
+600 31 has taken a fork
+600 31 has taken a fork
+600 31 is eating
+600 6 is thinking
+600 5 is sleeping
+600 4 has taken a fork
+600 4 has taken a fork
+600 4 is eating
+600 2 has taken a fork
+600 2 has taken a fork
+600 2 is eating
+601 8 is thinking
+601 7 is sleeping
+601 6 has taken a fork
+601 6 has taken a fork
+601 6 is eating
+601 10 is thinking
+601 14 is thinking
+601 9 is sleeping
+602 8 has taken a fork
+602 8 has taken a fork
+602 13 is sleeping
+602 8 is eating
+602 12 is thinking
+602 11 is sleeping
+602 10 has taken a fork
+602 10 has taken a fork
+602 10 is eating
+602 15 is sleeping
+602 14 has taken a fork
+602 14 has taken a fork
+602 14 is eating
+602 12 has taken a fork
+602 12 has taken a fork
+602 12 is eating
+602 18 is thinking
+602 16 is thinking
+602 19 is sleeping
+602 20 is thinking
+602 17 is sleeping
+602 18 has taken a fork
+602 18 has taken a fork
+602 18 is eating
+602 16 has taken a fork
+602 16 has taken a fork
+602 16 is eating
+603 22 is thinking
+603 21 is sleeping
+603 20 has taken a fork
+603 20 has taken a fork
+603 20 is eating
+603 26 is thinking
+603 24 is thinking
+603 23 is sleeping
+603 22 has taken a fork
+603 22 has taken a fork
+603 22 is eating
+603 25 is sleeping
+604 28 is thinking
+604 27 is sleeping
+604 26 has taken a fork
+604 26 has taken a fork
+604 26 is eating
+604 24 has taken a fork
+604 24 has taken a fork
+604 24 is eating
+800 30 is thinking
+800 3 is thinking
+800 28 has taken a fork
+800 1 is thinking
+800 29 is sleeping
+800 28 has taken a fork
+800 28 is eating
+800 31 is sleeping
+800 30 has taken a fork
+800 30 has taken a fork
+800 30 is eating
+800 4 is sleeping
+800 2 is sleeping
+800 1 has taken a fork
+800 1 has taken a fork
+800 1 is eating
+800 3 has taken a fork
+800 3 has taken a fork
+800 3 is eating
+800 5 is thinking
+801 7 is thinking
+801 6 is sleeping
+801 5 has taken a fork
+801 5 has taken a fork
+801 5 is eating
+802 11 is thinking
+802 9 is thinking
+802 13 is thinking
+802 8 is sleeping
+802 7 has taken a fork
+802 7 has taken a fork
+802 7 is eating
+802 10 is sleeping
+802 14 is sleeping
+802 12 is sleeping
+802 11 has taken a fork
+802 11 has taken a fork
+802 11 is eating
+802 9 has taken a fork
+802 9 has taken a fork
+802 15 is thinking
+802 9 is eating
+803 18 is sleeping
+803 19 is thinking
+803 16 is sleeping
+803 17 is thinking
+803 15 has taken a fork
+803 15 has taken a fork
+803 15 is eating
+803 13 has taken a fork
+803 13 has taken a fork
+803 13 is eating
+803 21 is thinking
+803 19 has taken a fork
+803 19 has taken a fork
+803 19 is eating
+803 20 is sleeping
+803 17 has taken a fork
+803 17 has taken a fork
+803 17 is eating
+804 22 is sleeping
+804 21 has taken a fork
+804 21 has taken a fork
+804 21 is eating
+804 23 is thinking
+804 25 is thinking
+804 27 is thinking
+804 24 is sleeping
+804 23 has taken a fork
+804 23 has taken a fork
+804 23 is eating
+804 26 is sleeping
+804 25 has taken a fork
+804 25 has taken a fork
+804 25 is eating
+1000 28 is sleeping
+1000 27 has taken a fork
+1000 27 has taken a fork
+1000 27 is eating
+1000 29 is thinking
+1000 31 is thinking
+1000 30 is sleeping
+1000 29 has taken a fork
+1000 29 has taken a fork
+1000 29 is eating
+1001 1 is sleeping
+1001 31 has taken a fork
+1001 31 has taken a fork
+1001 31 is eating
+1001 2 is thinking
+1001 3 is sleeping
+1001 2 has taken a fork
+1001 2 has taken a fork
+1001 2 is eating
+1001 4 is thinking
+1001 6 is thinking
+1001 5 is sleeping
+1001 4 has taken a fork
+1001 4 has taken a fork
+1001 4 is eating
+1002 7 is sleeping
+1002 6 has taken a fork
+1002 6 has taken a fork
+1002 6 is eating
+1002 8 is thinking
+1002 10 is thinking
+1002 9 is sleeping
+1002 8 has taken a fork
+1002 8 has taken a fork
+1002 8 is eating
+1002 11 is sleeping
+1003 10 has taken a fork
+1003 10 has taken a fork
+1003 10 is eating
+1003 12 is thinking
+1003 14 is thinking
+1003 16 is thinking
+1003 18 is thinking
+1003 15 is sleeping
+1003 13 is sleeping
+1003 12 has taken a fork
+1003 12 has taken a fork
+1003 12 is eating
+1003 14 has taken a fork
+1003 14 has taken a fork
+1003 14 is eating
+1003 20 is thinking
+1003 17 is sleeping
+1003 16 has taken a fork
+1003 16 has taken a fork
+1003 16 is eating
+1003 19 is sleeping
+1003 18 has taken a fork
+1003 18 has taken a fork
+1003 18 is eating
+1004 21 is sleeping
+1004 20 has taken a fork
+1004 20 has taken a fork
+1004 20 is eating
+1004 22 is thinking
+1004 23 is sleeping
+1004 22 has taken a fork
+1004 22 has taken a fork
+1004 22 is eating
+1004 24 is thinking
+1004 25 is sleeping
+1004 24 has taken a fork
+1004 24 has taken a fork
+1004 24 is eating
+1004 26 is thinking
+1200 28 is thinking
+1200 29 is sleeping
+1200 27 is sleeping
+1200 26 has taken a fork
+1200 26 has taken a fork
+1200 26 is eating
+1201 28 has taken a fork
+1201 28 has taken a fork
+1201 28 is eating
+1201 30 is thinking
+1201 1 is thinking
+1201 31 is sleeping
+1201 30 has taken a fork
+1201 30 has taken a fork
+1201 30 is eating
+1201 3 is thinking
+1201 2 is sleeping
+1201 1 has taken a fork
+1201 1 has taken a fork
+1201 1 is eating
+1201 5 is thinking
+1201 4 is sleeping
+1201 3 has taken a fork
+1201 3 has taken a fork
+1201 3 is eating
+1202 7 is thinking
+1202 6 is sleeping
+1202 5 has taken a fork
+1202 5 has taken a fork
+1202 5 is eating
+1202 9 is thinking
+1202 8 is sleeping
+1202 7 has taken a fork
+1202 7 has taken a fork
+1202 7 is eating
+1203 11 is thinking
+1203 10 is sleeping
+1203 9 has taken a fork
+1203 9 has taken a fork
+1203 9 is eating
+1203 13 is thinking
 1203 14 is sleeping
-1226 6 has taken a fork
-1226 6 has taken a fork
-1226 6 is eating
-1226 6 is thinking
-1240 2 has taken a fork
-1240 2 has taken a fork
-1240 2 is eating
-1240 2 is thinking
-1250 8 has taken a fork
-1250 8 has taken a fork
-1250 8 is eating
-1250 8 is thinking
-1275 17 has taken a fork
-1275 17 has taken a fork
-1275 17 is eating
-1275 17 is thinking
-1282 11 is sleeping
-1303 7 has taken a fork
-1303 7 has taken a fork
-1303 7 is eating
-1303 7 is thinking
-1309 1 has taken a fork
-1309 1 has taken a fork
-1309 1 is eating
-1309 1 is thinking
-1322 3 is sleeping
-1326 18 has taken a fork
-1326 18 has taken a fork
-1326 18 is eating
-1326 18 is thinking
-1340 10 is sleeping
-1341 15 is sleeping
-1376 12 is sleeping
-1378 4 has taken a fork
-1378 4 has taken a fork
-1378 4 is eating
-1378 4 is thinking
-1382 6 is sleeping
-1400 14 has taken a fork
-1400 14 has taken a fork
-1400 14 is eating
-1400 14 is thinking
-1401 19 has taken a fork
-1401 19 has taken a fork
-1401 19 is eating
-1401 19 is thinking
-1414 5 is sleeping
-1430 2 is sleeping
-1432 13 has taken a fork
-1432 13 has taken a fork
-1432 13 is eating
-1432 13 is thinking
-1443 16 is sleeping
-1445 17 is sleeping
-1470 9 is sleeping
-1484 11 has taken a fork
-1484 11 has taken a fork
-1484 11 is eating
-1484 11 is thinking
-1492 15 has taken a fork
-1492 15 has taken a fork
-1492 15 is eating
-1492 15 is thinking
-1495 7 is sleeping
-1502 19 is sleeping
-1512 18 is sleeping
-1512 12 has taken a fork
-1512 12 has taken a fork
-1512 12 is eating
-1512 12 is thinking
-1530 8 is sleeping
-1533 1 is sleeping
-1543 3 has taken a fork
-1543 3 has taken a fork
-1543 3 is eating
-1543 3 is thinking
-1547 10 has taken a fork
-1547 10 has taken a fork
-1547 10 is eating
-1547 10 is thinking
-1548 5 has taken a fork
-1548 5 has taken a fork
-1548 5 is eating
-1548 5 is thinking
-1586 20 has taken a fork
-1586 20 has taken a fork
-1586 20 is eating
-1586 20 is thinking
-1595 6 has taken a fork
-1595 6 has taken a fork
-1595 6 is eating
-1595 6 is thinking
-1631 2 has taken a fork
-1631 2 has taken a fork
-1631 2 is eating
-1631 2 is thinking
-1632 9 has taken a fork
-1632 9 has taken a fork
-1632 9 is eating
-1632 9 is thinking
-1645 15 is sleeping
-1651 3 is sleeping
-1652 4 is sleeping
-1657 17 has taken a fork
-1657 17 has taken a fork
-1657 17 is eating
-1657 17 is thinking
-1662 16 has taken a fork
-1662 16 has taken a fork
-1662 16 is eating
-1662 16 is thinking
-1669 1 has taken a fork
-1669 1 has taken a fork
-1669 1 is eating
-1669 1 is thinking
-1671 22 has taken a fork
-1671 22 has taken a fork
-1671 22 is eating
-1671 22 is thinking
-1674 10 is sleeping
-1674 7 has taken a fork
-1674 7 has taken a fork
-1674 7 is eating
-1674 7 is thinking
-1679 23 has taken a fork
-1679 23 has taken a fork
-1679 23 is eating
-1679 23 is thinking
-1681 14 is sleeping
-1704 11 is sleeping
-1706 5 is sleeping
-1714 12 is sleeping
-1718 21 has taken a fork
-1718 21 has taken a fork
-1718 21 is eating
-1718 21 is thinking
-1719 13 is sleeping
-1723 8 has taken a fork
-1723 8 has taken a fork
-1723 8 is eating
-1723 8 is thinking
-1758 19 has taken a fork
-1758 19 has taken a fork
-1758 19 is eating
-1758 19 is thinking
-1759 4 has taken a fork
-1759 4 has taken a fork
-1759 4 is eating
-1759 4 is thinking
-1764 16 is sleeping
-1767 18 has taken a fork
-1767 18 has taken a fork
-1767 18 is eating
-1767 18 is thinking
-1790 20 is sleeping
-1819 22 is sleeping
-1832 21 is sleeping
-1839 10 has taken a fork
-1839 10 has taken a fork
-1839 10 is eating
-1839 10 is thinking
-1840 1 is sleeping
-1849 12 has taken a fork
-1849 12 has taken a fork
-1849 12 is eating
-1849 12 is thinking
-1862 7 is sleeping
-1862 13 has taken a fork
-1862 13 has taken a fork
-1862 13 is eating
-1862 13 is thinking
-1867 14 has taken a fork
-1867 14 has taken a fork
-1867 14 is eating
-1867 14 is thinking
-1872 9 is sleeping
-1877 3 has taken a fork
-1877 3 has taken a fork
-1877 3 is eating
-1877 3 is thinking
-1885 24 has taken a fork
-1885 24 has taken a fork
-1885 24 is eating
-1885 24 is thinking
-1888 6 is sleeping
-1890 2 is sleeping
-1898 8 is sleeping
-1910 15 has taken a fork
-1910 15 has taken a fork
-1910 15 is eating
-1910 15 is thinking
-1915 19 is sleeping
-1915 17 is sleeping
-1928 21 has taken a fork
-1928 21 has taken a fork
-1928 21 is eating
-1928 21 is thinking
-1942 5 has taken a fork
-1942 5 has taken a fork
-1942 5 is eating
-1942 5 is thinking
-1950 20 has taken a fork
-1950 20 has taken a fork
-1950 20 is eating
-1950 20 is thinking
-1951 22 has taken a fork
-1951 22 has taken a fork
-1951 22 is eating
-1951 22 is thinking
-1965 7 has taken a fork
-1965 7 has taken a fork
-1965 7 is eating
-1965 7 is thinking
-1965 11 has taken a fork
-1965 11 has taken a fork
-1965 11 is eating
-1965 11 is thinking
-1971 4 is sleeping
-1971 16 has taken a fork
-1971 16 has taken a fork
-1971 16 is eating
-1971 16 is thinking
-1977 23 is sleeping
-1978 18 is sleeping
-1984 2 has taken a fork
-1984 2 has taken a fork
-1984 2 is eating
-1984 2 is thinking
+1203 12 is sleeping
+1203 11 has taken a fork
+1203 11 has taken a fork
+1203 11 is eating
+1203 13 has taken a fork
+1203 13 has taken a fork
+1203 13 is eating
+1203 15 is thinking
+1204 18 is sleeping
+1204 16 is sleeping
+1204 15 has taken a fork
+1204 15 has taken a fork
+1204 15 is eating
+1204 17 is thinking
+1204 17 has taken a fork
+1204 17 has taken a fork
+1204 17 is eating
+1204 19 is thinking
+1204 21 is thinking
+1204 20 is sleeping
+1204 19 has taken a fork
+1204 19 has taken a fork
+1204 19 is eating
+1204 23 is thinking
+1205 24 is sleeping
+1205 22 is sleeping
+1205 21 has taken a fork
+1205 21 has taken a fork
+1205 21 is eating
+1205 23 has taken a fork
+1205 23 has taken a fork
+1205 23 is eating
+1205 25 is thinking
+1400 28 is sleeping
+1400 26 is sleeping
+1400 25 has taken a fork
+1400 25 has taken a fork
+1400 25 is eating
+1400 29 is thinking
+1400 27 is thinking
+1400 31 is thinking
+1400 30 is sleeping
+1400 29 has taken a fork
+1400 29 has taken a fork
+1400 29 is eating
+1400 27 has taken a fork
+1400 27 has taken a fork
+1400 27 is eating
+1400 2 is thinking
+1401 1 is sleeping
+1401 31 has taken a fork
+1401 31 has taken a fork
+1401 31 is eating
+1401 3 is sleeping
+1401 2 has taken a fork
+1401 2 has taken a fork
+1401 2 is eating
+1401 4 is thinking
+1402 8 is thinking
+1402 6 is thinking
+1402 7 is sleeping
+1402 5 is sleeping
+1402 4 has taken a fork
+1402 4 has taken a fork
+1402 4 is eating
+1402 10 is thinking
+1402 9 is sleeping
+1402 8 has taken a fork
+1402 8 has taken a fork
+1402 8 is eating
+1402 6 has taken a fork
+1402 6 has taken a fork
+1402 6 is eating
+1402 13 is sleeping
+1402 12 is thinking
+1403 11 is sleeping
+1403 10 has taken a fork
+1403 10 has taken a fork
+1403 10 is eating
+1403 12 has taken a fork
+1403 12 has taken a fork
+1403 12 is eating
+1403 14 is thinking
+1403 16 is thinking
+1403 18 is thinking
+1403 17 is sleeping
+1403 15 is sleeping
+1403 14 has taken a fork
+1403 14 has taken a fork
+1403 14 is eating
+1403 16 has taken a fork
+1403 16 has taken a fork
+1403 16 is eating
+1403 20 is thinking
+1403 19 is sleeping
+1403 18 has taken a fork
+1403 18 has taken a fork
+1403 18 is eating
+1404 24 is thinking
+1404 21 is sleeping
+1404 20 has taken a fork
+1404 20 has taken a fork
+1404 20 is eating
+1404 22 is thinking
+1404 23 is sleeping
+1600 25 is sleeping
+1600 24 has taken a fork
+1600 26 is thinking
+1600 24 has taken a fork
+1600 24 is eating
+1600 28 is thinking
+1600 22 has taken a fork
+1600 22 has taken a fork
+1600 22 is eating
+1600 29 is sleeping
+1600 27 is sleeping
+1600 26 has taken a fork
+1600 26 has taken a fork
+1600 30 is thinking
+1600 28 has taken a fork
+1600 28 has taken a fork
+1600 28 is eating
+1600 26 is eating
+1601 3 is thinking
+1601 1 is thinking
+1601 31 is sleeping
+1601 2 is sleeping
+1601 30 has taken a fork
+1601 30 has taken a fork
+1601 30 is eating
+1602 7 is thinking
+1602 5 is thinking
+1602 4 is sleeping
+1602 3 has taken a fork
+1602 3 has taken a fork
+1602 3 is eating
+1602 1 has taken a fork
+1602 1 has taken a fork
+1602 1 is eating
+1602 9 is thinking
+1602 6 is sleeping
+1602 8 is sleeping
+1602 7 has taken a fork
+1602 7 has taken a fork
+1602 7 is eating
+1602 5 has taken a fork
+1602 5 has taken a fork
+1602 5 is eating
+1603 12 is sleeping
+1603 11 is thinking
+1603 13 is thinking
+1603 10 is sleeping
+1603 9 has taken a fork
+1603 9 has taken a fork
+1603 9 is eating
+1603 11 has taken a fork
+1603 11 has taken a fork
+1603 11 is eating
+1603 16 is sleeping
+1603 14 is sleeping
+1603 13 has taken a fork
+1603 13 has taken a fork
+1603 13 is eating
+1603 17 is thinking
+1603 15 is thinking
+1604 19 is thinking
+1604 18 is sleeping
+1604 17 has taken a fork
+1604 17 has taken a fork
+1604 17 is eating
+1604 15 has taken a fork
+1604 15 has taken a fork
+1604 15 is eating
+1604 20 is sleeping
+1604 19 has taken a fork
+1604 19 has taken a fork
+1604 19 is eating
+1604 21 is thinking
+1604 23 is thinking
+1800 25 is thinking
+1800 22 is sleeping
+1800 21 has taken a fork
+1800 21 has taken a fork
+1800 21 is eating
+1800 24 is sleeping
+1800 23 has taken a fork
+1800 23 has taken a fork
+1800 23 is eating
+1801 28 is sleeping
+1801 27 is thinking
+1801 26 is sleeping
+1801 25 has taken a fork
+1801 25 has taken a fork
+1801 25 is eating
+1801 29 is thinking
+1801 31 is thinking
+1801 29 has taken a fork
+1801 29 has taken a fork
+1801 30 is sleeping
+1801 29 is eating
+1801 27 has taken a fork
+1801 27 has taken a fork
+1801 27 is eating
+1801 2 is thinking
+1802 3 is sleeping
+1802 4 is thinking
+1802 1 is sleeping
+1802 2 has taken a fork
+1802 2 has taken a fork
+1802 2 is eating
+1802 31 has taken a fork
+1802 31 has taken a fork
+1802 31 is eating
+1803 6 is thinking
+1803 5 is sleeping
+1803 4 has taken a fork
+1803 4 has taken a fork
+1803 4 is eating
+1803 8 is thinking
+1803 7 is sleeping
+1803 6 has taken a fork
+1803 6 has taken a fork
+1803 6 is eating
+1803 11 is sleeping
+1803 10 is thinking
+1803 12 is thinking
+1803 9 is sleeping
+1803 8 has taken a fork
+1803 8 has taken a fork
+1803 8 is eating
+1803 10 has taken a fork
+1803 10 has taken a fork
+1803 10 is eating
+1803 16 is thinking
+1803 13 is sleeping
+1804 12 has taken a fork
+1804 12 has taken a fork
+1804 12 is eating
+1804 14 is thinking
+1804 18 is thinking
+1804 15 is sleeping
+1804 17 is sleeping
+1804 16 has taken a fork
+1804 16 has taken a fork
+1804 16 is eating
+1804 14 has taken a fork
+1804 14 has taken a fork
+1804 14 is eating
+1804 20 is thinking
+1804 19 is sleeping
+1804 18 has taken a fork
+1804 18 has taken a fork
+1804 18 is eating
+2000 22 is thinking
+2000 20 has taken a fork
+2000 20 has taken a fork
+2000 21 is sleeping
+2000 20 is eating
+2001 28 is thinking
+2001 23 is sleeping
+2001 22 has taken a fork
+2001 22 has taken a fork
+2001 22 is eating
+2001 24 is thinking
+2001 25 is sleeping
+2001 26 is thinking
+2002 30 is thinking
+2002 27 is sleeping
+2002 29 is sleeping
+2002 28 has taken a fork
+2002 28 has taken a fork
+2002 28 is eating
+2002 24 has taken a fork
+2002 24 has taken a fork
+2002 24 is eating
+2002 26 has taken a fork
+2002 26 has taken a fork
+2002 26 is eating
+2003 1 is thinking
+2003 31 is sleeping
+2003 2 is sleeping
+2003 3 is thinking
+2003 30 has taken a fork
+2003 30 has taken a fork
+2003 30 is eating
+2003 4 is sleeping
+2003 5 is thinking
+2003 1 has taken a fork
+2003 1 has taken a fork
+2003 1 is eating
+2003 11 is thinking
+2003 6 is sleeping
+2003 5 has taken a fork
+2003 5 has taken a fork
+2003 5 is eating
+2003 7 is thinking
+2003 3 has taken a fork
+2003 3 has taken a fork
+2003 3 is eating
+2003 8 is sleeping
+2003 9 is thinking
+2003 10 is sleeping
+2004 13 is thinking
+2004 12 is sleeping
+2004 11 has taken a fork
+2004 11 has taken a fork
+2004 11 is eating
+2004 7 has taken a fork
+2004 7 has taken a fork
+2004 7 is eating
 2004 9 has taken a fork
 2004 9 has taken a fork
 2004 9 is eating
-2004 9 is thinking
-2005 6 has taken a fork
-2005 6 has taken a fork
-2005 6 is eating
-2005 6 is thinking
-2007 26 has taken a fork
-2007 26 has taken a fork
-2007 26 is eating
-2007 26 is thinking
-2014 1 has taken a fork
-2014 1 has taken a fork
-2014 1 is eating
-2014 1 is thinking
-2029 27 has taken a fork
-2029 27 has taken a fork
-2029 27 is eating
-2029 27 is thinking
-2033 13 is sleeping
-2038 8 has taken a fork
-2038 8 has taken a fork
-2038 8 is eating
-2038 8 is thinking
-2042 24 is sleeping
-2043 19 has taken a fork
-2043 19 has taken a fork
-2043 19 is eating
-2043 19 is thinking
-2045 25 has taken a fork
-2045 25 has taken a fork
-2045 25 is eating
-2045 25 is thinking
-2045 10 is sleeping
-2050 21 is sleeping
-2062 20 is sleeping
-2072 22 is sleeping
-2103 12 is sleeping
-2105 5 is sleeping
-2105 18 has taken a fork
-2105 18 has taken a fork
-2105 18 is eating
-2105 18 is thinking
-2109 4 has taken a fork
-2109 4 has taken a fork
-2109 4 is eating
-2109 4 is thinking
-2115 3 is sleeping
-2117 17 has taken a fork
-2117 17 has taken a fork
-2117 17 is eating
-2117 17 is thinking
-2118 14 is sleeping
-2129 26 is sleeping
-2130 15 is sleeping
-2150 9 is sleeping
-2153 7 is sleeping
-2159 23 has taken a fork
-2159 23 has taken a fork
-2159 23 is eating
-2159 23 is thinking
-2180 24 has taken a fork
-2180 24 has taken a fork
-2180 24 is eating
-2180 24 is thinking
-2191 14 has taken a fork
-2191 14 has taken a fork
-2191 14 is eating
-2191 14 is thinking
-2195 1 is sleeping
-2198 2 is sleeping
-2199 11 is sleeping
-2214 28 has taken a fork
-2214 28 has taken a fork
-2214 28 is eating
-2214 28 is thinking
-2219 22 has taken a fork
-2219 22 has taken a fork
-2219 22 is eating
-2219 22 is thinking
-2220 16 is sleeping
-2226 21 has taken a fork
-2226 21 has taken a fork
-2226 21 is eating
-2226 21 is thinking
-2231 27 is sleeping
-2231 10 has taken a fork
-2231 10 has taken a fork
-2231 10 is eating
-2231 10 is thinking
-2242 5 has taken a fork
-2242 5 has taken a fork
-2242 5 is eating
-2242 5 is thinking
-2243 25 is sleeping
-2248 6 is sleeping
-2253 19 is sleeping
-2259 13 has taken a fork
-2259 13 has taken a fork
-2259 13 is eating
-2259 13 is thinking
-2260 26 has taken a fork
-2260 26 has taken a fork
-2260 26 is eating
-2260 26 is thinking
-2264 7 has taken a fork
-2264 7 has taken a fork
-2264 7 is eating
-2264 7 is thinking
-2274 12 has taken a fork
-2274 12 has taken a fork
-2274 12 is eating
-2274 12 is thinking
-2292 15 has taken a fork
-2292 15 has taken a fork
-2292 15 is eating
-2292 15 is thinking
-2298 20 has taken a fork
-2298 20 has taken a fork
-2298 20 is eating
-2298 20 is thinking
-2298 4 is sleeping
-2299 8 is sleeping
-2319 28 is sleeping
-2320 30 has taken a fork
-2320 30 has taken a fork
-2320 30 is eating
-2320 30 is thinking
-2321 29 has taken a fork
-2321 29 has taken a fork
-2321 29 is eating
-2321 29 is thinking
-2342 18 is sleeping
-2345 5 is sleeping
-2347 31 has taken a fork
-2347 31 has taken a fork
-2347 31 is eating
-2347 31 is thinking
-2352 3 has taken a fork
-2352 3 has taken a fork
-2352 3 is eating
-2352 3 is thinking
-2363 6 has taken a fork
-2363 6 has taken a fork
-2363 6 is eating
-2363 6 is thinking
-2371 14 is sleeping
-2371 17 is sleeping
-2372 1 has taken a fork
-2372 1 has taken a fork
-2372 1 is eating
-2372 1 is thinking
-2388 26 is sleeping
-2394 23 is sleeping
-2398 9 has taken a fork
-2398 9 has taken a fork
-2398 9 is eating
-2398 9 is thinking
-2405 21 is sleeping
-2406 11 has taken a fork
-2406 11 has taken a fork
-2406 11 is eating
-2406 11 is thinking
-2408 22 is sleeping
-2415 27 has taken a fork
-2415 27 has taken a fork
-2415 27 is eating
-2415 27 is thinking
-2421 24 is sleeping
-2426 16 has taken a fork
-2426 16 has taken a fork
-2426 16 is eating
-2426 16 is thinking
-2433 2 has taken a fork
-2433 2 has taken a fork
-2433 2 is eating
-2433 2 is thinking
-2435 19 has taken a fork
-2435 19 has taken a fork
-2435 19 is eating
-2435 19 is thinking
-2441 14 has taken a fork
-2441 14 has taken a fork
-2441 14 is eating
-2441 14 is thinking
-2446 10 is sleeping
-2449 12 is sleeping
-2449 8 has taken a fork
-2449 8 has taken a fork
-2449 8 is eating
-2449 8 is thinking
-2450 4 has taken a fork
-2450 4 has taken a fork
-2450 4 is eating
-2450 4 is thinking
-2462 7 is sleeping
-2473 25 has taken a fork
-2473 25 has taken a fork
-2473 25 is eating
-2473 25 is thinking
-2481 18 has taken a fork
-2481 18 has taken a fork
-2481 18 is eating
-2481 18 is thinking
-2489 31 is sleeping
-2510 15 is sleeping
-2511 3 is sleeping
-2516 13 is sleeping
-2525 30 is sleeping
-2545 5 has taken a fork
-2545 5 has taken a fork
-2545 5 is eating
-2545 5 is thinking
-2549 26 has taken a fork
-2549 26 has taken a fork
-2549 26 is eating
-2549 26 is thinking
-2558 22 has taken a fork
-2558 22 has taken a fork
-2558 22 is eating
-2558 22 is thinking
-2562 28 has taken a fork
-2562 28 has taken a fork
-2562 28 is eating
-2562 28 is thinking
-2568 17 has taken a fork
-2568 17 has taken a fork
-2568 17 is eating
-2568 17 is thinking
-2571 8 is sleeping
-2572 19 is sleeping
-2590 20 is sleeping
-2591 23 has taken a fork
-2591 23 has taken a fork
-2591 23 is eating
-2591 23 is thinking
-2599 1 is sleeping
-2601 21 has taken a fork
-2601 21 has taken a fork
-2601 21 is eating
+2004 14 is sleeping
+2004 13 has taken a fork
+2004 17 is thinking
+2004 13 has taken a fork
+2004 16 is sleeping
+2004 13 is eating
+2004 15 is thinking
+2004 15 has taken a fork
+2004 15 has taken a fork
+2004 15 is eating
+2005 19 is thinking
+2005 18 is sleeping
+2005 17 has taken a fork
+2005 17 has taken a fork
+2005 17 is eating
+2201 21 is thinking
+2201 20 is sleeping
+2201 19 has taken a fork
+2201 19 has taken a fork
+2201 19 is eating
+2201 23 is thinking
+2201 22 is sleeping
+2201 21 has taken a fork
+2201 21 has taken a fork
+2201 21 is eating
+2202 25 is thinking
+2202 26 is sleeping
+2202 24 is sleeping
+2202 29 is thinking
+2202 23 has taken a fork
+2202 23 has taken a fork
+2202 23 is eating
+2202 27 is thinking
+2202 28 is sleeping
+2203 4 is thinking
+2203 30 is sleeping
+2203 1 is sleeping
+2203 2 is thinking
+2203 29 has taken a fork
+2203 29 has taken a fork
+2203 29 is eating
+2203 31 is thinking
+2203 25 has taken a fork
+2203 25 has taken a fork
+2203 25 is eating
+2203 27 has taken a fork
+2203 27 has taken a fork
+2203 27 is eating
+2203 3 is sleeping
+2203 6 is thinking
+2203 5 is sleeping
+2203 4 has taken a fork
+2203 4 has taken a fork
+2203 4 is eating
+2203 2 has taken a fork
+2203 2 has taken a fork
+2203 2 is eating
+2203 31 has taken a fork
+2203 31 has taken a fork
+2203 31 is eating
+2204 10 is thinking
+2204 8 is thinking
+2204 9 is sleeping
+2204 7 is sleeping
+2204 6 has taken a fork
+2204 6 has taken a fork
+2204 6 is eating
+2204 12 is thinking
+2204 11 is sleeping
+2204 10 has taken a fork
+2204 10 has taken a fork
+2204 10 is eating
+2204 8 has taken a fork
+2204 8 has taken a fork
+2204 8 is eating
+2205 14 is thinking
+2205 16 is thinking
+2205 15 is sleeping
+2205 13 is sleeping
+2205 12 has taken a fork
+2205 12 has taken a fork
+2205 12 is eating
+2205 14 has taken a fork
+2205 14 has taken a fork
+2205 14 is eating
+2205 17 is sleeping
+2205 16 has taken a fork
+2205 16 has taken a fork
+2205 16 is eating
+2205 18 is thinking
+2400 19 is sleeping
+2400 18 has taken a fork
+2400 18 has taken a fork
+2400 18 is eating
+2400 20 is thinking
+2400 22 is thinking
+2400 21 is sleeping
+2400 20 has taken a fork
+2400 20 has taken a fork
+2400 20 is eating
+2401 26 is thinking
+2401 24 is thinking
+2401 28 is thinking
+2401 22 has taken a fork
+2401 22 has taken a fork
+2401 23 is sleeping
+2401 22 is eating
+2402 30 is thinking
+2402 25 is sleeping
+2402 29 is sleeping
+2402 1 is thinking
+2402 27 is sleeping
+2402 26 has taken a fork
+2402 26 has taken a fork
+2402 26 is eating
+2402 24 has taken a fork
+2402 24 has taken a fork
+2402 24 is eating
+2402 28 has taken a fork
+2402 28 has taken a fork
+2402 28 is eating
+2403 4 is sleeping
+2403 3 is thinking
+2403 5 is thinking
+2403 2 is sleeping
+2403 30 has taken a fork
+2403 30 has taken a fork
+2403 31 is sleeping
+2403 1 has taken a fork
+2403 1 has taken a fork
+2403 1 is eating
+2403 30 is eating
+2403 3 has taken a fork
+2403 3 has taken a fork
+2403 3 is eating
+2404 11 is thinking
+2404 8 is sleeping
+2404 7 is thinking
+2404 6 is sleeping
+2404 5 has taken a fork
+2404 5 has taken a fork
+2404 5 is eating
+2404 10 is sleeping
+2404 9 is thinking
+2404 15 is thinking
+2404 13 is thinking
+2404 14 is sleeping
+2404 12 is sleeping
+2404 11 has taken a fork
+2404 11 has taken a fork
+2404 11 is eating
+2404 7 has taken a fork
+2404 7 has taken a fork
+2404 7 is eating
+2404 9 has taken a fork
+2404 9 has taken a fork
+2404 9 is eating
+2405 16 is sleeping
+2405 15 has taken a fork
+2405 15 has taken a fork
+2405 15 is eating
+2405 17 is thinking
+2405 13 has taken a fork
+2405 13 has taken a fork
+2405 13 is eating
+2600 19 is thinking
+2600 18 is sleeping
+2600 17 has taken a fork
+2600 17 has taken a fork
+2600 17 is eating
 2601 21 is thinking
-2603 16 is sleeping
-2611 29 is sleeping
-2611 6 is sleeping
-2612 7 has taken a fork
-2612 7 has taken a fork
-2612 7 is eating
-2612 7 is thinking
-2633 18 is sleeping
-2640 12 has taken a fork
-2640 12 has taken a fork
-2640 12 is eating
-2640 12 is thinking
-2648 11 is sleeping
-2670 27 is sleeping
-2673 9 is sleeping
-2677 24 has taken a fork
-2677 24 has taken a fork
-2677 24 is eating
-2677 24 is thinking
-2678 26 is sleeping
-2679 8 has taken a fork
-2679 8 has taken a fork
-2679 8 is eating
-2679 8 is thinking
-2682 5 is sleeping
-2682 3 has taken a fork
-2682 3 has taken a fork
-2682 3 is eating
-2682 3 is thinking
-2702 10 has taken a fork
-2702 10 has taken a fork
-2702 10 is eating
-2702 10 is thinking
-2704 25 is sleeping
-2706 13 has taken a fork
-2706 13 has taken a fork
-2706 13 is eating
-2706 13 is thinking
-2723 15 has taken a fork
-2723 15 has taken a fork
-2723 15 is eating
-2723 15 is thinking
-2727 22 is sleeping
-2732 14 is sleeping
-2733 2 is sleeping
-2733 31 has taken a fork
-2733 31 has taken a fork
-2733 31 is eating
-2733 31 is thinking
-2734 28 is sleeping
-2735 4 is sleeping
-2755 1 has taken a fork
-2755 1 has taken a fork
-2755 1 is eating
-2755 1 is thinking
-2762 21 is sleeping
-2764 23 is sleeping
-2775 29 has taken a fork
-2775 29 has taken a fork
-2775 29 is eating
-2775 29 is thinking
-2776 6 has taken a fork
-2776 6 has taken a fork
-2776 6 is eating
-2776 6 is thinking
-2801 20 has taken a fork
-2801 20 has taken a fork
-2801 20 is eating
+2601 20 is sleeping
+2601 19 has taken a fork
+2601 19 has taken a fork
+2601 19 is eating
+2602 23 is thinking
+2602 22 is sleeping
+2602 21 has taken a fork
+2602 21 has taken a fork
+2602 21 is eating
+2603 24 is sleeping
+2603 29 is thinking
+2603 23 has taken a fork
+2603 23 has taken a fork
+2603 23 is eating
+2603 28 is sleeping
+2603 27 is thinking
+2603 25 is thinking
+2603 26 is sleeping
+2603 4 is thinking
+2603 31 is thinking
+2603 2 is thinking
+2603 29 has taken a fork
+2603 29 has taken a fork
+2603 30 is sleeping
+2603 29 is eating
+2603 25 has taken a fork
+2603 3 is sleeping
+2603 1 is sleeping
+2603 25 has taken a fork
+2603 25 is eating
+2603 27 has taken a fork
+2603 27 has taken a fork
+2603 27 is eating
+2604 10 is thinking
+2604 5 is sleeping
+2604 4 has taken a fork
+2604 4 has taken a fork
+2604 4 is eating
+2604 31 has taken a fork
+2604 31 has taken a fork
+2604 31 is eating
+2604 2 has taken a fork
+2604 2 has taken a fork
+2604 2 is eating
+2604 6 is thinking
+2604 8 is thinking
+2604 14 is thinking
+2604 9 is sleeping
+2604 12 is thinking
+2604 11 is sleeping
+2604 10 has taken a fork
+2604 10 has taken a fork
+2605 10 is eating
+2605 7 is sleeping
+2605 6 has taken a fork
+2605 6 has taken a fork
+2605 6 is eating
+2605 8 has taken a fork
+2605 8 has taken a fork
+2605 8 is eating
+2605 16 is thinking
+2605 13 is sleeping
+2605 15 is sleeping
+2605 14 has taken a fork
+2605 14 has taken a fork
+2605 14 is eating
+2605 12 has taken a fork
+2605 12 has taken a fork
+2605 12 is eating
+2800 18 is thinking
+2801 17 is sleeping
+2801 16 has taken a fork
+2801 16 has taken a fork
+2801 16 is eating
+2801 19 is sleeping
+2801 18 has taken a fork
+2801 18 has taken a fork
+2801 18 is eating
 2801 20 is thinking
-2810 30 has taken a fork
-2810 30 has taken a fork
-2810 30 is eating
-2810 30 is thinking
-2810 7 is sleeping
-2811 10 is sleeping
-2817 19 has taken a fork
-2817 19 has taken a fork
-2817 19 is eating
-2817 19 is thinking
-2840 11 has taken a fork
-2840 11 has taken a fork
-2840 11 is eating
-2840 11 is thinking
-2845 16 has taken a fork
-2845 16 has taken a fork
-2845 16 is eating
-2845 16 is thinking
-2847 26 has taken a fork
-2847 26 has taken a fork
-2847 26 is eating
-2847 26 is thinking
-2852 2 has taken a fork
-2852 2 has taken a fork
-2852 2 is eating
-2852 2 is thinking
-2861 17 is sleeping
-2862 5 has taken a fork
-2862 5 has taken a fork
-2862 5 is eating
-2862 5 is thinking
-2888 9 has taken a fork
-2888 9 has taken a fork
-2888 9 is eating
-2888 9 is thinking
-2890 18 has taken a fork
-2890 18 has taken a fork
-2890 18 is eating
-2890 18 is thinking
-2896 25 has taken a fork
-2896 25 has taken a fork
-2896 25 is eating
-2896 25 is thinking
-2896 27 has taken a fork
-2896 27 has taken a fork
-2896 27 is eating
-2896 27 is thinking
-2899 12 is sleeping
-2901 20 is sleeping
-2911 21 has taken a fork
-2911 21 has taken a fork
-2911 21 is eating
-2911 21 is thinking
-2912 23 has taken a fork
-2912 23 has taken a fork
-2912 23 is eating
-2912 23 is thinking
-2917 22 has taken a fork
-2917 22 has taken a fork
-2917 22 is eating
-2917 22 is thinking
-2922 28 has taken a fork
-2922 28 has taken a fork
-2922 28 is eating
-2922 28 is thinking
-2926 3 is sleeping
-2931 8 is sleeping
-2937 24 is sleeping
-2944 14 has taken a fork
-2944 14 has taken a fork
-2944 14 is eating
-2944 14 is thinking
-2945 1 is sleeping
-2948 4 has taken a fork
-2948 4 has taken a fork
-2948 4 is eating
-2948 4 is thinking
-2985 6 is sleeping
-2985 7 has taken a fork
-2985 7 has taken a fork
-2985 7 is eating
-2985 7 is thinking
-2999 13 is sleeping
-3009 9 is sleeping
-3013 17 has taken a fork
-3013 17 has taken a fork
-3013 17 is eating
-3013 17 is thinking
-3019 31 is sleeping
-3022 11 is sleeping
-3024 15 is sleeping
-3030 28 is sleeping
-3032 20 has taken a fork
-3032 20 has taken a fork
-3032 20 is eating
-3032 20 is thinking
-3037 19 is sleeping
-3044 10 has taken a fork
-3044 10 has taken a fork
-3044 10 is eating
-3044 10 is thinking
-3046 16 is sleeping
-3048 29 is sleeping
-3072 8 has taken a fork
-3072 8 has taken a fork
-3072 8 is eating
-3072 8 is thinking
-3075 26 is sleeping
-3090 30 is sleeping
-3092 22 is sleeping
-3100 3 has taken a fork
-3100 3 has taken a fork
-3100 3 is eating
-3100 3 is thinking
-3118 23 is sleeping
-3133 31 has taken a fork
-3133 31 has taken a fork
-3133 31 is eating
-3133 31 is thinking
-3135 17 is sleeping
-3139 5 is sleeping
-3140 12 has taken a fork
-3140 12 has taken a fork
-3140 12 is eating
-3140 12 is thinking
-3140 11 has taken a fork
-3140 11 has taken a fork
-3140 11 is eating
-3140 11 is thinking
-3143 25 is sleeping
-3144 27 is sleeping
-3144 14 is sleeping
-3145 2 is sleeping
-3158 24 has taken a fork
-3158 24 has taken a fork
-3158 24 is eating
-3158 24 is thinking
-3158 21 is sleeping
-3175 16 has taken a fork
-3175 16 has taken a fork
-3175 16 is eating
-3175 16 is thinking
-3176 18 is sleeping
-3180 6 has taken a fork
-3180 6 has taken a fork
-3180 6 is eating
-3180 6 is thinking
-3196 1 has taken a fork
-3196 1 has taken a fork
-3196 1 is eating
-3196 1 is thinking
-3203 13 has taken a fork
-3203 13 has taken a fork
-3203 13 is eating
-3203 13 is thinking
-3203 9 has taken a fork
-3203 9 has taken a fork
-3203 9 is eating
-3203 9 is thinking
-3204 26 has taken a fork
-3204 26 has taken a fork
-3204 26 is eating
-3204 26 is thinking
-3230 30 has taken a fork
-3230 30 has taken a fork
-3230 30 is eating
-3230 30 is thinking
-3236 31 is sleeping
-3240 7 is sleeping
-3244 4 is sleeping
-3257 28 has taken a fork
-3257 28 has taken a fork
-3257 28 is eating
-3257 28 is thinking
-3260 15 has taken a fork
-3260 15 has taken a fork
-3260 15 is eating
-3260 15 is thinking
-3278 20 is sleeping
-3279 10 is sleeping
-3285 19 has taken a fork
-3285 19 has taken a fork
-3285 19 is eating
-3285 19 is thinking
-3290 17 has taken a fork
-3290 17 has taken a fork
-3290 17 is eating
-3290 17 is thinking
-3293 29 has taken a fork
-3293 29 has taken a fork
-3293 29 is eating
-3293 29 is thinking
-3293 22 has taken a fork
-3293 22 has taken a fork
-3293 22 is eating
-3293 22 is thinking
-3317 13 is sleeping
-3320 1 is sleeping
-3335 8 is sleeping
-3339 2 has taken a fork
-3339 2 has taken a fork
-3339 2 is eating
-3339 2 is thinking
-3340 11 is sleeping
-3343 5 has taken a fork
-3343 5 has taken a fork
-3343 5 is eating
-3343 5 is thinking
-3347 6 is sleeping
-3347 14 has taken a fork
-3347 14 has taken a fork
-3347 14 is eating
-3347 14 is thinking
-3348 16 is sleeping
-3363 7 has taken a fork
-3363 7 has taken a fork
-3363 7 is eating
-3363 7 is thinking
-3365 27 has taken a fork
-3365 27 has taken a fork
-3365 27 is eating
-3365 27 is thinking
-3365 23 has taken a fork
-3365 23 has taken a fork
-3365 23 is eating
-3365 23 is thinking
-3373 25 has taken a fork
-3373 25 has taken a fork
-3373 25 is eating
-3373 25 is thinking
-3380 3 is sleeping
-3390 12 is sleeping
-3390 26 is sleeping
-3390 4 has taken a fork
-3390 4 has taken a fork
-3390 4 is eating
-3390 4 is thinking
-3393 24 is sleeping
+2802 21 is sleeping
+2802 20 has taken a fork
+2802 20 has taken a fork
+2802 20 is eating
+2802 22 is thinking
+2803 24 is thinking
+2803 26 is thinking
+2803 23 is sleeping
+2803 22 has taken a fork
+2803 22 has taken a fork
+2803 28 is thinking
+2803 22 is eating
+2803 1 is thinking
+2803 27 is sleeping
+2803 3 is thinking
+2803 29 is sleeping
+2804 25 is sleeping
+2804 28 has taken a fork
+2804 28 has taken a fork
+2804 28 is eating
+2804 30 is thinking
+2804 4 is sleeping
+2804 5 is thinking
+2804 2 is sleeping
+2804 31 is sleeping
+2804 30 has taken a fork
+2804 30 has taken a fork
+2804 30 is eating
+2804 24 has taken a fork
+2804 24 has taken a fork
+2804 24 is eating
+2804 1 has taken a fork
+2804 1 has taken a fork
+2804 1 is eating
+2804 3 has taken a fork
+2804 3 has taken a fork
+2804 3 is eating
+2805 26 has taken a fork
+2805 26 has taken a fork
+2805 26 is eating
+2805 8 is sleeping
+2805 11 is thinking
+2805 7 is thinking
+2805 10 is sleeping
+2805 6 is sleeping
+2805 9 is thinking
+2805 5 has taken a fork
+2805 5 has taken a fork
+2805 5 is eating
+2805 13 is thinking
+2805 14 is sleeping
+2805 15 is thinking
+2805 12 is sleeping
+2805 13 has taken a fork
+2805 13 has taken a fork
+2805 13 is eating
+2805 7 has taken a fork
+2805 7 has taken a fork
+2805 7 is eating
+2805 9 has taken a fork
+2805 9 has taken a fork
+2805 9 is eating
+2805 11 has taken a fork
+2805 11 has taken a fork
+2805 11 is eating
+3001 17 is thinking
+3001 16 is sleeping
+3001 15 has taken a fork
+3001 15 has taken a fork
+3001 15 is eating
+3001 19 is thinking
+3001 18 is sleeping
+3001 17 has taken a fork
+3001 17 has taken a fork
+3001 17 is eating
+3002 20 is sleeping
+3002 19 has taken a fork
+3002 19 has taken a fork
+3002 19 is eating
+3002 21 is thinking
+3003 22 is sleeping
+3003 21 has taken a fork
+3003 21 has taken a fork
+3003 21 is eating
+3003 23 is thinking
+3004 25 is thinking
+3004 27 is thinking
+3004 29 is thinking
+3004 28 is sleeping
+3004 4 is thinking
+3005 24 is sleeping
+3005 23 has taken a fork
+3005 23 has taken a fork
+3005 23 is eating
+3005 1 is sleeping
+3005 3 is sleeping
+3005 2 is thinking
+3005 26 is sleeping
+3005 25 has taken a fork
+3005 25 has taken a fork
+3005 25 is eating
+3005 27 has taken a fork
+3005 27 has taken a fork
+3005 27 is eating
+3005 31 is thinking
+3005 30 is sleeping
+3005 29 has taken a fork
+3005 29 has taken a fork
+3005 29 is eating
+3005 10 is thinking
+3005 5 is sleeping
+3005 6 is thinking
+3005 8 is thinking
+3005 4 has taken a fork
+3005 4 has taken a fork
+3005 4 is eating
+3005 2 has taken a fork
+3005 2 has taken a fork
+3005 2 is eating
+3005 31 has taken a fork
+3005 31 has taken a fork
+3005 31 is eating
+3006 12 is thinking
+3006 11 is sleeping
+3006 7 is sleeping
+3006 13 is sleeping
+3006 9 is sleeping
+3006 10 has taken a fork
+3006 10 has taken a fork
+3006 10 is eating
+3006 6 has taken a fork
+3006 6 has taken a fork
+3006 6 is eating
+3006 8 has taken a fork
+3006 8 has taken a fork
+3006 8 is eating
+3006 12 has taken a fork
+3006 12 has taken a fork
+3006 12 is eating
+3006 14 is thinking
+3201 16 is thinking
+3201 15 is sleeping
+3201 14 has taken a fork
+3201 14 has taken a fork
+3201 14 is eating
+3202 17 is sleeping
+3202 16 has taken a fork
+3202 16 has taken a fork
+3202 16 is eating
+3202 18 is thinking
+3203 19 is sleeping
+3203 18 has taken a fork
+3203 18 has taken a fork
+3203 18 is eating
+3203 20 is thinking
+3203 21 is sleeping
+3203 20 has taken a fork
+3203 20 has taken a fork
+3203 20 is eating
+3203 22 is thinking
+3204 28 is thinking
+3205 27 is sleeping
+3205 3 is thinking
+3205 23 is sleeping
+3205 24 is thinking
+3205 22 has taken a fork
+3205 30 is thinking
+3205 1 is thinking
+3205 22 has taken a fork
+3205 22 is eating
+3205 29 is sleeping
+3205 26 is thinking
+3205 25 is sleeping
+3205 28 has taken a fork
+3205 28 has taken a fork
+3205 28 is eating
+3205 31 is sleeping
+3205 4 is sleeping
+3205 2 is sleeping
+3205 5 is thinking
+3205 3 has taken a fork
+3205 3 has taken a fork
+3205 3 is eating
+3205 24 has taken a fork
+3205 24 has taken a fork
+3205 24 is eating
+3205 30 has taken a fork
+3205 30 has taken a fork
+3205 30 is eating
+3205 1 has taken a fork
+3205 1 has taken a fork
+3205 1 is eating
+3205 26 has taken a fork
+3205 26 has taken a fork
+3205 26 is eating
+3206 7 is thinking
+3206 13 is thinking
+3206 9 is thinking
+3206 6 is sleeping
+3206 5 has taken a fork
+3206 5 has taken a fork
+3206 5 is eating
+3206 8 is sleeping
+3206 7 has taken a fork
+3206 7 has taken a fork
+3206 7 is eating
+3206 10 is sleeping
+3206 12 is sleeping
+3206 11 is thinking
+3400 14 is sleeping
+3400 13 has taken a fork
+3400 13 has taken a fork
+3400 13 is eating
+3400 9 has taken a fork
+3400 9 has taken a fork
+3400 9 is eating
+3400 11 has taken a fork
+3400 11 has taken a fork
+3400 11 is eating
+3400 15 is thinking
+3401 17 is thinking
+3401 16 is sleeping
+3401 15 has taken a fork
+3401 15 has taken a fork
+3401 15 is eating
+3402 19 is thinking
+3402 18 is sleeping
+3402 17 has taken a fork
+3402 17 has taken a fork
+3402 17 is eating
+3403 20 is sleeping
+3403 21 is thinking
+3403 19 has taken a fork
+3403 19 has taken a fork
+3403 19 is eating
+3404 27 is thinking
+3404 29 is thinking
+3404 22 is sleeping
+3404 23 is thinking
 3404 21 has taken a fork
 3404 21 has taken a fork
+3404 28 is sleeping
 3404 21 is eating
-3404 21 is thinking
-3404 9 is sleeping
-3407 13 has taken a fork
-3407 13 has taken a fork
-3407 13 is eating
-3407 13 is thinking
-3407 18 has taken a fork
-3407 18 has taken a fork
-3407 18 is eating
-3407 18 is thinking
-3443 30 is sleeping
-3445 17 is sleeping
-3447 2 is sleeping
-3463 31 has taken a fork
-3463 31 has taken a fork
-3463 31 is eating
-3463 31 is thinking
-3473 15 is sleeping
-3477 19 is sleeping
-3478 7 is sleeping
-3485 11 has taken a fork
-3485 11 has taken a fork
-3485 11 is eating
-3485 11 is thinking
-3488 8 has taken a fork
-3488 8 has taken a fork
-3488 8 is eating
-3488 8 is thinking
-3506 20 has taken a fork
-3506 20 has taken a fork
-3506 20 is eating
-3506 20 is thinking
-3512 10 has taken a fork
-3512 10 has taken a fork
-3512 10 is eating
-3512 10 is thinking
-3523 17 has taken a fork
-3523 17 has taken a fork
-3523 17 is eating
-3523 17 is thinking
-3524 1 has taken a fork
-3524 1 has taken a fork
-3524 1 is eating
-3524 1 is thinking
-3524 16 has taken a fork
-3524 16 has taken a fork
-3524 16 is eating
-3524 16 is thinking
-3526 6 has taken a fork
-3526 6 has taken a fork
-3526 6 is eating
-3526 6 is thinking
-3538 28 is sleeping
-3539 3 has taken a fork
-3539 3 has taken a fork
-3539 3 is eating
-3539 3 is thinking
-3547 13 is sleeping
-3550 14 is sleeping
-3550 22 is sleeping
-3557 23 is sleeping
-3577 29 is sleeping
-3582 12 has taken a fork
-3582 12 has taken a fork
-3582 12 is eating
-3582 12 is thinking
-3584 30 has taken a fork
-3584 30 has taken a fork
-3584 30 is eating
-3584 30 is thinking
-3585 18 is sleeping
-3594 5 is sleeping
-3600 27 is sleeping
-3601 26 has taken a fork
-3601 26 has taken a fork
-3601 26 is eating
-3601 26 is thinking
-3611 9 has taken a fork
-3611 9 has taken a fork
-3611 9 is eating
-3611 9 is thinking
-3622 24 has taken a fork
-3622 24 has taken a fork
-3622 24 is eating
-3622 24 is thinking
-3639 4 is sleeping
-3642 19 has taken a fork
-3642 19 has taken a fork
-3642 19 is eating
-3642 19 is thinking
-3651 16 is sleeping
-3653 25 is sleeping
-3673 11 is sleeping
-3676 21 is sleeping
-3679 20 is sleeping
-3693 29 has taken a fork
-3693 29 has taken a fork
-3693 29 is eating
-3693 29 is thinking
-3699 17 is sleeping
-3700 13 has taken a fork
-3700 13 has taken a fork
-3700 13 is eating
-3700 13 is thinking
-3703 15 has taken a fork
-3703 15 has taken a fork
-3703 15 is eating
-3703 15 is thinking
-3726 2 has taken a fork
-3726 2 has taken a fork
-3726 2 is eating
-3726 2 is thinking
-3728 8 is sleeping
-3739 6 is sleeping
-3739 14 has taken a fork
-3739 14 has taken a fork
-3739 14 is eating
-3739 14 is thinking
-3740 28 has taken a fork
-3740 28 has taken a fork
-3740 28 is eating
-3740 28 is thinking
-3751 22 has taken a fork
-3751 22 has taken a fork
-3751 22 is eating
-3751 22 is thinking
-3752 30 is sleeping
-3752 7 has taken a fork
-3752 7 has taken a fork
-3752 7 is eating
-3752 7 is thinking
-3757 31 is sleeping
-3758 19 is sleeping
-3762 1 is sleeping
-3771 3 is sleeping
-3772 27 has taken a fork
-3772 27 has taken a fork
-3772 27 is eating
-3772 27 is thinking
-3794 10 is sleeping
-3795 5 has taken a fork
-3795 5 has taken a fork
-3795 5 is eating
-3795 5 is thinking
-3802 23 has taken a fork
-3802 23 has taken a fork
-3802 23 is eating
-3802 23 is thinking
-3803 18 has taken a fork
-3803 18 has taken a fork
-3803 18 is eating
-3803 18 is thinking
-3807 26 is sleeping
-3809 17 has taken a fork
-3809 17 has taken a fork
-3809 17 is eating
-3809 17 is thinking
-3817 24 is sleeping
-3822 16 has taken a fork
-3822 16 has taken a fork
-3822 16 is eating
-3822 16 is thinking
-3832 15 is sleeping
-3835 25 has taken a fork
-3835 25 has taken a fork
-3835 25 is eating
-3835 25 is thinking
-3844 12 is sleeping
-3847 9 is sleeping
-3869 11 has taken a fork
-3869 11 has taken a fork
-3869 11 is eating
-3869 11 is thinking
-3874 27 is sleeping
-3876 21 has taken a fork
-3876 21 has taken a fork
-3876 21 is eating
-3876 21 is thinking
-3880 20 has taken a fork
-3880 20 has taken a fork
-3880 20 is eating
-3880 20 is thinking
-3880 4 has taken a fork
-3880 4 has taken a fork
-3880 4 is eating
-3880 4 is thinking
-3888 8 has taken a fork
-3888 8 has taken a fork
-3888 8 is eating
-3888 8 is thinking
-3893 28 is sleeping
-3899 30 has taken a fork
-3899 30 has taken a fork
-3899 30 is eating
-3899 30 is thinking
-3899 29 is sleeping
-3903 22 is sleeping
-3909 5 is sleeping
-3916 26 has taken a fork
-3916 26 has taken a fork
-3916 26 is eating
-3916 26 is thinking
-3923 14 is sleeping
-3924 6 has taken a fork
-3924 6 has taken a fork
-3924 6 is eating
-3924 6 is thinking
-3956 19 has taken a fork
-3956 19 has taken a fork
-3956 19 is eating
-3956 19 is thinking
-3963 13 is sleeping
-3972 3 has taken a fork
-3972 3 has taken a fork
-3972 3 is eating
-3972 3 is thinking
-3973 24 has taken a fork
-3973 24 has taken a fork
-3973 24 is eating
-3973 24 is thinking
-3984 2 is sleeping
-3992 16 is sleeping
-3996 28 has taken a fork
-3996 28 has taken a fork
-3996 28 is eating
-3997 28 is thinking
-4000 31 has taken a fork
-4000 31 has taken a fork
-4000 31 is eating
-4000 31 is thinking
-4002 18 is sleeping
-4002 7 is sleeping
-4009 9 has taken a fork
-4009 9 has taken a fork
-4009 9 is eating
-4009 9 is thinking
-4035 10 has taken a fork
-4035 10 has taken a fork
-4035 10 is eating
-4035 10 is thinking
-4036 11 is sleeping
-4037 15 has taken a fork
-4037 15 has taken a fork
-4037 15 is eating
-4037 15 is thinking
-4037 17 is sleeping
-4074 23 is sleeping
-4081 6 is sleeping
-4090 21 is sleeping
-4090 26 is sleeping
-4092 25 is sleeping
-4095 22 has taken a fork
-4095 22 has taken a fork
-4095 22 is eating
-4095 22 is thinking
-4100 12 has taken a fork
-4100 12 has taken a fork
-4100 12 is eating
-4100 12 is thinking
-4134 27 has taken a fork
-4134 27 has taken a fork
-4134 27 is eating
-4134 27 is thinking
-4134 30 is sleeping
-4135 31 is sleeping
-4142 17 has taken a fork
-4142 17 has taken a fork
-4142 17 is eating
-4142 17 is thinking
-4155 15 is sleeping
-4156 14 has taken a fork
-4156 14 has taken a fork
-4156 14 is eating
-4156 14 is thinking
-4160 29 has taken a fork
-4160 29 has taken a fork
-4160 29 is eating
-4160 29 is thinking
-4164 8 is sleeping
-4175 4 is sleeping
-4177 19 is sleeping
-4180 20 is sleeping
-4207 12 is sleeping
-4212 28 is sleeping
-4232 23 has taken a fork
-4232 23 has taken a fork
-4232 23 is eating
-4232 23 is thinking
-4241 9 is sleeping
-4244 13 has taken a fork
-4244 13 has taken a fork
-4244 13 is eating
-4244 13 is thinking
-4245 26 has taken a fork
-4245 26 has taken a fork
-4245 26 is eating
-4245 26 is thinking
-4251 24 is sleeping
-4262 18 has taken a fork
-4262 18 has taken a fork
-4262 18 is eating
-4262 18 is thinking
-4265 3 is sleeping
-4266 1 died
+3404 25 is thinking
+3404 4 is thinking
+3404 31 is thinking
+3404 3 is sleeping
+3404 26 is sleeping
+3404 2 is thinking
+3404 27 has taken a fork
+3404 27 has taken a fork
+3404 27 is eating
+3404 1 is sleeping
+3404 30 is sleeping
+3404 29 has taken a fork
+3404 29 has taken a fork
+3404 29 is eating
+3404 23 has taken a fork
+3404 23 has taken a fork
+3404 23 is eating
+3404 24 is sleeping
+3404 25 has taken a fork
+3404 25 has taken a fork
+3404 25 is eating
+3405 7 is sleeping
+3405 12 is thinking
+3405 8 is thinking
+3405 5 is sleeping
+3405 4 has taken a fork
+3405 4 has taken a fork
+3405 6 is thinking
+3405 6 has taken a fork
+3405 6 has taken a fork
+3405 10 is thinking
+3405 6 is eating
+3405 31 has taken a fork
+3405 31 has taken a fork
+3405 4 is eating
+3405 31 is eating
+3405 2 has taken a fork
+3405 2 has taken a fork
+3405 2 is eating
+3600 9 is sleeping
+3600 14 is thinking
+3600 11 is sleeping
+3600 13 is sleeping
+3600 12 has taken a fork
+3600 12 has taken a fork
+3600 12 is eating
+3600 8 has taken a fork
+3600 8 has taken a fork
+3600 8 is eating
+3600 10 has taken a fork
+3600 10 has taken a fork
+3600 10 is eating
+3601 16 is thinking
+3601 15 is sleeping
+3601 14 has taken a fork
+3601 14 has taken a fork
+3601 14 is eating
+3602 18 is thinking
+3602 17 is sleeping
+3602 16 has taken a fork
+3602 16 has taken a fork
+3602 16 is eating
+3603 19 is sleeping
+3603 18 has taken a fork
+3603 18 has taken a fork
+3603 18 is eating
+3603 20 is thinking
+3604 22 is thinking
+3604 21 is sleeping
+3604 20 has taken a fork
+3604 20 has taken a fork
+3604 20 is eating
+3604 28 is thinking
+3604 3 is thinking
+3604 27 is sleeping
+3604 26 is thinking
+3604 25 is sleeping
+3605 1 is thinking
+3605 7 is thinking
+3605 23 is sleeping
+3605 5 is thinking
+3605 24 is thinking
+3605 22 has taken a fork
+3605 30 is thinking
+3605 22 has taken a fork
+3605 22 is eating
+3605 2 is sleeping
+3605 29 is sleeping
+3605 31 is sleeping
+3605 28 has taken a fork
+3605 28 has taken a fork
+3605 28 is eating
+3605 4 is sleeping
+3605 3 has taken a fork
+3605 3 has taken a fork
+3605 3 is eating
+3605 6 is sleeping
+3605 26 has taken a fork
+3605 26 has taken a fork
+3605 26 is eating
+3605 1 has taken a fork
+3605 1 has taken a fork
+3605 1 is eating
+3800 9 is thinking
+3800 11 is thinking
+3801 10 is sleeping
+3801 13 is thinking
+3801 12 is sleeping
+3801 8 is sleeping
+3801 7 has taken a fork
+3801 7 has taken a fork
+3801 7 is eating
+3801 5 has taken a fork
+3801 5 has taken a fork
+3801 5 is eating
+3801 24 has taken a fork
+3801 24 has taken a fork
+3801 24 is eating
+3801 30 has taken a fork
+3801 30 has taken a fork
+3801 30 is eating
+3801 9 has taken a fork
+3801 9 has taken a fork
+3801 9 is eating
+3801 11 has taken a fork
+3801 11 has taken a fork
+3801 11 is eating
+3801 15 is thinking
+3801 14 is sleeping
+3801 13 has taken a fork
+3801 13 has taken a fork
+3801 13 is eating
+3802 17 is thinking
+3802 16 is sleeping
+3802 15 has taken a fork
+3802 15 has taken a fork
+3802 15 is eating
+3803 18 is sleeping
+3803 19 is thinking
+3803 17 has taken a fork
+3803 17 has taken a fork
+3803 17 is eating
+3804 20 is sleeping
+3804 19 has taken a fork
+3804 19 has taken a fork
+3804 19 is eating
+3804 21 is thinking
+3804 27 is thinking
+3804 25 is thinking
+3805 23 is thinking
+3805 2 is thinking
+3805 4 is thinking
+3805 29 is thinking
+3805 28 is sleeping
+3805 6 is thinking
+3805 22 is sleeping
+3805 3 is sleeping
+3805 21 has taken a fork
+3805 21 has taken a fork
+3805 21 is eating
+3805 31 is thinking
+3805 26 is sleeping
+3805 27 has taken a fork
+3805 27 has taken a fork
+3805 27 is eating
+3806 1 is sleeping
+4001 10 is thinking
+4001 12 is thinking
+4001 8 is thinking
+4001 24 is sleeping
+4001 25 has taken a fork
+4001 25 has taken a fork
+4001 25 is eating
+4001 23 has taken a fork
+4001 23 has taken a fork
+4001 23 is eating
+4001 2 has taken a fork
+4001 2 has taken a fork
+4001 2 is eating
+4001 5 is sleeping
+4001 4 has taken a fork
+4001 4 has taken a fork
+4001 4 is eating
+4001 30 is sleeping
+4001 11 is sleeping
+4001 29 has taken a fork
+4001 29 has taken a fork
+4001 9 is sleeping
+4001 29 is eating
+4001 7 is sleeping
+4001 6 has taken a fork
+4001 6 has taken a fork
+4001 6 is eating
+4001 31 has taken a fork
+4001 31 has taken a fork
+4001 31 is eating
+4001 10 has taken a fork
+4001 10 has taken a fork
+4001 10 is eating
+4002 13 is sleeping
+4002 12 has taken a fork
+4002 12 has taken a fork
+4002 12 is eating
+4002 14 is thinking
+4002 8 has taken a fork
+4002 8 has taken a fork
+4002 8 is eating
+4002 16 is thinking
+4003 15 is sleeping
+4003 14 has taken a fork
+4003 14 has taken a fork
+4003 14 is eating
+4003 17 is sleeping
+4003 16 has taken a fork
+4003 16 has taken a fork
+4003 16 is eating
+4003 18 is thinking
+4004 19 is sleeping
+4004 20 is thinking
+4004 18 has taken a fork
+4004 18 has taken a fork
+4004 18 is eating
+4006 21 is sleeping
+4006 22 is thinking
+4006 3 is thinking
+4006 20 has taken a fork
+4006 20 has taken a fork
+4006 20 is eating
+4006 27 is sleeping
+4006 26 is thinking
+4006 28 is thinking
+4006 1 is thinking
+4201 9 is thinking
+4201 5 is thinking
+4201 11 is thinking
+4201 2 is sleeping
+4201 22 has taken a fork
+4201 22 has taken a fork
+4201 29 is sleeping
+4201 22 is eating
+4201 6 is sleeping
+4201 23 is sleeping
+4201 26 has taken a fork
+4201 26 has taken a fork
+4201 26 is eating
+4201 4 is sleeping
+4201 24 is thinking
+4201 28 has taken a fork
+4201 28 has taken a fork
+4201 28 is eating
+4201 30 is thinking
+4201 24 has taken a fork
+4201 24 has taken a fork
+4201 10 is sleeping
+4201 31 is sleeping
+4201 24 is eating
+4201 25 is sleeping
+4201 30 has taken a fork
+4201 30 has taken a fork
+4201 30 is eating
+4202 7 is thinking
+4202 13 is thinking
+4202 12 is sleeping
+4202 8 is sleeping
+4203 14 is sleeping
+4203 15 is thinking
+4203 16 is sleeping
+4203 17 is thinking
+4205 19 is thinking
+4205 18 is sleeping
+4206 27 is thinking
+4206 20 is sleeping
+4206 21 is thinking
+4206 1 died
