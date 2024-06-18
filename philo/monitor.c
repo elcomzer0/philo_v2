@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:43 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/17 23:30:29 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:29:58 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ int dining_checker(t_philosopher *philo)
     pthread_mutex_lock(&philo->data->meals_eaten_mutex);
     int result = (philo->data->times_must_eat != -1 && philo->meals_eaten >= philo->data->times_must_eat);
     pthread_mutex_unlock(&philo->data->meals_eaten_mutex);
+    //printf("philos: %d\n", philo->id);
+    printf("result: %d\n", result);
+    
     return result;
 }
 
@@ -44,8 +47,12 @@ int dined_enough(t_philosopher *philo)
 
     i = 0;
     count = 0;
-    while (1 < philo->data->number_of_philosophers && dining_checker(philo) == 1)
+    while (/*i < philo->data->number_of_philosophers && */dining_checker(philo) == 0)
     {
+        if (dining_checker(philo) == 1)
+        {
+            return (1);
+        }
         count++;
         if (count == philo->data->number_of_philosophers)
         {
@@ -111,7 +118,7 @@ void process_philo_life_cycle(t_data *data)
                         print_status(philo, "died");
                         pthread_mutex_unlock(&data->last_meal_timestamps_mutex);
                         unlocked_inside_loop = 1;
-                        break;
+                        break ;
                     }
                     pthread_mutex_unlock(&data->death);
             }
@@ -143,7 +150,7 @@ bool stop_simulation(t_data *data)
     if (!stop)
     {
         pthread_mutex_lock(&data->dined);
-        if (data->dined_enough)
+        if (data->dined_enough)// && dined_enough(data->philosophers) == 0)
         {
             stop = true;
         }
@@ -164,8 +171,8 @@ void   *monitor_death(void *arg)
     }
     return NULL;
 }
-
-void check_eaten_status(t_data *data) //, int *total_dining)
+//TODO tatsächlich die funktion aufrufen die überprüft ob alle gegessen haben
+/* void check_eaten_status(t_data *data) //, int *total_dining)
 {
     pthread_mutex_lock(&data->dined);
     if (data->times_must_eat > 0 && data->philosophers->meals_eaten >= data->number_of_philosophers)
@@ -177,15 +184,40 @@ void check_eaten_status(t_data *data) //, int *total_dining)
     {
         pthread_mutex_unlock(&data->dined);
     }
+} */
+
+int check_eaten_status(t_data *data) //, int *total_dining)
+{
+    pthread_mutex_lock(&data->dined);
+    int i = 0;
+    while (1){
+            t_philosopher *philo = &data->philosophers[i];
+            //if (data->times_must_eat > 0 && philo->meals_eaten >= data->times_must_eat)
+            if (dined_enough(philo) == 1)
+            {
+                data->dined_enough = 1;
+                return (1);
+                pthread_mutex_unlock(&data->dined);
+            }
+            else
+            {
+                pthread_mutex_unlock(&data->dined);
+            }
+            i++;
+        }
+    }
+    return (0);
 }
 
 void *monitor_eat(void *arg)
 {
     t_data *data = (t_data *)arg;
-    while(!stop_simulation(data))
+    while(!stop_simulation(data)) //&& dined_enough(data->philosophers) == 0)
     {
-        check_eaten_status(data);
-        usleep(1000); // Short delay to reduce CPU usage
+        //dined_enough(data->philosophers);
+        if (check_eaten_status(data) == 1)
+            return (NULL);
+        //usleep(1000); // Short delay to reduce CPU usage
     }
     return (NULL);
 }

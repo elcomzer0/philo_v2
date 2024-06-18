@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:21:10 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/18 10:40:55 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/18 12:29:13 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void update_last_meal_time(t_philosopher *philo)
 */
 void release_forks(t_philosopher *philo)
 {
-    pthread_mutex_unlock(philo->left_fork);
     pthread_mutex_unlock(philo->right_fork);
+    pthread_mutex_unlock(philo->left_fork);
 }
 
 void acquire_forks(t_philosopher *philo)
@@ -66,8 +66,8 @@ void acquire_forks(t_philosopher *philo)
 void action_eat(t_philosopher *philo)
 {
     acquire_forks(philo);
-    update_last_meal_time(philo);
     print_status(philo, "is eating");
+    update_last_meal_time(philo);
     ft_usleep(philo->data->time_to_eat, philo);
     release_forks(philo);
 }
