@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:36 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/17 19:38:15 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/18 20:54:43 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,40 +26,16 @@
 
 #define SIZE_MAX ((size_t)-1)
 #define MAX_PHILOSOPHERS 201
-#define THRESHOLD 400
-#define STARVATION_THRESHOLD 3
 
-
-//perhaps enumeration for a state maching in case of monitoring
-/* typedef enum state_monitor {
-    
-    
-    
-} state_monitor; */
-
-
-/**
- * Represents a philosopher in the dining philosophers problem.
- *
- * Each philosopher has an ID, the time of their last meal, the number of meals they have eaten,
- * a thread to represent their actions, a left and right fork, pointers to the next and previous
- * philosophers, and a reference to the overall dining data.
- */
 typedef struct s_philosopher
 {
     int id;
     long last_meal_time;
     int meals_eaten;
     long time_to_die;
-    int *l_fork;
-    int *r_fork;
-    int starvation_counter;
-    int prioritize_eating;
     pthread_t thread;
     pthread_mutex_t *left_fork;
     pthread_mutex_t *right_fork;
-    /* struct s_philosopher *next;
-    struct s_philosopher *prev; */
     struct s_data *data;
 } t_philosopher;
 
@@ -73,10 +49,6 @@ typedef struct s_data
     int times_must_eat;
     int death_note;
     int dined_enough;
-    int *forks;
-    int completed_threads_count;
-    int exiting; // Flag to indicate that the simulation is exiting
-    int turn;
     long long last_meal_timestamps[201];
     pthread_t monitor_eat;
     pthread_t monitor_death;
@@ -85,10 +57,7 @@ typedef struct s_data
     pthread_mutex_t death;
     pthread_mutex_t dined;
     pthread_mutex_t meals_eaten_mutex;
-    pthread_mutex_t completed_threads_mutex;
     pthread_mutex_t last_meal_timestamps_mutex;
-    pthread_mutex_t fork_status_mutex;
-    pthread_mutex_t prioritized_mutex;
     pthread_mutex_t dining_mutex;
     t_philosopher *philosophers; 
 } t_data;
@@ -109,7 +78,7 @@ void *ft_calloc(size_t num_elements, size_t element_size);
 long get_current_time();
 void print_status(t_philosopher *philo, const char *status);
 void clean_exit(t_data *data);
-bool is_death_note(t_philosopher *philo);
+//bool is_death_note(t_philosopher *philo);
 
 /*monitor*/
 void *monitor_eat(void *arg);

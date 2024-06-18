@@ -6,20 +6,17 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/18 00:01:45 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/18 20:58:11 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
-
 #include "philo.h"
 
-
-//keep all functions here
 void *sokrates_case(void *arg)
 {
-    t_data *data = (t_data *)arg;
+    t_data *data;
+     
+    data = (t_data *)arg;
     usleep((int)data->time_to_die);
     printf("%ld 1 died\n", data->time_to_die);    
     return (NULL);
@@ -30,9 +27,8 @@ void create_single_philosopher_thread(t_data *data)
     
     if (pthread_create(&thread, NULL, &sokrates_case, data) != 0)
     {
-        perror("Error creating philosopher thread");
-       //exit(EXIT_FAILURE);
-       return;
+        write(STDERR_FILENO, "Error creating philosopher thread\n", 35);
+        return ;
     }
     pthread_join(thread, NULL);
 }
