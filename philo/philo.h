@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:36 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/19 00:09:24 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 00:14:55 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include <time.h>
 # include <unistd.h>
 
-# define SIZE_MAX ((size_t)-1)
 # define MAX_PHILOSOPHERS 201
 
 typedef struct s_philosopher

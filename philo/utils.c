@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:05 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/18 23:55:54 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 00:15:02 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	*ft_calloc(size_t num_elements, size_t element_size)
 	size_t	total_size;
 	void	*ptr;
 
-	if (num_elements && SIZE_MAX / num_elements < element_size)
-		return (NULL);
 	total_size = num_elements * element_size;
 	ptr = malloc(total_size);
 	if (!ptr)
