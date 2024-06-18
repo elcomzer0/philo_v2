@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/18 12:49:08 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/18 17:35:56 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static t_philosopher *allocate_philosophers(int number_of_philosophers)
     t_philosopher *philosophers = (t_philosopher *)ft_calloc(number_of_philosophers, sizeof(t_philosopher));
     if (!philosophers)
     {
-        perror("Error allocating philosophers");
+        //perror("Error allocating philosophers");
+        write(2, "Error allocating philosophers\n", 35);
         return NULL;
     }
     return philosophers;
@@ -75,8 +76,8 @@ static int initialize_mutex(pthread_mutex_t *mutex, t_data *data)
 
     if (pthread_mutex_init(mutex, NULL) != 0)
     {
-        perror("Error initializing mutex");
-
+       // perror("Error initializing mutex");
+        write(2, "Error: mutex_init\n", 18);
         j = 0;
         while (j < data->number_of_philosophers)
         {
@@ -246,14 +247,16 @@ int create_monitor_threads(t_data *data)
     // Create the monitor thread for eating
     if (pthread_create(&(data->monitor_eat), NULL, monitor_eat, data) != 0)
     {
-        perror("Error creating monitor thread");
+        //perror("Error creating monitor thread");
+        write(2, "Error creating monitor thread\n", 30);
         return -1;  // Return an error code
     }
 
     // Create the monitor thread for death
     if (pthread_create(&(data->monitor_death), NULL, monitor_death, data) != 0)
     {
-        perror("Error creating monitor thread");
+        //perror("Error creating monitor thread");
+        write(2, "Error creating monitor thread\n", 30);
         return -1;  // Return an error code
     }
 
@@ -296,7 +299,8 @@ int create_threads(t_data *data)
     {
         if (pthread_create(&(data->philosophers[i].thread), NULL, philosopher_routine, &(data->philosophers[i])) != 0)
         {
-            perror("Error creating philosopher thread");
+            //perror("Error creating philosopher thread");
+            write(2, "Error creating philosopher thread\n", 31);
             j = 0;
             while (j <= i)
             {
