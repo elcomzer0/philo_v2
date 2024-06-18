@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:43 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/18 14:29:58 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:37:18 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,16 @@ int dining_checker(t_philosopher *philo)
 {
     pthread_mutex_lock(&philo->data->meals_eaten_mutex);
     int result = (philo->data->times_must_eat != -1 && philo->meals_eaten >= philo->data->times_must_eat);
+    if (result == philo->data->times_must_eat){
+        pthread_mutex_unlock(&philo->data->meals_eaten_mutex);
+        return 1;
+    }
+    else 
+        return 0;
     pthread_mutex_unlock(&philo->data->meals_eaten_mutex);
     //printf("philos: %d\n", philo->id);
     printf("result: %d\n", result);
-    
-    return result;
+    //return result;
 }
 
 
@@ -42,27 +47,27 @@ int dining_checker(t_philosopher *philo)
  */
 int dined_enough(t_philosopher *philo)
 {
-    int i;
-    int count;
+    // int i;
+    // int count;
 
-    i = 0;
-    count = 0;
-    while (/*i < philo->data->number_of_philosophers && */dining_checker(philo) == 0)
-    {
-        if (dining_checker(philo) == 1)
-        {
-            return (1);
-        }
-        count++;
-        if (count == philo->data->number_of_philosophers)
-        {
-            pthread_mutex_lock(&philo->data->dined);
-            philo->data->dined_enough = 1;
-            pthread_mutex_unlock(&philo->data->dined);
-            return (1);
-        }
-        i++;
-    }
+    // i = 0;
+    // count = 0;
+    // while (/*i < philo->data->number_of_philosophers && */dining_checker(philo) == 0)
+    // {
+    //     if (dining_checker(philo) == 1)
+    //     {
+    //         return (1);
+    //     }
+    //     count++;
+    //     if (count == philo->data->number_of_philosophers)
+    //     {
+    //         pthread_mutex_lock(&philo->data->dined);
+    //         philo->data->dined_enough = 1;
+    //         pthread_mutex_unlock(&philo->data->dined);
+    //         return (1);
+    //     }
+    //     i++;
+    // }
     return (0);
 }
 
@@ -188,22 +193,29 @@ void   *monitor_death(void *arg)
 
 int check_eaten_status(t_data *data) //, int *total_dining)
 {
-    pthread_mutex_lock(&data->dined);
+    int count = 0;
     int i = 0;
-    while (1){
-            t_philosopher *philo = &data->philosophers[i];
-            //if (data->times_must_eat > 0 && philo->meals_eaten >= data->times_must_eat)
-            if (dined_enough(philo) == 1)
-            {
-                data->dined_enough = 1;
-                return (1);
-                pthread_mutex_unlock(&data->dined);
-            }
-            else
-            {
-                pthread_mutex_unlock(&data->dined);
-            }
-            i++;
+    while (1)
+    {
+        t_philosopher *philo = &data->philosophers[i];
+        //if (data->times_must_eat > 0 && philo->meals_eaten >= data->times_must_eat)
+        //pthread_mutex_lock(&data->dined);
+        if (dining_checker(philo) == 1)
+        {
+            count++;
+            //return (1);
+            //pthread_mutex_unlock(&data->dined);
+        }
+        if (count == data->number_of_philosophers)
+            return 
+        // else
+        // {
+        //     pthread_mutex_unlock(&data->dined);
+        // }
+        i++;
+        if (i == data->number_of_philosophers){
+            count = 0;
+            i = 0;
         }
     }
     return (0);
