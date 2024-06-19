@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:43 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/19 19:07:05 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 23:11:28 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,17 @@ int	dining_checker(t_philosopher *philo)
 	}
 }
 
-int	dining_timespan(t_philosopher *philo)
+/* int	dining_timespan(t_philosopher *philo)
 {
 	long	current_time;
 
 	current_time = get_current_time();
+	if (current_time == -1)
+		return (1);
 	return ((current_time - philo->last_meal_time) >= philo->data->time_to_die);
-}
+} */
 
-void	process_philo_life_cycle(t_data *data)
+int	process_philo_life_cycle(t_data *data)
 {
 	int				i;
 	long long		current_time;
@@ -48,6 +50,8 @@ void	process_philo_life_cycle(t_data *data)
 
 	pthread_mutex_lock(&data->last_meal_timestamps_mutex);
 	current_time = get_current_time();
+	if (current_time == -1)
+		return (1);
 	i = 0;
 	while (i < data->number_of_philosophers)
 	{
@@ -64,6 +68,7 @@ void	process_philo_life_cycle(t_data *data)
 		i++;
 	}
 	pthread_mutex_unlock(&data->last_meal_timestamps_mutex);
+	return (0);
 }
 
 void	*monitor_death(void *arg)

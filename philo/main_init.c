@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 21:30:52 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/19 18:16:22 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 23:09:07 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,13 @@ int	initialize_mutexes(t_philosopher *philosophers, t_data *data)
 	return (0);
 }
 
-void	initialize_philosopher(t_philosopher *philosopher, int id,
+int	initialize_philosopher_data(t_philosopher *philosopher, int id,
 		long start_time, t_data *data)
 {
 	philosopher->id = id;
 	philosopher->last_meal_time = get_current_time();
+	if (philosopher->last_meal_time == -1)
+		return (1);
 	philosopher->meals_eaten = 0;
 	philosopher->time_to_die = data->time_to_die;
 	philosopher->data = data;
@@ -78,23 +80,27 @@ void	initialize_philosopher(t_philosopher *philosopher, int id,
 	pthread_mutex_lock(&data->last_meal_timestamps_mutex);
 	data->last_meal_timestamps[id - 1] = start_time;
 	pthread_mutex_unlock(&data->last_meal_timestamps_mutex);
+	return (0);
 }
 
-void	initialize_multiple_philosophers(t_philosopher *philosophers,
+int	initialize_multiple_philosophers(t_philosopher *philosophers,
 		t_data *data)
 {
 	int		i;
 	long	start_time;
 
 	start_time = get_current_time();
+	if (start_time == -1)
+		return (1);
 	i = 0;
 	while (i < data->number_of_philosophers)
 	{
 		data->start_time = start_time;
-		initialize_philosopher(&philosophers[i], i + 1, start_time, data);
+		initialize_philosopher_data(&philosophers[i], i + 1, start_time, data);
 		assign_forks(&philosophers[i], data);
 		i++;
 	}
+	return (0);
 }
 
 int	initialize_philosophers(t_data *data)

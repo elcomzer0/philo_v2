@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:05 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/19 22:41:19 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 23:12:06 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,37 +39,46 @@ long	get_current_time(void)
 	return (time);
 }
 
-void	print_status(t_philosopher *philo, const char *status)
+int	print_status(t_philosopher *philo, const char *status)
 {
+	long curry_time;
+
 	if (philo == NULL || philo->data == NULL)
-		return ;
+		return 1;
 	pthread_mutex_lock(&philo->data->print_lock);
 	pthread_mutex_lock(&philo->data->death);
 	if (!philo->data->death_note || ft_strncmp(status, "died", 4) == 0) 
 	{
-		printf("%ld %d %s\n", get_current_time() - philo->data->start_time,
-			philo->id, status);
+		curry_time = get_current_time() - philo->data->start_time;
+		if (curry_time == -1)
+			return 1;
+		printf("%ld %d %s\n", curry_time, philo->id, status);
 	}
 	pthread_mutex_unlock(&philo->data->death);
 	pthread_mutex_unlock(&philo->data->print_lock);
+	return 0;
 }
 
-void	ft_usleep(unsigned long long int time_value, t_philosopher *philo)
+int	ft_usleep(unsigned long long int time_value, t_philosopher *philo)
 {
 	unsigned long long	elapsed;
 	struct timeval		start;
 	struct timeval		current;
 
 	if (philo == NULL || philo->data == NULL)
-		return ;
+		return 1;
 	if (gettimeofday(&start, NULL) == -1)
 	{
 		write(2, "Error: gettimeofday\n", 18);
-		return ;
+		return 1;
 	}
 	while (1)
 	{
-		gettimeofday(&current, NULL);
+		if (gettimeofday(&current, NULL) == -1)
+		{
+			write(2, "Error: gettimeofday\n", 18);
+			return 1;
+		}
 		elapsed = (current.tv_sec - start.tv_sec) * 1000 + (current.tv_usec
 				- start.tv_usec) / 1000;
 		pthread_mutex_lock(&philo->data->death);
@@ -81,4 +90,5 @@ void	ft_usleep(unsigned long long int time_value, t_philosopher *philo)
 		pthread_mutex_unlock(&philo->data->death);
 		usleep(50);
 	}
+	return (0);
 }

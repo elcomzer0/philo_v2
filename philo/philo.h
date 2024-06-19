@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:36 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/19 22:39:40 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 23:32:01 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_data
 
 // Function prototypes
 void				*philosopher_routine(void *arg);
-void				ft_usleep(unsigned long long int time_value,
+int				ft_usleep(unsigned long long int time_value,
 						t_philosopher *philo);
 
 // single_philosopher
@@ -75,7 +75,7 @@ void				create_single_philosopher_thread(t_data *data);
 /* utils */
 void				*ft_calloc(size_t num_elements, size_t element_size);
 long				get_current_time(void);
-void				print_status(t_philosopher *philo, const char *status);
+int				print_status(t_philosopher *philo, const char *status);
 void				clean_exit(t_data *data);
 // bool is_death_note(t_philosopher *philo);
 
@@ -91,9 +91,9 @@ int					death_note_check(t_philosopher *philo);
 int					dined_enough_check(t_data *data);
 
 /*actions*/
-void				action_eat(t_philosopher *philo);
-void				action_sleep(t_philosopher *philo);
-void				action_think(t_philosopher *philo);
+int				action_eat(t_philosopher *philo);
+int				action_sleep(t_philosopher *philo);
+int				action_think(t_philosopher *philo);
 void				print_philosopher(t_philosopher *philosopher);
 void				print_data(const t_data *data);
 void				random_delay(int min_ms, int max_ms);
@@ -108,9 +108,9 @@ int					main(int argc, char **argv);
 int					initialize_mutex(pthread_mutex_t *mutex, t_data *data);
 int					initialize_mutexes(t_philosopher *philosophers,
 						t_data *data);
-void				initialize_philosopher(t_philosopher *philosopher, int id,
+int				initialize_philosopher_data(t_philosopher *philosopher, int id,
 						long start_time, t_data *data);
-void				initialize_multiple_philosophers(t_philosopher *philosophers,
+int				initialize_multiple_philosophers(t_philosopher *philosophers,
 						t_data *data);
 int					initialize_philosophers(t_data *data);
 
@@ -132,11 +132,11 @@ int					ft_atoi(const char *str);
 long				ft_atol(const char *str);
 
 /* FUNCTIONS */
-void				acquire_forks(t_philosopher *philo);
+int				acquire_forks(t_philosopher *philo);
 void				release_forks(t_philosopher *philo);
 void				update_last_meal_time(t_philosopher *philo);
-void				action_think(t_philosopher *philo);
-void				action_sleep(t_philosopher *philo);
-void				action_eat(t_philosopher *philo);
+//void				action_think(t_philosopher *philo);
+//void				action_sleep(t_philosopher *philo);
+//void				action_eat(t_philosopher *philo);
 
 #endif

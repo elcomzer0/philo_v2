@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:25:59 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/19 18:36:57 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 23:16:50 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	size_t	i;
 
 	if (!s1 || !s2)
-		return (0);
+		return (-1);
 	i = 0;
 	if (n == 0)
-		return (0);
+		return (-1);
 	while (s1[i] && s2[i] && s1[i] == s2[i] && i < n - 1)
 		i++;
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
@@ -60,7 +60,7 @@ int	ft_atoi(const char *str)
 	long	n;
 
 	if (!str)
-		return (0);
+		return (-1);
 	sign = 1;
 	n = 0;
 	i = 0;
@@ -88,7 +88,7 @@ long	ft_atol(const char *str)
 	long	n;
 
 	if (!str)
-		return (0);
+		return (-1);
 	sign = 1;
 	n = 0;
 	i = 0;

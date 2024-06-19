@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:56 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/19 20:14:15 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 23:30:22 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,28 @@ void	*philosopher_routine(void *arg)
 	philo = (t_philosopher *)arg;
 	data = philo->data;
 	if (philo->id % 2 == 0)
-		ft_usleep(philo->data->time_to_eat / 2, philo);
+	{
+		if (ft_usleep(philo->data->time_to_eat / 2, philo) == 1)
+			return (NULL);
+	}
 	while (death_note_check(philo) == 0 && dined_enough_check(data) == 0)
 	{
 		if (data->number_of_philosophers < 2)
 		{
-			print_status(philo, "has taken a fork");
+			if (print_status(philo, "has taken a fork") == 1)
+				return (NULL);
 			ft_usleep(philo->time_to_die, philo);
 			return (NULL);
 		}
-		action_eat(philo);
+		if(action_eat(philo) == 1)
+			return (NULL);
 		pthread_mutex_lock(&data->meals_eaten_mutex);
 		philo->meals_eaten++;
 		pthread_mutex_unlock(&data->meals_eaten_mutex);
-		action_sleep(philo);
-		action_think(philo);
-	}
+		if(action_sleep(philo) == 1)
+			return (NULL);
+		if(action_think(philo) == 1)
+			return (NULL);
+	}	
 	return (NULL);
 }
