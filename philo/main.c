@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/19 16:14:42 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 22:36:05 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,16 +84,15 @@ int	main(int argc, char **argv)
 		write(STDERR_FILENO, "Usage: ./philo number_of_philosophers", 35);
 		write(STDERR_FILENO,
 			"time_to_die time_to_eat time_to_sleep [times_must_eat]\n", 37);
+		clean_exit(data);
 		return (1);
 	}
-	if (init_data(data, argc, argv) != 0)
+	if (init_data(data, argc, argv) != 0 || initialize_philosophers(data) == 1
+		|| create_threads(data) == -1)
 	{
-		write(STDERR_FILENO, "Error: invalid arguments\n", 25);
+		clean_exit(data);
 		return (1);
 	}
-	initialize_philosophers(data);
-	//if (data->number_of_philosophers > 1)
-		create_threads(data);
 	clean_exit(data);
 	return (0);
 }

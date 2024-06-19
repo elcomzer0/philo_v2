@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 21:32:35 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/19 13:55:08 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 18:21:10 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	create_threads(t_data *data)
 			pthread_mutex_destroy(&data->print_lock);
 			return (-1);
 		}
-		//usleep(100);
 		i++;
 	}
 	if (create_monitor_threads(data) != 0)

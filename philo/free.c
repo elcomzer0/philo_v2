@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 21:53:55 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/19 16:20:42 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 22:29:32 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,15 @@ void	join_threads(t_data *data)
 {
 	int	i;
 
-	//if (data->number_of_philosophers > 1)
-	//{
+	if (data->number_of_philosophers < 201)
+	{
 		i = 0;
 		while (i < data->number_of_philosophers)
 		{
 			pthread_join(data->philosophers[i].thread, NULL);
 			i++;
 		}
-	//}
+	}
 	if (data->monitor_eat)
 		pthread_join(data->monitor_eat, NULL);
 	if (data->monitor_death)

@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 21:30:52 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/19 16:14:10 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 18:16:22 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,48 +97,17 @@ void	initialize_multiple_philosophers(t_philosopher *philosophers,
 	}
 }
 
-/* int	initialize_philosophers(t_data *data)
-{
-	t_philosopher	*philosophers;
-
-	if (data->number_of_philosophers == 1)
-	{
-		initialize_single_philosopher_case(data);
-		return (1);
-	}
-	philosophers = allocate_philosophers(data->number_of_philosophers);
-	data->philosophers = philosophers;
-	if (data->number_of_philosophers > 1)
-	{
-		if (initialize_mutexes(philosophers, data) != 0)
-		{
-			write(2, "Error: initialize_mutexes\n", 25);
-			return (1);
-		}
-		initialize_multiple_philosophers(philosophers, data);
-	}
-	return (0);
-} */
-
 int	initialize_philosophers(t_data *data)
 {
 	t_philosopher	*philosophers;
 
 	philosophers = allocate_philosophers(data->number_of_philosophers);
 	data->philosophers = philosophers;
-	/* if (data->number_of_philosophers == 1)
+	if (initialize_mutexes(philosophers, data) != 0)
 	{
-		initialize_single_philosopher_case(data);
+		write(2, "Error: initialize_mutexes\n", 25);
 		return (1);
 	}
-	if (data->number_of_philosophers > 1)
-	{ */
-		if (initialize_mutexes(philosophers, data) != 0)
-		{
-			write(2, "Error: initialize_mutexes\n", 25);
-			return (1);
-		}
-		initialize_multiple_philosophers(philosophers, data);
-	//}
+	initialize_multiple_philosophers(philosophers, data);
 	return (0);
 }
