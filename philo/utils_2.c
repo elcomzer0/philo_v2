@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:25:59 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/19 00:06:19 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:25:49 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	ft_atoi(const char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
+		// if statement bzgl overflow
 		n = 10 * n + (str[i] - '0');
 		i++;
 	}
@@ -92,6 +93,7 @@ long	ft_atol(const char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
+		// if statement für overflow
 		n = 10 * n + (str[i] - '0');
 		i++;
 	}

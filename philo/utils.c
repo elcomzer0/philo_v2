@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:05 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/19 00:15:02 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 13:06:10 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	ft_usleep(unsigned long long int time_value, t_philosopher *philo)
 
 	if (philo == NULL || philo->data == NULL)
 		return ;
+	// protect gettimeofday
 	gettimeofday(&start, NULL);
 	while (1)
 	{
@@ -88,6 +89,19 @@ void	ft_usleep(unsigned long long int time_value, t_philosopher *philo)
 			break ;
 		}
 		pthread_mutex_unlock(&philo->data->death);
-		usleep(400);
+		usleep(150);
+	}
+}
+
+void us_leep(long long time, t_philosopher *philo)
+{
+	long long start; 
+
+	start= get_current_time(); 
+	while(get_current_time() - start < time)
+	{
+		if(death_note_check(philo) == 1)
+			break ; 
+		usleep (50); 
 	}
 }

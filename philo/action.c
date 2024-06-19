@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:21:10 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/19 00:02:33 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:41:21 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ void	release_forks(t_philosopher *philo)
 
 void	acquire_forks(t_philosopher *philo)
 {
-	pthread_mutex_lock(&philo->data->dining_mutex);
+	//pthread_mutex_lock(&philo->data->dining_mutex);
 	pthread_mutex_lock(&philo->data->death);
 	if (philo->data->death_note)
 	{
 		pthread_mutex_unlock(&philo->data->death);
-		pthread_mutex_unlock(&philo->data->dining_mutex);
+		//pthread_mutex_unlock(&philo->data->dining_mutex);
 		return ;
 	}
 	pthread_mutex_unlock(&philo->data->death);
@@ -42,5 +42,5 @@ void	acquire_forks(t_philosopher *philo)
 	pthread_mutex_lock(philo->right_fork);
 	print_status(philo, "has taken a fork");
 	print_status(philo, "has taken a fork");
-	pthread_mutex_unlock(&philo->data->dining_mutex);
+	//pthread_mutex_unlock(&philo->data->dining_mutex);
 }

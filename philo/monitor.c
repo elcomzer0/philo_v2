@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:43 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/18 23:56:26 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:54:23 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,3 +92,5 @@ void	*monitor_eat(void *arg)
 	}
 	return (NULL);
 }
+
+// protect usleep

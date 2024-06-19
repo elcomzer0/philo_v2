@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/18 23:56:46 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:31:53 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,8 @@ void	initialize_single_philosopher_case(t_data *data)
 {
 	create_single_philosopher_thread(data);
 }
+
+// one phillo
+// takes fork
+// usleep (2 x ttd)
+// died
