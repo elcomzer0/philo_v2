@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/18 23:13:03 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/19 16:14:42 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	initialize_philosophers(data);
-	if (data->number_of_philosophers > 1)
+	//if (data->number_of_philosophers > 1)
 		create_threads(data);
 	clean_exit(data);
 	return (0);
