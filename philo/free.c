@@ -6,30 +6,30 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 21:53:55 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/19 22:29:32 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/20 20:33:02 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	free_resources(t_data *data)
-{
-	if (data->fork)
-	{
-		free(data->fork);
-		data->fork = NULL;
-	}
-	if (data->philosophers)
-	{
-		free(data->philosophers);
-		data->philosophers = NULL;
-	}
-	if (data)
-	{
-		free(data);
-		data = NULL;
-	}
-}
+// void	free_resources(t_data *data)
+// {
+// 	// if (data->fork)
+// 	// {
+// 	// 	free(data->fork);
+// 	// 	data->fork = NULL;
+// 	// }
+// 	if (data->philosophers)
+// 	{
+// 		free(data->philosophers);
+// 		data->philosophers = NULL;
+// 	}
+// 	if (data)
+// 	{
+// 		free(data);
+// 		data = NULL;
+// 	}
+// }
 
 void	destroy_mutexes(t_data *data)
 {
@@ -41,22 +41,18 @@ void	destroy_mutexes(t_data *data)
 		write(2, "Error: death mutex_destroy\n", 27);
 	if (pthread_mutex_destroy(&data->dined) != 0)
 		write(2, "Error: dined mutex_destroy\n", 27);
-	if (pthread_mutex_destroy(&data->dining_mutex) != 0)
-		write(2, "Error: dining mutex_destroy\n", 27);
+	destroy_fork_mutexes(data, data->number_of_philosophers);
 }
 
 void	join_threads(t_data *data)
 {
 	int	i;
 
-	if (data->number_of_philosophers < 201)
+	i = 0;
+	while (i < data->number_of_philosophers)
 	{
-		i = 0;
-		while (i < data->number_of_philosophers)
-		{
-			pthread_join(data->philosophers[i].thread, NULL);
-			i++;
-		}
+		pthread_join(data->philosophers[i].thread, NULL);
+		i++;
 	}
 	if (data->monitor_eat)
 		pthread_join(data->monitor_eat, NULL);
@@ -70,5 +66,4 @@ void	clean_exit(t_data *data)
 		return ;
 	join_threads(data);
 	destroy_mutexes(data);
-	free_resources(data);
 }

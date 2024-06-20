@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:31 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/19 22:36:05 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/20 22:27:58 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,18 @@ int	init_data(t_data *data, int argc, char **argv)
 		if (validate_argument(argv[5],
 				"Error: invalid argument for times_must_eat\n"))
 			return (1);
-		data->times_must_eat = ft_atoi(argv[5]);
+		data->times_must_eat = ft_atol(argv[5]);
 		if (validate_times_must_eat(data->times_must_eat))
 			return (1);
 	}
 	else
 		data->times_must_eat = -1;
+	if (data->number_of_philosophers == -1 || data->time_to_die == -1
+		|| data->time_to_eat == -1 || data->time_to_sleep == -1)
+	{
+		write(STDERR_FILENO, "Error: invalid argument\n", 23);
+		return (1);
+	}
 	return (0);
 }
 
@@ -79,20 +85,15 @@ int	main(int argc, char **argv)
 		write(2, "Error allocating data\n", 22);
 		return (1);
 	}
-	if (argc != 5 && argc != 6)
+	if ((argc != 5 && argc != 6) || init_data(data, argc, argv) != 0)
 	{
-		write(STDERR_FILENO, "Usage: ./philo number_of_philosophers", 35);
-		write(STDERR_FILENO,
-			"time_to_die time_to_eat time_to_sleep [times_must_eat]\n", 37);
-		clean_exit(data);
+		write(STDERR_FILENO, "False input\n", 12);
+		free(data);
 		return (1);
 	}
-	if (init_data(data, argc, argv) != 0 || initialize_philosophers(data) == 1
-		|| create_threads(data) == -1)
-	{
-		clean_exit(data);
+	if (initialize_philosophers(data) == 1)
 		return (1);
-	}
+	data = create_threads(data);
 	clean_exit(data);
 	return (0);
 }

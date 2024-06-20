@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 21:19:44 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/19 00:04:36 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/20 18:44:19 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ bool	stop_simulation(t_data *data)
 
 	stop = false;
 	pthread_mutex_lock(&data->death);
-	if (data->death_note == 1)
+	if (data->death_note == 1 || data->all_philosophers_created == 1)
 	{
 		stop = true;
 	}

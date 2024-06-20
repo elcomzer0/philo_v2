@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:05:43 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/19 23:11:28 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/20 15:16:07 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,12 @@ int	dining_checker(t_philosopher *philo)
 	}
 }
 
-/* int	dining_timespan(t_philosopher *philo)
+void	death_is_one(t_data *data)
 {
-	long	current_time;
-
-	current_time = get_current_time();
-	if (current_time == -1)
-		return (1);
-	return ((current_time - philo->last_meal_time) >= philo->data->time_to_die);
-} */
+	pthread_mutex_lock(&data->death);
+	data->death_note = 1;
+	pthread_mutex_unlock(&data->death);
+}
 
 int	process_philo_life_cycle(t_data *data)
 {
@@ -59,9 +56,7 @@ int	process_philo_life_cycle(t_data *data)
 		time_since_last_meal = current_time - data->last_meal_timestamps[i];
 		if (time_since_last_meal >= data->time_to_die && data->death_note == 0)
 		{
-			pthread_mutex_lock(&data->death);
-			data->death_note = 1;
-			pthread_mutex_unlock(&data->death);
+			death_is_one(data);
 			print_status(philo, "died");
 			break ;
 		}
@@ -79,7 +74,11 @@ void	*monitor_death(void *arg)
 	while (!stop_simulation(data))
 	{
 		process_philo_life_cycle(data);
-		usleep(100);
+		if (usleep(100) == -1)
+		{
+			write(2, "Error: usleep\n", 13);
+			return (NULL);
+		}
 	}
 	return (NULL);
 }
@@ -93,9 +92,11 @@ void	*monitor_eat(void *arg)
 	{
 		if (check_eaten_status(data) == 1)
 			return (NULL);
-		usleep(100);
+		if (usleep(100) == -1)
+		{
+			write(2, "Error: usleep\n", 13);
+			return (NULL);
+		}
 	}
 	return (NULL);
 }
-
-// protect usleep

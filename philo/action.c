@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:21:10 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/19 23:22:36 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/20 15:14:46 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ int	acquire_forks(t_philosopher *philo)
 	if (philo->data->death_note)
 	{
 		pthread_mutex_unlock(&philo->data->death);
-		return 1;
+		return (1);
 	}
 	pthread_mutex_unlock(&philo->data->death);
 	pthread_mutex_lock(philo->left_fork);
 	pthread_mutex_lock(philo->right_fork);
 	if (print_status(philo, "has taken a fork") == 1)
-		return 1;
+		return (1);
 	if (print_status(philo, "has taken a fork") == 1)
-		return 1;
-	return 0;
+		return (1);
+	return (0);
 }

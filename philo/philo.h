@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:06:36 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/19 23:32:01 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/20 22:32:22 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 # include <pthread.h>
 # include <stdbool.h>
 # include <stddef.h>
+# include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/time.h>
 # include <time.h>
 # include <unistd.h>
-# include <stdint.h>
 
 # define MAX_PHILOSOPHERS 201
 
@@ -46,9 +46,10 @@ typedef struct s_data
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
-	int				times_must_eat;
+	long			times_must_eat;
 	int				death_note;
 	int				dined_enough;
+	int				all_philosophers_created;
 	long long		last_meal_timestamps[201];
 	pthread_t		monitor_eat;
 	pthread_t		monitor_death;
@@ -58,26 +59,17 @@ typedef struct s_data
 	pthread_mutex_t	dined;
 	pthread_mutex_t	meals_eaten_mutex;
 	pthread_mutex_t	last_meal_timestamps_mutex;
-	pthread_mutex_t	dining_mutex;
 	t_philosopher	*philosophers;
 }					t_data;
 
 // Function prototypes
 void				*philosopher_routine(void *arg);
-int				ft_usleep(unsigned long long int time_value,
+int					ft_usleep(unsigned long long int time_value,
 						t_philosopher *philo);
-
-// single_philosopher
-void				*sokrates_case(void *arg);
-void				initialize_single_philosopher_case(t_data *data);
-void				create_single_philosopher_thread(t_data *data);
-
 /* utils */
 void				*ft_calloc(size_t num_elements, size_t element_size);
 long				get_current_time(void);
-int				print_status(t_philosopher *philo, const char *status);
-void				clean_exit(t_data *data);
-// bool is_death_note(t_philosopher *philo);
+int					print_status(t_philosopher *philo, const char *status);
 
 /*monitor*/
 void				*monitor_eat(void *arg);
@@ -91,9 +83,9 @@ int					death_note_check(t_philosopher *philo);
 int					dined_enough_check(t_data *data);
 
 /*actions*/
-int				action_eat(t_philosopher *philo);
-int				action_sleep(t_philosopher *philo);
-int				action_think(t_philosopher *philo);
+int					action_eat(t_philosopher *philo);
+int					action_sleep(t_philosopher *philo);
+int					action_think(t_philosopher *philo);
 void				print_philosopher(t_philosopher *philosopher);
 void				print_data(const t_data *data);
 void				random_delay(int min_ms, int max_ms);
@@ -105,25 +97,28 @@ int					init_data(t_data *data, int argc, char **argv);
 int					main(int argc, char **argv);
 
 /*main_init*/
-int					initialize_mutex(pthread_mutex_t *mutex, t_data *data);
-int					initialize_mutexes(t_philosopher *philosophers,
-						t_data *data);
-int				initialize_philosopher_data(t_philosopher *philosopher, int id,
-						long start_time, t_data *data);
-int				initialize_multiple_philosophers(t_philosopher *philosophers,
+int					initialize_mutex(pthread_mutex_t *mutex);
+int					init_other_mutexes(t_data *data, int i);
+int					destroy_fork_mutexes(t_data *data, int i);
+int					initialize_mutexes(t_data *data);
+int					initialize_philosopher_data(t_philosopher *philosopher,
+						int id, long start_time, t_data *data);
+int					init_multiple_philosophers(t_philosopher *philosophers,
 						t_data *data);
 int					initialize_philosophers(t_data *data);
 
 /*main_create*/
 int					create_monitor_threads(t_data *data);
-int					create_threads(t_data *data);
+void				destroy_mutex_in_create_thread(t_data *data);
+t_data				*create_threads(t_data *data);
+void				join_threads_failure(t_data *data, int i);
 
 /*main_valid*/
 int					is_valid_number(char *str);
 int					is_within_limits(char *str);
 int					validate_argument(char *arg, const char *error_message);
 int					validate_number_of_philosophers(int number_of_philosophers);
-int					validate_times_must_eat(int times_must_eat);
+int					validate_times_must_eat(long times_must_eat);
 
 /*utils_2*/
 size_t				ft_strlen(const char *str);
@@ -132,11 +127,14 @@ int					ft_atoi(const char *str);
 long				ft_atol(const char *str);
 
 /* FUNCTIONS */
-int				acquire_forks(t_philosopher *philo);
+int					acquire_forks(t_philosopher *philo);
 void				release_forks(t_philosopher *philo);
 void				update_last_meal_time(t_philosopher *philo);
-//void				action_think(t_philosopher *philo);
-//void				action_sleep(t_philosopher *philo);
-//void				action_eat(t_philosopher *philo);
+
+/* free */
+void				destroy_mutexes(t_data *data);
+void				join_threads(t_data *data);
+void				free_resources(t_data *data);
+void				clean_exit(t_data *data);
 
 #endif

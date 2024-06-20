@@ -6,7 +6,7 @@
 /*   By: jorgonca <jorgonca@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:25:59 by jorgonca          #+#    #+#             */
-/*   Updated: 2024/06/19 23:16:50 by jorgonca         ###   ########.fr       */
+/*   Updated: 2024/06/20 22:32:49 by jorgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,27 +65,23 @@ int	ft_atoi(const char *str)
 	n = 0;
 	i = 0;
 	skip_spaces_and_sign(str, &sign, &i);
+	if (sign < 0)
+		return (-1);
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (n > INT_MAX / 10 || (n == INT_MAX / 10 && (str[i] - '0') > INT_MAX
-				% 10))
-		{
-			if (sign == -1)
-				return (INT_MIN);
-			else
-				return (INT_MAX);
-		}
 		n = 10 * n + (str[i] - '0');
 		i++;
+		if (n > INT_MAX)
+			return (-1);
 	}
-	return (n * sign);
+	return ((int)n);
 }
 
 long	ft_atol(const char *str)
 {
-	int		sign;
-	int		i;
-	long	n;
+	int			sign;
+	int			i;
+	long long	n;
 
 	if (!str)
 		return (-1);
@@ -93,18 +89,14 @@ long	ft_atol(const char *str)
 	n = 0;
 	i = 0;
 	skip_spaces_and_sign(str, &sign, &i);
+	if (sign < 0)
+		return (-1);
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (n > LONG_MAX / 10 || (n == LONG_MAX / 10 && str[i] - '0' > LONG_MAX
-				% 10))
-		{
-			if (sign == -1)
-				return (LONG_MIN);
-			else
-				return (LONG_MAX);
-		}
 		n = 10 * n + (str[i] - '0');
 		i++;
+		if (n > LONG_MAX)
+			return (-1);
 	}
-	return (n * sign);
+	return ((long)n);
 }
